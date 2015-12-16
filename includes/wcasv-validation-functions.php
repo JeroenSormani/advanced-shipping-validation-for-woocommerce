@@ -89,6 +89,11 @@ function wcasv_match_conditions( $condition_groups = array(), $package, $package
  */
 function wcasv_add_checkout_validation_messages() {
 
+	// Check if validation is enabled
+	if ( 'yes' !== get_option( 'enable_woocommerce_advanced_shipping_validation', 'yes' ) ) :
+		return;
+	endif;
+
 	$validation_rules = wcasv_get_validation_posts();
 	if ( $packages = WC()->shipping->get_packages() ) :
 		foreach ( $packages as $i => $package ) :

@@ -110,7 +110,7 @@ class WCASV_Post_Type {
 			10 => __( 'Shipping validation rule draft updated.', 'woocommerce-advanced-shipping-validation' ),
 		);
 
-		$permalink = admin_url( 'admin.php?page=wc-settings&tab=shipping_validation' );
+		$permalink = admin_url( 'admin.php?page=wc-settings&tab=shipping&section=shipping_validation' );
 		$overview_link = sprintf( ' <a href="%s">%s</a>', esc_url( $permalink ), __( 'Return to overview.', 'woocommerce-advanced-shipping-validation' ) );
 		$messages['shipping_validation'][1] .= $overview_link;
 		$messages['shipping_validation'][6] .= $overview_link;
@@ -254,7 +254,7 @@ class WCASV_Post_Type {
 
 			if ( isset( $_GET['trashed'] ) && intval( $_GET['trashed'] ) > 0 ) :
 
-				$redirect = admin_url( '/admin.php?page=wc-settings&tab=shipping_validation' );
+				$redirect = admin_url( 'admin.php?page=wc-settings&tab=shipping&section=shipping_validation' );
 				wp_redirect( $redirect );
 				exit();
 

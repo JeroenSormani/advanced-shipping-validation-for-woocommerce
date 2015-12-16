@@ -11,7 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Setup shipping validation rules for your store. Let your customers know why they can't ship their products.
 
 == Description ==
-With Advanced Shipping Validation for WooCommerce you can setup your own shipping validation rules. With these rules you can prvent
+With Advanced Shipping Validation for WooCommerce you can setup your own shipping validation rules. With these rules you can prevent
 customers from checking out based on your conditions.
 
 A common use case is the restriction of certain products being shipped to states like Hawaii and Alaska.

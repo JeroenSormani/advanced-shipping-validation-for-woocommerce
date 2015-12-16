@@ -24,7 +24,6 @@ $validation_rules = get_posts( array( 'posts_per_page' => '-1', 'post_type' => '
 				<tr>
 					<th style='width: 17px;'></th>
 					<th style='padding-left: 10px;'><?php _e( 'Title', 'woocommerce-advanced-shipping-validation' ); ?></th>
-					<th style='padding-left: 10px;'><?php _e( 'Type', 'woocommerce-advanced-shipping-validation' ); ?></th>
 					<th style='width: 70px;'><?php _e( '# Groups', 'woocommerce-advanced-shipping-validation' ); ?></th>
 				</tr>
 			</thead>

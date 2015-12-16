@@ -20,37 +20,31 @@ class WCASV_Admin_Settings {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-
-		// Add WC settings tab
-		add_filter( 'woocommerce_settings_tabs_array', array( $this, 'settings_tab' ), 60 );
-
-		// Settings page contents
-		add_action( 'woocommerce_settings_tabs_shipping_validation', array( $this, 'settings_page' ) );
-
-		// Save settings page
-		add_action( 'woocommerce_update_options_shipping_validation', array( $this, 'update_options' ) );
-
-		// Table field type
-		add_action( 'woocommerce_admin_field_shipping_validation_table', array( $this, 'generate_table_field' ) );
-
+		add_action( 'admin_init', array( $this, 'init' ), 20 );
 	}
 
 
 	/**
-	 * Settings tab.
-	 *
-	 * Add a WooCommerce settings tab for the 'Fees' settings page.
+	 * Initialize plugin.
 	 *
 	 * @since 1.0.0
-	 *
-	 * @param 	array	$tabs	Default tabs used in WC.
-	 * @return 	array 			All WC settings tabs including newly added.
 	 */
-	public function settings_tab( $tabs ) {
+	public function init() {
 
-		$tabs['shipping_validation'] = __( 'Shipping Validation', 'woocommerce-advanced-shipping-validation' );
+		// Save settings page
+		add_action( 'woocommerce_update_options_shipping_validation', array( $this, 'update_options' ) );
 
-		return $tabs;
+		// Add 'extra shipping options' shipping section
+		add_action( 'woocommerce_get_sections_shipping', array( $this, 'add_shipping_section' ) );
+
+		// Add settings to Extra shipping options section
+		add_action( 'woocommerce_settings_shipping', array( $this, 'shipping_validation_section_settings' ) );
+
+		// Save settings
+		add_action( 'woocommerce_settings_save_shipping', array( $this, 'update_options' ) );
+
+		// Table field type
+		add_action( 'woocommerce_admin_field_shipping_validation_table', array( $this, 'generate_table_field' ) );
 
 	}
 
@@ -69,14 +63,12 @@ class WCASV_Admin_Settings {
 			array(
 				'title' 	=> __( 'General', 'woocommerce-advanced-shipping-validation' ),
 				'type' 		=> 'title',
-				'desc' 		=> '',
-				'id'		=> 'wcasv_general',
 			),
 
 			array(
 				'title'   	=> __( 'Enable shipping validation', 'woocommerce-advanced-shipping-validation' ),
 				'desc' 	  	=> __( 'When disabled you will still be able to manage validation rules, but none will be shown to customers.','woocommerce-advanced-shipping-validation' ),
-				'id' 	  	=> 'enable_woocommerce_Advanced_Shipping_Validation',
+				'id' 	  	=> 'enable_woocommerce_advanced_shipping_validation',
 				'default' 	=> 'yes',
 				'type' 	  	=> 'checkbox',
 				'autoload'	=> false
@@ -89,25 +81,12 @@ class WCASV_Admin_Settings {
 
 			array(
 				'type' 		=> 'sectionend',
-				'id' 		=> 'wcasv_end'
 			),
 
 		) );
 
 		return $settings;
 
-	}
-
-
-	/**
-	 * Settings page content.
-	 *
-	 * Output settings page content via WooCommerce output_fields() method.
-	 *
-	 * @since 1.0.0
-	 */
-	public function settings_page() {
-		WC_Admin_Settings::output_fields( $this->get_settings() );
 	}
 
 
@@ -131,8 +110,50 @@ class WCASV_Admin_Settings {
 	 * @return string
 	 */
 	public function generate_table_field() {
-		// Fees table
+		// Overview table
 		require_once plugin_dir_path( __FILE__ ) . 'views/html-overview-table.php';
+	}
+
+
+	/**
+	 * Add shipping section.
+	 *
+	 * Add a new 'shipping validation' section under the shipping tab.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param	array	$sections	List of existing shipping sections.
+	 * @return	array				List of modified shipping sections.
+	 */
+	public function add_shipping_section( $sections ) {
+
+		$sections['shipping_validation'] = __( 'Validation rules', 'woocommerce-advanced-shipping-validation' );
+
+		return $sections;
+
+	}
+
+
+	/**
+	 * Shipping validation settings.
+	 *
+	 * Add the settings to the shipping validation shipping section.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param	string	$current_section	Slug of the current section
+	 */
+	public function shipping_validation_section_settings( $current_section ) {
+
+		global $current_section;
+
+		if ( 'shipping_validation' !== $current_section ) :
+			return;
+		endif;
+
+		$settings = $this->get_settings();
+		WC_Admin_Settings::output_fields( $settings );
+
 	}
 
 

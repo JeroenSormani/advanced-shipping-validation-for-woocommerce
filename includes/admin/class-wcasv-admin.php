@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 /**
  * Class WCASV_Admin.
  *
@@ -9,9 +11,6 @@
  * @package		WooCommerce Advanced Shipping Validation
  * @version		1.0.0
  */
-
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
 class WCASV_Admin {
 
 
@@ -21,6 +20,16 @@ class WCASV_Admin {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
+		add_action( 'admin_init', array( $this, 'init' ) );
+	}
+
+
+	/**
+	 * Initialize admin.
+	 *
+	 * @since 1.0.0
+	 */
+	public function init() {
 
 		// Add to WC Screen IDs to load scripts.
 		add_filter( 'woocommerce_screen_ids', array( $this, 'add_wcasv_screen_ids' ) );
@@ -34,6 +43,12 @@ class WCASV_Admin {
 		// Settings
 		require_once plugin_dir_path( __FILE__ ) . 'class-wcasv-admin-settings.php';
 		$this->settings = new WCASV_Admin_Settings();
+
+		global $pagenow;
+		if ( 'plugins.php' == $pagenow ) :
+			// Plugins page
+			add_filter( 'plugin_action_links_' . plugin_basename( Woocommerce_Advanced_Shipping_Validation()->file ), array( $this, 'add_plugin_action_links' ), 10, 2 );
+		endif;
 
 	}
 
@@ -70,14 +85,14 @@ class WCASV_Admin {
 		if (
 			( isset( $_REQUEST['post'] ) && 'shipping_validation' == get_post_type( $_REQUEST['post'] ) ) ||
 			( isset( $_REQUEST['post_type'] ) && 'shipping_validation' == $_REQUEST['post_type'] ) ||
-			( isset( $_REQUEST['tab'] ) && 'shipping_validation' == $_REQUEST['tab'] )
+			( isset( $_REQUEST['section'] ) && 'shipping_validation' == $_REQUEST['section'] )
 		) :
 
 			// Style script
 			wp_enqueue_style( 'woocommerce-advanced-shipping-validation-css', plugins_url( 'assets/admin/css/woocommerce-advanced-shipping-validation.css', Woocommerce_Advanced_Shipping_Validation()->file ), array(), Woocommerce_Advanced_Shipping_Validation()->version );
 
 			// Javascript
-			wp_enqueue_script( 'woocommerce-advanced-shipping-validation-js', plugins_url( 'assets/admin/js/woocommerce-advanced-shipping-validation.js', Woocommerce_Advanced_Shipping_Validation()->file ), array( 'jquery', 'jquery-ui-sortable' ), Woocommerce_Advanced_Shipping_Validation()->version, true );
+			wp_enqueue_script( 'woocommerce-advanced-shipping-validation-js', plugins_url( 'assets/admin/js/woocommerce-advanced-shipping-validation.min.js', Woocommerce_Advanced_Shipping_Validation()->file ), array( 'jquery', 'jquery-ui-sortable' ), Woocommerce_Advanced_Shipping_Validation()->version, true );
 
 			wp_localize_script( 'woocommerce-advanced-shipping-validation-js', 'wcasv', array(
 				'nonce'	=> wp_create_nonce( 'wcasv-ajax-nonce' ),
@@ -105,6 +120,31 @@ class WCASV_Admin {
 			$parent_file = 'woocommerce';
 			$submenu_file = 'wc-settings';
 		endif;
+
+	}
+
+
+	/**
+	 * Plugin action links.
+	 *
+	 * Add links to the plugins.php page below the plugin name
+	 * and besides the 'activate', 'edit', 'delete' action links.
+	 *
+	 * @since 1.1.8
+	 *
+	 * @param	array	$links	List of existing links.
+	 * @param	string	$file	Name of the current plugin being looped.
+	 * @return	array			List of modified links.
+	 */
+	public function add_plugin_action_links( $links, $file ) {
+
+		if ( $file == plugin_basename( Woocommerce_Advanced_Shipping_Validation()->file ) ) :
+			$links = array_merge( array(
+					'<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=shipping&section=shipping_validation' ) ) . '">' . __( 'Settings', 'woocommerce-advanced-shipping-validation' ) . '</a>'
+			), $links );
+		endif;
+
+		return $links;
 
 	}
 

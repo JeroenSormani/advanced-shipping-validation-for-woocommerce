@@ -3,13 +3,14 @@
  * Plugin Name: 	WooCommerce Advanced Shipping Validation
  * Plugin URI: 		http://jeroensormani.com/
  * Donate link: 	http://jeroensormani.com/donate/
- * Description: 	WooCommerce Advanced Free Shipping is an plugin which allows you to set up advanced free shipping conditions.
+ * Description: 	Setup shipping validation rules based on your own conditions. Show customers a specific message why they can't continue to checkout.
  * Version: 		1.0.0
  * Author: 			Jeroen Sormani
  * Author URI: 		http://jeroensormani.com/
  * Text Domain:     woocommerce-advanced-shipping-validation
  */
 
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
  * Class Woocommerce_Advanced_Shipping_Validation.
@@ -20,9 +21,6 @@
  * @version		1.0.0
  * @author		Jeroen Sormani
  */
-
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
 class Woocommerce_Advanced_Shipping_Validation {
 
 
@@ -75,7 +73,7 @@ class Woocommerce_Advanced_Shipping_Validation {
 		// Initialize plugin parts
 		$this->init();
 
-		do_action( 'woocommerce_Advanced_Shipping_Validation_init' );
+		do_action( 'woocommerce_advanced_shipping_validation_init' );
 
 	}
 
