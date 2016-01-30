@@ -130,7 +130,7 @@ class WCASV_Admin {
 	 * Add links to the plugins.php page below the plugin name
 	 * and besides the 'activate', 'edit', 'delete' action links.
 	 *
-	 * @since 1.1.8
+	 * @since 1.0.0
 	 *
 	 * @param	array	$links	List of existing links.
 	 * @param	string	$file	Name of the current plugin being looped.
@@ -140,7 +140,7 @@ class WCASV_Admin {
 
 		if ( $file == plugin_basename( Woocommerce_Advanced_Shipping_Validation()->file ) ) :
 			$links = array_merge( array(
-					'<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=shipping&section=shipping_validation' ) ) . '">' . __( 'Settings', 'woocommerce-advanced-shipping-validation' ) . '</a>'
+				'<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=shipping&section=shipping_validation' ) ) . '">' . __( 'Settings', 'woocommerce-advanced-shipping-validation' ) . '</a>'
 			), $links );
 		endif;
 

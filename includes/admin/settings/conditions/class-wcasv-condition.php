@@ -66,17 +66,17 @@ class WCASV_Condition {
 	 */
 	public function __construct( $id = null, $group = 0, $condition = null, $operator = null, $value = null ) {
 
-		 $this->id			= $id;
-		 $this->group 		= $group;
-		 $this->condition 	= $condition;
-		 $this->operator 	= $operator;
-		 $this->value 		= $value;
+		$this->id			= $id;
+		$this->group 		= $group;
+		$this->condition 	= $condition;
+		$this->operator 	= $operator;
+		$this->value 		= $value;
 
-		 if ( ! $id ) :
-		 	$this->id = rand();
-		 endif;
+		if ( ! $id ) :
+			$this->id = rand();
+		endif;
 
-		 $this->wcasv_create_object();
+		$this->wcasv_create_object();
 
 	}
 
