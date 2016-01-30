@@ -21,7 +21,7 @@ $conditions = get_post_meta( $post->ID, '_conditions', true );
 
 	<p><strong><?php _e( 'Match all of the following rules to apply the fee:', 'woocommerce-advanced-shipping-validation' ); ?></strong></p>
 
-	<?php if ( !empty( $conditions ) ) :
+	<?php if ( ! empty( $conditions ) ) :
 
 		foreach ( $conditions as $condition_group => $conditions ) :
 
