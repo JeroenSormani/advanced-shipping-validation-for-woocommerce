@@ -20,7 +20,9 @@ class WCASV_Admin {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
+
 		add_action( 'admin_init', array( $this, 'init' ) );
+
 	}
 
 
@@ -60,8 +62,8 @@ class WCASV_Admin {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	array	$screen_ids	List of existing screen IDs.
-	 * @return 	array 				List of modified screen IDs.
+	 * @param   array  $screen_ids  List of existing screen IDs.
+	 * @return  array               List of modified screen IDs.
 	 */
 	public function add_wcasv_screen_ids( $screen_ids ) {
 
@@ -84,8 +86,8 @@ class WCASV_Admin {
 		// Only load scripts on relevant pages
 		if (
 			( isset( $_REQUEST['post'] ) && 'shipping_validation' == get_post_type( $_REQUEST['post'] ) ) ||
-			( isset($_REQUEST['post_type']) && 'shipping_validation' == $_REQUEST['post_type'] ) ||
-			( isset( $_REQUEST['section']) && 'shipping_validation' == $_REQUEST['section'] )
+			( isset( $_REQUEST['post_type'] ) && 'shipping_validation' == $_REQUEST['post_type'] ) ||
+			( isset( $_REQUEST['section'] ) && 'shipping_validation' == $_REQUEST['section'] )
 		) :
 
 			// Style script
@@ -95,7 +97,7 @@ class WCASV_Admin {
 			wp_enqueue_script( 'woocommerce-advanced-shipping-validation-js', plugins_url( 'assets/admin/js/woocommerce-advanced-shipping-validation.min.js', Woocommerce_Advanced_Shipping_Validation()->file ), array( 'jquery', 'jquery-ui-sortable' ), Woocommerce_Advanced_Shipping_Validation()->version, true );
 
 			wp_localize_script( 'woocommerce-advanced-shipping-validation-js', 'wcasv', array(
-				'nonce'	=> wp_create_nonce( 'wcasv-ajax-nonce' ),
+				'nonce' => wp_create_nonce( 'wcasv-ajax-nonce' ),
 			) );
 
 			wp_dequeue_script( 'autosave' );
@@ -117,7 +119,7 @@ class WCASV_Admin {
 		global $parent_file, $submenu_file, $post_type;
 
 		if ( 'shipping_validation' == $post_type ) :
-			$parent_file = 'woocommerce';
+			$parent_file  = 'woocommerce';
 			$submenu_file = 'wc-settings';
 		endif;
 
@@ -132,9 +134,9 @@ class WCASV_Admin {
 	 *
 	 * @since 1.1.8
 	 *
-	 * @param	array	$links	List of existing links.
-	 * @param	string	$file	Name of the current plugin being looped.
-	 * @return	array			List of modified links.
+	 * @param   array   $links  List of existing links.
+	 * @param   string  $file   Name of the current plugin being looped.
+	 * @return  array           List of modified links.
 	 */
 	public function add_plugin_action_links( $links, $file ) {
 
