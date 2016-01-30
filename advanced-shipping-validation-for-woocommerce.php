@@ -57,7 +57,8 @@ class Woocommerce_Advanced_Shipping_Validation {
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct() {
+	public function __construct() 
+	{
 
 		// Check if WooCommerce is active
 		if ( ! function_exists( 'is_plugin_active_for_network' ) ) :
@@ -88,7 +89,8 @@ class Woocommerce_Advanced_Shipping_Validation {
 	 *
 	 * @return  object  Instance of the class.
 	 */
-	public static function instance() {
+	public static function instance() 
+	{
 
 		if ( is_null( self::$instance ) ) :
 			self::$instance = new self();
