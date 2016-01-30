@@ -4,7 +4,7 @@ php:
     align_variables: space
     closing_newline: add
     closing_php_tag: remove
-    control_structure_parentheses_inner_whitespace: no_apply #whitespace
+    control_structure_parentheses_inner_whitespace: whitespace
     doc_function_whitespace: no_space
     else_if_whitespace: no_space
     exclamation_whitespace: whitespace
