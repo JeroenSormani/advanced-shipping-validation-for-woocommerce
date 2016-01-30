@@ -12,9 +12,16 @@ Setup shipping validation rules for your store. Let your customers know why they
 
 == Description ==
 With Advanced Shipping Validation for WooCommerce you can setup your own shipping validation rules. With these rules you can prevent
-customers from checking out based on your conditions.
+customers from finishing the checkout process based on your conditions.
 
-A common use case is the restriction of certain products being shipped to states like Hawaii and Alaska.
+**Prevent finishing checkout?!**
+There are valid reasons why you'd want to prevent someone from checking out with products in their cart.
+At the checkout is the moment where you definitely know where the products should be shipped, at that time, it could be that
+the customer has some products that are not allowed to ship to certain locations.
+
+A common use case with this is the restriction of certain products being shipped from the mainland to states like Hawaii and Alaska.
+
+**Translations, feature requests, ratings and donations are welcome and appreciated!**
 
 == Installation ==
 
@@ -25,7 +32,8 @@ A common use case is the restriction of certain products being shipped to states
 == Screenshots ==
 
 1. Example shipping validation
-2. Back-end shipping validation setup.
+2. Back-end shipping validation setup
+3. Validation overview page
 
 == Changelog ==
 

@@ -418,7 +418,7 @@ class WCASV_Match_Conditions {
 	 *
 	 * Matches if the condition value shipping class is in the cart.
 	 *
-	 * @since 1.0.1
+	 * @since 1.0.0
 	 *
 	 * @param 	bool 	$match			Current match value.
 	 * @param 	string 	$operator		Operator selected by the user in the condition row.
@@ -503,11 +503,16 @@ class WCASV_Match_Conditions {
 
 				if ( $zipcode_match ) :
 					return true;
+				else :
+					$match = $zipcode_match;
 				endif;
 
 			endforeach;
 
 		elseif ( '!=' == $operator ) :
+
+			// True until proven false
+			$match = true;
 
 			// Loop through zipcodes
 			foreach ( $zipcodes as $zipcode ) :
@@ -527,13 +532,13 @@ class WCASV_Match_Conditions {
 
 		elseif ( '>=' == $operator ) :
 			$zipcode = reset( $zipcodes );
-			$zipcode_match = ( $zipcode >= $value );
+			$match = ( $zipcode >= $value );
 		elseif ( '<=' == $operator ) :
 			$zipcode = reset( $zipcodes );
-			$zipcode_match = ( $zipcode <= $value );
+			$match = ( $zipcode <= $value );
 		endif;
 
-		return $zipcode_match;
+		return $match;
 
 	}
 

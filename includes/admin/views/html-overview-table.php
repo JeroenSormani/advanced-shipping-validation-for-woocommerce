@@ -44,16 +44,16 @@ $validation_rules = get_posts( array( 'posts_per_page' => '-1', 'post_type' => '
 						<td>
 							<strong>
 								<a href='<?php echo get_edit_post_link( $rule->ID ); ?>' class='row-title' title='<?php _e( 'Edit Method', 'woocommerce-advanced-shipping-validation' ); ?>'><?php
-									 echo _draft_or_post_title( $rule->ID );
+									echo _draft_or_post_title( $rule->ID );
 								?></a><?php
-									 _post_states( $rule );
+								_post_states( $rule );
 							?></strong>
 							<div class='row-actions'>
 								<span class='edit'>
 									<a href='<?php echo get_edit_post_link( $rule->ID ); ?>' title='<?php _e( 'Edit Method', 'woocommerce-advanced-shipping-validation' ); ?>'>
 										<?php _e( 'Edit', 'woocommerce-advanced-shipping-validation' ); ?>
 									</a>
-									 |
+									|
 								</span>
 								<span class='trash'>
 									<a href='<?php echo get_delete_post_link( $rule->ID ); ?>' title='<?php _e( 'Delete Method', 'woocommerce-advanced-shipping-validation' ); ?>'>
