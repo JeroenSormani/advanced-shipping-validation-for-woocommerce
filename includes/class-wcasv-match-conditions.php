@@ -2,14 +2,14 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
- *	Class WCASV_Match_Conditions.
+ * Class WCASV_Match_Conditions.
  *
- *	The Match Conditions class handles the matching rules for shipping validation rules.
+ * The Match Conditions class handles the matching rules for shipping validation rules.
  *
- *	@class		WCASV_Match_Conditions
- *	@author		Jeroen Sormani
- *	@package 	WooCommerce Advanced Shipping Validation
- *	@version	1.0.0
+ * @class		WCASV_Match_Conditions
+ * @author		Jeroen Sormani
+ * @package 	WooCommerce Advanced Shipping Validation
+ * @version	1.0.0
  */
 class WCASV_Match_Conditions {
 
@@ -21,30 +21,30 @@ class WCASV_Match_Conditions {
 	 */
 	public function __construct() {
 
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_subtotal', 				array( $this, 'match_condition_subtotal' ), 10, 5 );
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_shipping_cost', 			array( $this, 'match_condition_shipping_cost' ), 10, 5 );
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_shipping_method', 		array( $this, 'match_condition_shipping_method' ), 10, 5 );
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_payment_gateway', 		array( $this, 'match_condition_payment_gateway' ), 10, 5 );
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_subtotal_ex_tax', 		array( $this, 'match_condition_subtotal_ex_tax' ), 10, 5 );
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_tax',					    array( $this, 'match_condition_tax' ), 10, 5 );
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_quantity', 				array( $this, 'match_condition_quantity' ), 10, 5 );
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_contains_product', 		array( $this, 'match_condition_contains_product' ), 10, 5 );
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_coupon', 				    array( $this, 'match_condition_coupon' ), 10, 5 );
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_weight', 				    array( $this, 'match_condition_weight' ), 10, 5 );
+		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_subtotal', array( $this, 'match_condition_subtotal' ), 10, 5 );
+		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_shipping_cost', array( $this, 'match_condition_shipping_cost' ), 10, 5 );
+		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_shipping_method', array( $this, 'match_condition_shipping_method' ), 10, 5 );
+		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_payment_gateway', array( $this, 'match_condition_payment_gateway' ), 10, 5 );
+		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_subtotal_ex_tax', array( $this, 'match_condition_subtotal_ex_tax' ), 10, 5 );
+		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_tax', array( $this, 'match_condition_tax' ), 10, 5 );
+		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_quantity', array( $this, 'match_condition_quantity' ), 10, 5 );
+		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_contains_product', array( $this, 'match_condition_contains_product' ), 10, 5 );
+		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_coupon', array( $this, 'match_condition_coupon' ), 10, 5 );
+		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_weight', array( $this, 'match_condition_weight' ), 10, 5 );
 		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_contains_shipping_class', array( $this, 'match_condition_contains_shipping_class' ), 10, 5 );
 
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_zipcode', 				array( $this, 'match_condition_zipcode' ), 10, 5 );
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_city', 					array( $this, 'match_condition_city' ), 10, 5 );
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_state', 					array( $this, 'match_condition_state' ), 10, 5 );
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_country', 				array( $this, 'match_condition_country' ), 10, 5 );
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_role',					array( $this, 'match_condition_role' ), 10, 5 );
+		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_zipcode', array( $this, 'match_condition_zipcode' ), 10, 5 );
+		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_city', array( $this, 'match_condition_city' ), 10, 5 );
+		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_state', array( $this, 'match_condition_state' ), 10, 5 );
+		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_country', array( $this, 'match_condition_country' ), 10, 5 );
+		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_role', array( $this, 'match_condition_role' ), 10, 5 );
 
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_width', 					array( $this, 'match_condition_width' ), 10, 5 );
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_height', 				    array( $this, 'match_condition_height' ), 10, 5 );
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_length',					array( $this, 'match_condition_length' ), 10, 5 );
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_stock', 					array( $this, 'match_condition_stock' ), 10, 5 );
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_stock_status', 			array( $this, 'match_condition_stock_status' ), 10, 5 );
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_contains_category', 		array( $this, 'match_condition_contains_category' ), 10, 5 );
+		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_width', array( $this, 'match_condition_width' ), 10, 5 );
+		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_height', array( $this, 'match_condition_height' ), 10, 5 );
+		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_length', array( $this, 'match_condition_length' ), 10, 5 );
+		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_stock', array( $this, 'match_condition_stock' ), 10, 5 );
+		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_stock_status', array( $this, 'match_condition_stock_status' ), 10, 5 );
+		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_contains_category', array( $this, 'match_condition_contains_category' ), 10, 5 );
 
 	}
 
@@ -56,12 +56,12 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match			Current match value.
-	 * @param 	string 	$operator		Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value			Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 					Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_subtotal( $match, $operator, $value, $package, $package_index ) {
 
@@ -70,7 +70,7 @@ class WCASV_Match_Conditions {
 		endif;
 
 		// Make sure its formatted correct
-		$value = str_replace( ',', '.', $value );
+		$value    = str_replace( ',', '.', $value );
 		$subtotal = WC()->cart->subtotal;
 
 		if ( '==' == $operator ) :
@@ -96,21 +96,21 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match			Current match value.
-	 * @param 	string 	$operator		Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value			Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 					Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_shipping_cost( $match, $operator, $value, $package, $package_index ) {
 
 		$chosen_shipping_methods = WC()->session->get( 'chosen_shipping_methods' );
-		$chosen_shipping_method = isset( $chosen_shipping_methods[ $package_index ] ) ? $chosen_shipping_methods[ $package_index ] : null;
-		$package = WC()->shipping->calculate_shipping_for_package( $package );
-		$rates = $package['rates'];
-		$chosen_rate = $rates[ $chosen_shipping_method ];
-		$shipping_cost = str_replace( ',', '.', $chosen_rate->cost );
+		$chosen_shipping_method  = isset( $chosen_shipping_methods[ $package_index ] ) ? $chosen_shipping_methods[ $package_index ] : null;
+		$package                 = WC()->shipping->calculate_shipping_for_package( $package );
+		$rates                   = $package['rates'];
+		$chosen_rate             = $rates[ $chosen_shipping_method ];
+		$shipping_cost           = str_replace( ',', '.', $chosen_rate->cost );
 
 		if ( '==' == $operator ) :
 			$match = ( $shipping_cost == $value );
@@ -134,17 +134,17 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match			Current match value.
-	 * @param 	string 	$operator		Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value			Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 					Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_shipping_method( $match, $operator, $value, $package, $package_index ) {
 
 		$chosen_shipping_methods = WC()->session->get( 'chosen_shipping_methods' );
-		$chosen_shipping_method = isset( $chosen_shipping_methods[ $package_index ] ) ? $chosen_shipping_methods[ $package_index ] : null;
+		$chosen_shipping_method  = isset( $chosen_shipping_methods[ $package_index ] ) ? $chosen_shipping_methods[ $package_index ] : null;
 
 		if ( '==' == $operator ) :
 			$match = ( $value == $chosen_shipping_method );
@@ -164,12 +164,12 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match		    Current match value.
-	 * @param 	string 	$operator	    Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value		    Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 				    Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_payment_gateway( $match, $operator, $value, $package, $package_index ) {
 
@@ -193,12 +193,12 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match			Current match value.
-	 * @param 	string 	$operator		Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value			Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 					Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_subtotal_ex_tax( $match, $operator, $value, $package, $package_index ) {
 
@@ -231,12 +231,12 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match			Current match value.
-	 * @param 	string 	$operator		Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value			Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 					Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_tax( $match, $operator, $value, $package, $package_index ) {
 
@@ -269,12 +269,12 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match			Current match value.
-	 * @param 	string 	$operator		Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value			Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 					Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_quantity( $match, $operator, $value, $package, $package_index ) {
 
@@ -309,12 +309,12 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match			Current match value.
-	 * @param 	string 	$operator		Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value			Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 					Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_contains_product( $match, $operator, $value, $package, $package_index ) {
 
@@ -344,12 +344,12 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match			Current match value.
-	 * @param 	string 	$operator		Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value			Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 					Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_coupon( $match, $operator, $value, $package, $package_index ) {
 
@@ -375,12 +375,12 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match			Current match value.
-	 * @param 	string 	$operator		Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value			Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 					Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_weight( $match, $operator, $value, $package, $package_index ) {
 
@@ -393,7 +393,7 @@ class WCASV_Match_Conditions {
 			$weight += $item['data']->weight * $item['quantity'];
 		endforeach;
 
-		$value 	= (string) $value;
+		$value = (string) $value;
 
 		// Make sure its formatted correct
 		$value = str_replace( ',', '.', $value );
@@ -420,12 +420,12 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match			Current match value.
-	 * @param 	string 	$operator		Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value			Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 					Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_contains_shipping_class( $match, $operator, $value, $package, $package_index ) {
 
@@ -440,8 +440,8 @@ class WCASV_Match_Conditions {
 
 		foreach ( WC()->cart->cart_contents as $product ) :
 
-			$id 		= ! empty( $product['variation_id'] ) ? $product['variation_id'] : $product['product_id'];
-			$product 	= get_product( $id );
+			$id      = ! empty( $product['variation_id'] ) ? $product['variation_id'] : $product['product_id'];
+			$product = get_product( $id );
 
 			if ( $operator == '==' ) :
 				if ( $product->get_shipping_class() == $value ) :
@@ -473,12 +473,12 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match			Current match value.
-	 * @param 	string 	$operator		Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value			Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 					Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_zipcode( $match, $operator, $value, $package, $package_index ) {
 
@@ -498,7 +498,7 @@ class WCASV_Match_Conditions {
 				if ( count( $parts ) > 1 ) : // Its a range
 					$zipcode_match = ( $customer_zipcode >= min( $parts ) && $customer_zipcode <= max( $parts ) );
 				else : // Its a regular zipcode
-					$zipcode_match = preg_match( "/^" . preg_quote( $zipcode, '/' ) . "/i", $customer_zipcode );
+					$zipcode_match = preg_match( '/^' . preg_quote( $zipcode, '/' ) . '/i', $customer_zipcode );
 				endif;
 
 				if ( $zipcode_match ) :
@@ -521,7 +521,7 @@ class WCASV_Match_Conditions {
 				if ( count( $parts ) > 1 ) : // Its a range
 					$zipcode_match = ( $customer_zipcode >= min( $parts ) && $customer_zipcode <= max( $parts ) );
 				else : // Its a regular zipcode
-					$zipcode_match = preg_match( "/^" . preg_quote( $zipcode, '/' ) . "/i", $customer_zipcode );
+					$zipcode_match = preg_match( '/^' . preg_quote( $zipcode, '/' ) . '/i', $customer_zipcode );
 				endif;
 
 				if ( $zipcode_match ) :
@@ -532,10 +532,10 @@ class WCASV_Match_Conditions {
 
 		elseif ( '>=' == $operator ) :
 			$zipcode = reset( $zipcodes );
-			$match = ( $zipcode >= $value );
+			$match   = ( $zipcode >= $value );
 		elseif ( '<=' == $operator ) :
 			$zipcode = reset( $zipcodes );
-			$match = ( $zipcode <= $value );
+			$match   = ( $zipcode <= $value );
 		endif;
 
 		return $match;
@@ -550,12 +550,12 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match			Current match value.
-	 * @param 	string 	$operator		Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value			Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 					Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_city( $match, $operator, $value, $package, $package_index ) {
 
@@ -568,7 +568,7 @@ class WCASV_Match_Conditions {
 			if ( preg_match( '/\, ?/', $value ) ) :
 				$match = ( in_array( WC()->customer->get_shipping_city(), explode( ',', $value ) ) );
 			else :
-				$match = ( preg_match( "/^" . preg_quote( $value, '/' ) . "$/i", WC()->customer->get_shipping_city() ) );
+				$match = ( preg_match( '/^' . preg_quote( $value, '/' ) . "$/i", WC()->customer->get_shipping_city() ) );
 			endif;
 
 		elseif ( '!=' == $operator ) :
@@ -576,7 +576,7 @@ class WCASV_Match_Conditions {
 			if ( preg_match( '/\, ?/', $value ) ) :
 				$match = ( ! in_array( WC()->customer->get_shipping_city(), explode( ',', $value ) ) );
 			else :
-				$match = ( ! preg_match( "/^" . preg_quote( $value, '/' ) . "$/i", WC()->customer->get_shipping_city() ) );
+				$match = ( ! preg_match( '/^' . preg_quote( $value, '/' ) . "$/i", WC()->customer->get_shipping_city() ) );
 			endif;
 
 		endif;
@@ -593,12 +593,12 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match			Current match value.
-	 * @param 	string 	$operator		Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value			Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 					Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_state( $match, $operator, $value, $package, $package_index ) {
 
@@ -626,12 +626,12 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match			Current match value.
-	 * @param 	string 	$operator		Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value			Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 					Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_country( $match, $operator, $value, $package, $package_index ) {
 
@@ -640,9 +640,9 @@ class WCASV_Match_Conditions {
 		endif;
 
 		if ( '==' == $operator ) :
-			$match = ( preg_match( "/^" . preg_quote( $value, '/' ) . "$/i", WC()->customer->get_shipping_country() ) );
+			$match = ( preg_match( '/^' . preg_quote( $value, '/' ) . "$/i", WC()->customer->get_shipping_country() ) );
 		elseif ( '!=' == $operator ) :
-			$match = ( ! preg_match( "/^" . preg_quote( $value, '/' ) . "$/i", WC()->customer->get_shipping_country() ) );
+			$match = ( ! preg_match( '/^' . preg_quote( $value, '/' ) . "$/i", WC()->customer->get_shipping_country() ) );
 		endif;
 
 		return $match;
@@ -657,12 +657,12 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match			Current match value.
-	 * @param 	string 	$operator		Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value			Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 					Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_role( $match, $operator, $value, $package, $package_index ) {
 
@@ -691,12 +691,12 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match			Current match value.
-	 * @param 	string 	$operator		Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value			Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 					Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_width( $match, $operator, $value, $package, $package_index ) {
 
@@ -738,12 +738,12 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match			Current match value.
-	 * @param 	string 	$operator		Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value			Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 					Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_height( $match, $operator, $value, $package, $package_index ) {
 
@@ -785,12 +785,12 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match			Current match value.
-	 * @param 	string 	$operator		Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value			Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 					Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_length( $match, $operator, $value, $package, $package_index ) {
 
@@ -832,12 +832,12 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match			Current match value.
-	 * @param 	string 	$operator		Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value			Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 					Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_stock( $match, $operator, $value, $package, $package_index ) {
 
@@ -881,12 +881,12 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match			Current match value.
-	 * @param 	string 	$operator		Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value			Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 					Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_stock_status( $match, $operator, $value, $package, $package_index ) {
 
@@ -927,12 +927,12 @@ class WCASV_Match_Conditions {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	bool 	$match			Current match value.
-	 * @param 	string 	$operator		Operator selected by the user in the condition row.
-	 * @param 	mixed 	$value			Value given by the user in the condition row.
-	 * @param 	array 	$package		List of shipping package details.
-	 * @param 	int 	$package_index	Current shipping package index.
-	 * @return 	BOOL 					Matching result, TRUE if results match, otherwise FALSE.
+	 * @param   bool    $match          Current match value.
+	 * @param   string  $operator       Operator selected by the user in the condition row.
+	 * @param   mixed   $value          Value given by the user in the condition row.
+	 * @param   array   $package        List of shipping package details.
+	 * @param   int     $package_index  Current shipping package index.
+	 * @return  BOOL                    Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_contains_category( $match, $operator, $value, $package, $package_index ) {
 
