@@ -37,8 +37,13 @@ php:
     whitespace_before_function_brace: space
     whitespace_before_function_close: newline
     whitespace_before_function_parentheses: no_space
+    whitespace_before_function_close_exclude_max_lines: 3
+    whitespace_after_function_open_exclude_max_lines: 3
+    
 blacklist: 
     directories:
         - 
     files:
         -
+
+
