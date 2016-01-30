@@ -84,8 +84,8 @@ class WCASV_Admin {
 		// Only load scripts on relevant pages
 		if (
 			( isset( $_REQUEST['post'] ) && 'shipping_validation' == get_post_type( $_REQUEST['post'] ) ) ||
-			( isset( $_REQUEST['post_type'] ) && 'shipping_validation' == $_REQUEST['post_type'] ) ||
-			( isset( $_REQUEST['section'] ) && 'shipping_validation' == $_REQUEST['section'] )
+			( isset($_REQUEST['post_type']) && 'shipping_validation' == $_REQUEST['post_type'] ) ||
+			( isset( $_REQUEST['section']) && 'shipping_validation' == $_REQUEST['section'] )
 		) :
 
 			// Style script
