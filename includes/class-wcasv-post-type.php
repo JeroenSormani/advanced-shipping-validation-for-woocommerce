@@ -16,7 +16,7 @@ class WCASV_Post_Type {
 
 	/**
 	 * Constructor.
- 	 *
+	 *
 	 * @since 1.0.0
 	 */
 	public function __construct() {
@@ -32,7 +32,7 @@ class WCASV_Post_Type {
 		add_filter( 'post_updated_messages', array( $this, 'custom_post_type_messages' ) );
 
 		// Redirect after delete
-		add_action('load-edit.php', array( $this, 'redirect_after_trash' ) );
+		add_action( 'load-edit.php', array( $this, 'redirect_after_trash' ) );
 
 	}
 
@@ -47,29 +47,29 @@ class WCASV_Post_Type {
 	public function register_post_type() {
 
 		$labels = array(
-			'name' 					=> __( 'Shipping validation rules', 'woocommerce-advanced-shipping-validation' ),
-			'singular_name' 		=> __( 'Shipping validation rule', 'woocommerce-advanced-shipping-validation' ),
-			'add_new' 				=> __( 'Add New', 'woocommerce-advanced-shipping-validation' ),
-			'add_new_item' 			=> __( 'Add New Shipping validation rule', 'woocommerce-advanced-shipping-validation' ),
-			'edit_item' 			=> __( 'Edit Shipping validation rule', 'woocommerce-advanced-shipping-validation' ),
-			'new_item' 				=> __( 'New Shipping validation rule', 'woocommerce-advanced-shipping-validation' ),
-			'view_item' 			=> __( 'View Shipping validation rule', 'woocommerce-advanced-shipping-validation' ),
-			'search_items' 			=> __( 'Search Shipping validation rules', 'woocommerce-advanced-shipping-validation' ),
-			'not_found' 			=> __( 'No Shipping validation rule', 'woocommerce-advanced-shipping-validation' ),
-			'not_found_in_trash'	=> __( 'No Shipping validation rules found in Trash', 'woocommerce-advanced-shipping-validation' ),
+			'name'               => __( 'Shipping validation rules', 'woocommerce-advanced-shipping-validation' ),
+			'singular_name'      => __( 'Shipping validation rule', 'woocommerce-advanced-shipping-validation' ),
+			'add_new'            => __( 'Add New', 'woocommerce-advanced-shipping-validation' ),
+			'add_new_item'       => __( 'Add New Shipping validation rule', 'woocommerce-advanced-shipping-validation' ),
+			'edit_item'          => __( 'Edit Shipping validation rule', 'woocommerce-advanced-shipping-validation' ),
+			'new_item'           => __( 'New Shipping validation rule', 'woocommerce-advanced-shipping-validation' ),
+			'view_item'          => __( 'View Shipping validation rule', 'woocommerce-advanced-shipping-validation' ),
+			'search_items'       => __( 'Search Shipping validation rules', 'woocommerce-advanced-shipping-validation' ),
+			'not_found'          => __( 'No Shipping validation rule', 'woocommerce-advanced-shipping-validation' ),
+			'not_found_in_trash' => __( 'No Shipping validation rules found in Trash', 'woocommerce-advanced-shipping-validation' ),
 		);
 
 		register_post_type( 'shipping_validation', array(
-			'label' 				=> 'shipping_validation',
-			'show_ui' 				=> true,
-			'show_in_menu' 			=> false,
-			'capability_type' 		=> 'post',
-			'map_meta_cap' 			=> true,
-			'rewrite' 				=> false,
-			'_builtin' 				=> false,
-			'query_var' 			=> true,
-			'supports' 				=> array( 'title' ),
-			'labels' 				=> $labels,
+			'label'           => 'shipping_validation',
+			'show_ui'         => true,
+			'show_in_menu'    => false,
+			'capability_type' => 'post',
+			'map_meta_cap'    => true,
+			'rewrite'         => false,
+			'_builtin'        => false,
+			'query_var'       => true,
+			'supports'        => array( 'title' ),
+			'labels'          => $labels,
 		) );
 
 	}
@@ -82,14 +82,14 @@ class WCASV_Post_Type {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param 	array $messages Existing list of messages.
-	 * @return 	array			Modified list of messages.
+	 * @param   array  $messages  Existing list of messages.
+	 * @return  array             Modified list of messages.
 	 */
 	function custom_post_type_messages( $messages ) {
 
-		$post 				= get_post();
-		$post_type			= get_post_type( $post );
-		$post_type_object	= get_post_type_object( $post_type );
+		$post             = get_post();
+		$post_type        = get_post_type( $post );
+		$post_type_object = get_post_type_object( $post_type );
 
 		$messages['shipping_validation'] = array(
 			0 => '',
@@ -110,7 +110,7 @@ class WCASV_Post_Type {
 			10 => __( 'Shipping validation rule draft updated.', 'woocommerce-advanced-shipping-validation' ),
 		);
 
-		$permalink = admin_url( 'admin.php?page=wc-settings&tab=shipping&section=shipping_validation' );
+		$permalink     = admin_url( 'admin.php?page=wc-settings&tab=shipping&section=shipping_validation' );
 		$overview_link = sprintf( ' <a href="%s">%s</a>', esc_url( $permalink ), __( 'Return to overview.', 'woocommerce-advanced-shipping-validation' ) );
 		$messages['shipping_validation'][1] .= $overview_link;
 		$messages['shipping_validation'][6] .= $overview_link;
@@ -146,8 +146,10 @@ class WCASV_Post_Type {
 	 * @since 1.0.0
 	 */
 	public function render_conditions() {
+
 		// Conditions meta box
 		require_once plugin_dir_path( __FILE__ ) . 'admin/views/html-meta-box-conditions.php';
+
 	}
 
 
@@ -159,8 +161,10 @@ class WCASV_Post_Type {
 	 * @since 1.0.0
 	 */
 	public function render_settings() {
+
 		// Settings meta box
 		require_once plugin_dir_path( __FILE__ ) . 'admin/views/html-meta-box-settings.php';
+
 	}
 
 
@@ -172,18 +176,21 @@ class WCASV_Post_Type {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int/numberic $post_id ID of the post being saved.
+	 * @param  int/numberic  $post_id  ID of the post being saved.
 	 */
 	public function save_meta_boxes( $post_id ) {
 
-		if ( ! isset( $_POST['wcasv_settings_meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['wcasv_settings_meta_box_nonce'], 'wcasv_settings_meta_box ' ) )
+		if ( ! isset( $_POST['wcasv_settings_meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['wcasv_settings_meta_box_nonce'], 'wcasv_settings_meta_box ' ) ) {
 			return $post_id;
+		}
 
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return $post_id;
+		}
 
-		if ( ! current_user_can( 'manage_woocommerce' ) )
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
 			return $post_id;
+		}
 
 
 		// Sanitize conditions
@@ -262,8 +269,8 @@ class WCASV_Post_Type {
 
 		endif;
 
-
 	}
+
 
 }
 
