@@ -18,17 +18,17 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @since 1.0.0
  *
- * @return	array	List of 'shipping_validation' post IDs.
+ * @return  array  List of 'shipping_validation' post IDs.
  */
 function wcasv_get_validation_posts() {
 
 	$fee_query = new WP_Query( array(
-		'post_type'			=> 'shipping_validation',
-		'post_status'		=> 'publish',
-		'posts_per_page'	=> -1,
-		'fields'			=> 'ids',
-		'orderby'			=> 'menu_order',
-		'order'				=> 'ASC',
+		'post_type'      => 'shipping_validation',
+		'post_status'    => 'publish',
+		'posts_per_page' => -1,
+		'fields'         => 'ids',
+		'orderby'        => 'menu_order',
+		'order'          => 'ASC',
 	) );
 	$fees = $fee_query->get_posts();
 
@@ -45,8 +45,8 @@ function wcasv_get_validation_posts() {
  *
  * @since 1.0.0
  *
- * @param array $condition_groups 	List of condition groups containing their conditions.
- * @return BOOL 					TRUE if all the conditions in one of the condition groups matches true.
+ * @param   array  $condition_groups  List of condition groups containing their conditions.
+ * @return  BOOL                      TRUE if all the conditions in one of the condition groups matches true.
  */
 function wcasv_match_conditions( $condition_groups = array(), $package, $package_index ) {
 
@@ -60,8 +60,8 @@ function wcasv_match_conditions( $condition_groups = array(), $package, $package
 
 		foreach ( $conditions as $condition ) :
 
-			$condition 	= apply_filters( 'woocommerce_advanced_shipping_validation_condition_values', $condition );
-			$match 		= apply_filters( 'woocommerce_advanced_shipping_validation_match_condition_' . $condition['condition'], false, $condition['operator'], $condition['value'], $package, $package_index );
+			$condition = apply_filters( 'woocommerce_advanced_shipping_validation_condition_values', $condition );
+			$match     = apply_filters( 'woocommerce_advanced_shipping_validation_match_condition_' . $condition['condition'], false, $condition['operator'], $condition['value'], $package, $package_index );
 
 			if ( false == $match ) :
 				$match_condition_group = false;
@@ -77,6 +77,7 @@ function wcasv_match_conditions( $condition_groups = array(), $package, $package
 	endforeach;
 
 	return false;
+
 }
 
 
@@ -112,4 +113,6 @@ function wcasv_add_checkout_validation_messages() {
 	return ;
 
 }
+
+
 add_action( 'woocommerce_after_checkout_validation', 'wcasv_add_checkout_validation_messages' );
