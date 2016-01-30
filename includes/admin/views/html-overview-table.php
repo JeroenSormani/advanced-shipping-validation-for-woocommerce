@@ -32,7 +32,7 @@ $validation_rules = get_posts( array( 'posts_per_page' => '-1', 'post_type' => '
 				$i = 0;
 				foreach ( $validation_rules as $rule ) :
 
-					$message = get_post_meta( $rule->ID, '_message', true );
+					$message    = get_post_meta( $rule->ID, '_message', true );
 					$conditions = get_post_meta( $rule->ID, 'conditions', true );
 
 					$alt = ( $i++ ) % 2 == 0 ? 'alternate' : '';
