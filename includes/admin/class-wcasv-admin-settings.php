@@ -61,26 +61,26 @@ class WCASV_Admin_Settings {
 		$settings = apply_filters( 'woocommerce_advanced_shipping_validation_settings', array(
 
 			array(
-				'title' 	=> __( 'General', 'woocommerce-advanced-shipping-validation' ),
-				'type' 		=> 'title',
+				'title' => __( 'General', 'woocommerce-advanced-shipping-validation' ),
+				'type'  => 'title',
 			),
 
 			array(
-				'title'   	=> __( 'Enable shipping validation', 'woocommerce-advanced-shipping-validation' ),
-				'desc' 	  	=> __( 'When disabled you will still be able to manage validation rules, but none will be shown to customers.','woocommerce-advanced-shipping-validation' ),
-				'id' 	  	=> 'enable_woocommerce_advanced_shipping_validation',
-				'default' 	=> 'yes',
-				'type' 	  	=> 'checkbox',
-				'autoload'	=> false
+				'title'    => __( 'Enable shipping validation', 'woocommerce-advanced-shipping-validation' ),
+				'desc'     => __( 'When disabled you will still be able to manage validation rules, but none will be shown to customers.', 'woocommerce-advanced-shipping-validation' ),
+				'id'       => 'enable_woocommerce_advanced_shipping_validation',
+				'default'  => 'yes',
+				'type'     => 'checkbox',
+				'autoload' => false
 			),
 
 			array(
-				'title'   	=> __( 'Shipping validation rules', 'woocommerce-advanced-shipping-validation' ),
-				'type' 	  	=> 'shipping_validation_table',
+				'title' => __( 'Shipping validation rules', 'woocommerce-advanced-shipping-validation' ),
+				'type'  => 'shipping_validation_table',
 			),
 
 			array(
-				'type' 		=> 'sectionend',
+				'type' => 'sectionend',
 			),
 
 		) );
@@ -107,7 +107,7 @@ class WCASV_Admin_Settings {
 	 *
 	 * Load and render table as a field type.
 	 *
-	 * @return string
+	 * @return  string
 	 */
 	public function generate_table_field() {
 		// Overview table
@@ -122,8 +122,8 @@ class WCASV_Admin_Settings {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param	array	$sections	List of existing shipping sections.
-	 * @return	array				List of modified shipping sections.
+	 * @param   array  $sections  List of existing shipping sections.
+	 * @return  array             List of modified shipping sections.
 	 */
 	public function add_shipping_section( $sections ) {
 
@@ -141,7 +141,7 @@ class WCASV_Admin_Settings {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param	string	$current_section	Slug of the current section
+	 * @param  string  $current_section  Slug of the current section
 	 */
 	public function shipping_validation_section_settings( $current_section ) {
 
