@@ -8,10 +8,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @since 1.0.0
  *
- * @param mixed 	$id				ID of the current condition.
- * @param mixed 	$group			Group the condition belongs to.
- * @param string 	$condition		Condition.
- * @param string 	$current_value	Current condition value.
+ * @param mixed  $id            ID of the current condition.
+ * @param mixed  $group         Group the condition belongs to.
+ * @param string $condition     Condition.
+ * @param string $current_value Current condition value.
  */
 function wcasv_condition_values( $id, $group = 0, $condition = 'subtotal', $current_value = '' ) {
 
@@ -67,7 +67,7 @@ function wcasv_condition_values( $id, $group = 0, $condition = 'subtotal', $curr
 			$values['field'] = 'select';
 			$products = get_posts( array( 'posts_per_page' => '-1', 'post_type' => 'product', 'order' => 'asc', 'orderby' => 'title' ) );
 			foreach ( $products as $product ) :
-				$values['options'][$product->ID ] = $product->post_title;
+				$values['options'][ $product->ID ] = $product->post_title;
 			endforeach;
 
 			break;
@@ -159,8 +159,8 @@ function wcasv_condition_values( $id, $group = 0, $condition = 'subtotal', $curr
 
 			$values['field'] = 'select';
 			$values['options'] = array(
-				'instock' 		=> __( 'In stock', 'woocommerce' ),
-				'outofstock'	=> __( 'Out of stock', 'woocommerce' ),
+				'instock'    => __( 'In stock', 'woocommerce' ),
+				'outofstock' => __( 'Out of stock', 'woocommerce' ),
 			);
 
 			break;
@@ -211,7 +211,7 @@ function wcasv_condition_values( $id, $group = 0, $condition = 'subtotal', $curr
 						if ( ! is_array( $value ) ) :
 							?><option value='<?php echo esc_attr( $key ); ?>' <?php selected( $key, $current_value ); ?>><?php echo esc_attr( $value ); ?></option><?php
 						else :
-							?><optgroup label='<?php echo esc_attr( $key ) ?>'><?php
+							?><optgroup label='<?php echo esc_attr( $key ); ?>'><?php
 								foreach ( $value as $k => $v ) :
 									?><option value='<?php echo esc_attr( $k ); ?>' <?php selected( $k, $current_value ); ?>><?php echo esc_attr( $v ); ?></option><?php
 								endforeach;
