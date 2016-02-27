@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Plugin Name: 	WooCommerce Advanced Shipping Validation
  * Plugin URI: 		http://jeroensormani.com/
  * Donate link: 	http://jeroensormani.com/donate/
@@ -186,8 +186,11 @@ class Woocommerce_Advanced_Shipping_Validation {
 if ( ! function_exists( 'Woocommerce_Advanced_Shipping_Validation' ) ) :
 
 	function Woocommerce_Advanced_Shipping_Validation() {
+
 		return Woocommerce_Advanced_Shipping_Validation::instance();
+
 	}
+
 
 endif;
 Woocommerce_Advanced_Shipping_Validation();
