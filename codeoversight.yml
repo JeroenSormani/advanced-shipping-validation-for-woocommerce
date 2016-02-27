@@ -1,6 +1,6 @@
 php:
     align_array_elements: space
-    align_doc_tags: double_space
+    align_doc_tags: space
     align_variables: space
     closing_newline: add
     closing_php_tag: remove
@@ -37,8 +37,3 @@ php:
     whitespace_before_function_brace: space
     whitespace_before_function_close: newline
     whitespace_before_function_parentheses: no_space
-blacklist: 
-    directories:
-        - 
-    files:
-        -
