@@ -65,7 +65,7 @@ function wcasv_condition_values( $id, $group = 0, $condition = 'subtotal', $curr
 
 		case 'contains_product' :
 			$values['field'] = 'select';
-			$products = get_posts( array( 'posts_per_page' => '-1', 'post_type' => 'product', 'order' => 'asc', 'orderby' => 'title' ) );
+			$products        = get_posts( array( 'posts_per_page' => '-1', 'post_type' => 'product', 'order' => 'asc', 'orderby' => 'title' ) );
 			foreach ( $products as $product ) :
 				$values['options'][ $product->ID ] = $product->post_title;
 			endforeach;
@@ -81,7 +81,7 @@ function wcasv_condition_values( $id, $group = 0, $condition = 'subtotal', $curr
 			break;
 
 		case 'contains_shipping_class' :
-			$values['field'] 			= 'select';
+			$values['field'] = 'select';
 			$values['options']['-1'] 	= __( 'No shipping class', 'woocommerce' );
 
 			// Get all shipping classes
@@ -122,15 +122,15 @@ function wcasv_condition_values( $id, $group = 0, $condition = 'subtotal', $curr
 			break;
 
 		case 'country' :
-			$values['field'] 	= 'select';
-			$values['options'] 	= WC()->countries->get_allowed_countries();
+			$values['field']   = 'select';
+			$values['options'] = WC()->countries->get_allowed_countries();
 
 			break;
 
 		case 'role' :
 
-			$values['field'] = 'select';
-			$roles = array_keys( get_editable_roles() );
+			$values['field']   = 'select';
+			$roles             = array_keys( get_editable_roles() );
 			$values['options'] = array_combine( $roles, $roles );
 
 			break;
@@ -157,7 +157,7 @@ function wcasv_condition_values( $id, $group = 0, $condition = 'subtotal', $curr
 
 		case 'stock_status' :
 
-			$values['field'] = 'select';
+			$values['field']   = 'select';
 			$values['options'] = array(
 				'instock'    => __( 'In stock', 'woocommerce' ),
 				'outofstock' => __( 'Out of stock', 'woocommerce' ),
