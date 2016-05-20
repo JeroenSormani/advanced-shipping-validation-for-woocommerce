@@ -4,7 +4,7 @@
  * Plugin URI: 		http://jeroensormani.com/
  * Donate link: 	http://jeroensormani.com/donate/
  * Description: 	Setup shipping validation rules based on your own conditions. Show customers a specific message why they can't continue to checkout.
- * Version: 		1.0.0
+ * Version: 		1.0.1
  * Author: 			Jeroen Sormani
  * Author URI: 		http://jeroensormani.com/
  * Text Domain:     woocommerce-advanced-shipping-validation
@@ -30,7 +30,7 @@ class Woocommerce_Advanced_Shipping_Validation {
 	 * @since 1.0.0
 	 * @var string $version Plugin version number.
 	 */
-	public $version = '1.0.0';
+	public $version = '1.0.1';
 
 
 	/**
