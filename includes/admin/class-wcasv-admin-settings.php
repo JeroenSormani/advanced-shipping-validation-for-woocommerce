@@ -66,8 +66,8 @@ class WCASV_Admin_Settings {
 			),
 
 			array(
-				'title'   	=> __( 'Enable shipping validation', 'woocommerce-advanced-shipping-validation' ),
-				'desc' 	  	=> __( 'When disabled you will still be able to manage validation rules, but none will be shown to customers.','woocommerce-advanced-shipping-validation' ),
+				'title'   	=> __( 'Enable/Disable', 'woocommerce-advanced-shipping-validation' ),
+				'desc' 	  	=> __( 'Enable Advanced Shipping Validation','woocommerce-advanced-shipping-validation' ),
 				'id' 	  	=> 'enable_woocommerce_advanced_shipping_validation',
 				'default' 	=> 'yes',
 				'type' 	  	=> 'checkbox',
@@ -98,7 +98,12 @@ class WCASV_Admin_Settings {
 	 * @since 1.0.0
 	 */
 	public function update_options() {
-		WC_Admin_Settings::save_fields( $this->get_settings() );
+
+		global $current_section;
+
+		if ( $current_section == 'shipping_validation' ) {
+			WC_Admin_Settings::save_fields( $this->get_settings() );
+		}
 	}
 
 
