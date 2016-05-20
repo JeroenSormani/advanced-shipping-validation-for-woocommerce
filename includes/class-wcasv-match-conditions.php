@@ -940,8 +940,6 @@ class WCASV_Match_Conditions {
 			return $match;
 		endif;
 
-		$match = true;
-
 		if ( '==' == $operator ) :
 
 			foreach ( WC()->cart->cart_contents as $product ) :
@@ -953,6 +951,7 @@ class WCASV_Match_Conditions {
 			endforeach;
 
 		elseif ( '!=' == $operator ) :
+			$match = true;
 
 			foreach ( WC()->cart->cart_contents as $product ) :
 
