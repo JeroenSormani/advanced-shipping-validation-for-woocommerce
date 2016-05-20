@@ -20,7 +20,9 @@ class WCASV_Admin_Settings {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
+
 		add_action( 'admin_init', array( $this, 'init' ), 20 );
+
 	}
 
 
@@ -61,8 +63,8 @@ class WCASV_Admin_Settings {
 		$settings = apply_filters( 'woocommerce_advanced_shipping_validation_settings', array(
 
 			array(
-				'title' 	=> __( 'General', 'woocommerce-advanced-shipping-validation' ),
-				'type' 		=> 'title',
+				'title' => __( 'General', 'woocommerce-advanced-shipping-validation' ),
+				'type'  => 'title',
 			),
 
 			array(
@@ -75,12 +77,12 @@ class WCASV_Admin_Settings {
 			),
 
 			array(
-				'title'   	=> __( 'Shipping validation rules', 'woocommerce-advanced-shipping-validation' ),
-				'type' 	  	=> 'shipping_validation_table',
+				'title' => __( 'Shipping validation rules', 'woocommerce-advanced-shipping-validation' ),
+				'type'  => 'shipping_validation_table',
 			),
 
 			array(
-				'type' 		=> 'sectionend',
+				'type' => 'sectionend',
 			),
 
 		) );
@@ -99,11 +101,16 @@ class WCASV_Admin_Settings {
 	 */
 	public function update_options() {
 
+<<<<<<< HEAD
 		global $current_section;
 
 		if ( $current_section == 'shipping_validation' ) {
 			WC_Admin_Settings::save_fields( $this->get_settings() );
 		}
+=======
+		WC_Admin_Settings::save_fields( $this->get_settings() );
+
+>>>>>>> 9cdaa619a4b711c4b4022d07c1acfbf603d50c08
 	}
 
 
@@ -115,8 +122,10 @@ class WCASV_Admin_Settings {
 	 * @return string
 	 */
 	public function generate_table_field() {
+
 		// Overview table
 		require_once plugin_dir_path( __FILE__ ) . 'views/html-overview-table.php';
+
 	}
 
 
@@ -127,8 +136,8 @@ class WCASV_Admin_Settings {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param	array	$sections	List of existing shipping sections.
-	 * @return	array				List of modified shipping sections.
+	 * @param  array $sections List of existing shipping sections.
+	 * @return array           List of modified shipping sections.
 	 */
 	public function add_shipping_section( $sections ) {
 
@@ -146,7 +155,7 @@ class WCASV_Admin_Settings {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param	string	$current_section	Slug of the current section
+	 * @param string $current_section Slug of the current section
 	 */
 	public function shipping_validation_section_settings( $current_section ) {
 

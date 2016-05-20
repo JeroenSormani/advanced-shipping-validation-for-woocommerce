@@ -8,9 +8,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @since 1.0.0
  *
- * @param mixed 	$id				ID of the current condition.
- * @param mixed 	$group			Group the (condition) operator belongs to.
- * @param string 	$current_value	Current operator value.
+ * @param mixed  $id            ID of the current condition.
+ * @param mixed  $group         Group the (condition) operator belongs to.
+ * @param string $current_value Current operator value.
  */
 function wcasv_condition_operator( $id, $group = 0, $current_value = '==' ) {
 
