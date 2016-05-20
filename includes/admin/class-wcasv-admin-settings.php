@@ -101,16 +101,12 @@ class WCASV_Admin_Settings {
 	 */
 	public function update_options() {
 
-<<<<<<< HEAD
 		global $current_section;
 
 		if ( $current_section == 'shipping_validation' ) {
 			WC_Admin_Settings::save_fields( $this->get_settings() );
 		}
-=======
-		WC_Admin_Settings::save_fields( $this->get_settings() );
 
->>>>>>> 9cdaa619a4b711c4b4022d07c1acfbf603d50c08
 	}
 
 
