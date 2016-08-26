@@ -1,16 +1,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-/**
- * wcasv meta box settings.
- *
- * Display the fee settings in the meta box.
- *
- * @author		Jeroen Sormani
- * @package		WooCommerce Advanced Shipping Validation
- * @version		1.0.0
- */
-
 wp_nonce_field( 'wcasv_settings_meta_box ', 'wcasv_settings_meta_box_nonce' );
 
 global $post;

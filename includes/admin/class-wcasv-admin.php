@@ -2,13 +2,11 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
- * Class WCASV_Admin.
+ * Admin class.
  *
- * WCASV_Admin class handles stuff for admin.
+ * Handle all admin related functions.
  *
- * @class       WCASV_Admin
  * @author     	Jeroen Sormani
- * @package		WooCommerce Advanced Shipping Validation
  * @version		1.0.0
  */
 class WCASV_Admin {
@@ -96,8 +94,10 @@ class WCASV_Admin {
 			// Javascript
 			wp_enqueue_script( 'woocommerce-advanced-shipping-validation-js', plugins_url( 'assets/admin/js/woocommerce-advanced-shipping-validation.min.js', Woocommerce_Advanced_Shipping_Validation()->file ), array( 'jquery', 'jquery-ui-sortable' ), Woocommerce_Advanced_Shipping_Validation()->version, true );
 
-			wp_localize_script( 'woocommerce-advanced-shipping-validation-js', 'wcasv', array(
-				'nonce' => wp_create_nonce( 'wcasv-ajax-nonce' ),
+			wp_localize_script( 'woocommerce-advanced-shipping-validation-js', 'wpc', array(
+				'nonce'         => wp_create_nonce( 'wpc-ajax-nonce' ),
+				'action_prefix' => 'wcasv_',
+				'asset_url'     => plugins_url( 'assets/', Woocommerce_Advanced_Shipping_Validation()->file ),
 			) );
 
 			wp_dequeue_script( 'autosave' );

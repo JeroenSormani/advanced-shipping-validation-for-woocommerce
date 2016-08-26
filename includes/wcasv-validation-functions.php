@@ -18,21 +18,21 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @since 1.0.0
  *
- * @return array List of 'shipping_validation' post IDs.
+ * @param  array $args List of WP_Query arguments.
+ * @return array       List of 'shipping_validation' post IDs.
  */
-function wcasv_get_validation_posts() {
+function wcasv_get_validation_posts( $args = array() ) {
 
-	$fee_query = new WP_Query( array(
+	$rule_query = new WP_Query( wp_parse_args( $args, array(
 		'post_type'      => 'shipping_validation',
 		'post_status'    => 'publish',
 		'posts_per_page' => -1,
-		'fields'         => 'ids',
 		'orderby'        => 'menu_order',
 		'order'          => 'ASC',
-	) );
-	$fees = $fee_query->get_posts();
+	) ) );
+	$rules = $rule_query->get_posts();
 
-	return apply_filters( 'woocommerce_Advanced_Shipping_Validation_get_fees', $fees );
+	return apply_filters( 'woocommerce_advanced_shipping_validation_get_validation_rules', $rules );
 
 }
 
@@ -46,7 +46,7 @@ function wcasv_get_validation_posts() {
  * @since 1.0.0
  *
  * @param  array $condition_groups List of condition groups containing their conditions.
- * @return BOOL                    TRUE if all the conditions in one of the condition groups matches true.
+ * @return bool                    true if all the conditions in one of the condition groups matches true.
  */
 function wcasv_match_conditions( $condition_groups = array(), $package, $package_index ) {
 
@@ -95,7 +95,7 @@ function wcasv_add_checkout_validation_messages() {
 		return;
 	endif;
 
-	$validation_rules = wcasv_get_validation_posts();
+	$validation_rules = wcasv_get_validation_posts( array( 'fields' => 'ids' ) );
 	if ( $packages = WC()->shipping->get_packages() ) :
 		foreach ( $packages as $i => $package ) :
 			foreach ( $validation_rules as $post_id ) :

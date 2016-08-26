@@ -1,87 +1,108 @@
 jQuery( function( $ ) {
 
-	var loading_icon = '<span class="loading-icon"><img src="images/wpspin_light.gif"/></span>';
+	/**************************************************************
+	 * WPC - 1.0.1
+	 *************************************************************/
 
-	// Add condition
-	$( '#wcasv_conditions' ).on( 'click', '.condition-add', function() {
+		// Add condition
+	$( document.body ).on( 'click', '.wpc-condition-add', function() {
 
-		var data = { action: 'wcasv_add_condition', group: $( this ).attr( 'data-group' ), nonce: wcasv.nonce };
+		var $this = $( this );
+		var data = {
+			action: wpc.action_prefix + 'add_condition',
+			group: $( this ).attr( 'data-group' ),
+			nonce: wpc.nonce
+		};
+		var condition_group = $this.parents( '.wpc-conditions' ).find( '.wpc-condition-group-' + data.group );
 
-		$( '.condition-group-' + data.group ).append( loading_icon ).children( ':last' );
+		var loading_icon = '<div class="wpc-condition-wrap loading"></div>';
+		condition_group.append( loading_icon ).children( ':last' ).block({ message: null, overlayCSS: { background: '', opacity: 0.6 } });
 
 		$.post( ajaxurl, data, function( response ) {
-			$( '.condition-group-' + data.group ).append( response ).children( ':last' ).hide().fadeIn( 'normal' );
-			$( '.condition-group-' + data.group + ' .loading-icon' ).children( ':first' ).remove();
+			condition_group.find( ' .wpc-condition-wrap.loading' ).first().replaceWith( function() {
+				return $( response ).hide().fadeIn( 'normal' );
+			});
 		});
 
 	});
 
 	// Delete condition
-	$( '#wcasv_conditions' ).on( 'click', '.condition-delete', function() {
+	$( document.body ).on( 'click', '.wpc-condition-delete', function() {
 
-		if ( $( this ).closest( '.condition-group' ).children( '.wcasv-condition-wrap' ).length == 1 ) {
-			$( this ).closest( '.condition-group' ).fadeOut( 'normal', function() { $( this ).remove();	});
-
+		if ( $( this ).closest( '.wpc-condition-group' ).children( '.wpc-condition-wrap' ).length == 1 ) {
+			$( this ).closest( '.wpc-condition-group' ).fadeOut( 'normal', function() {
+				$( this ).next( '.or-text' ).remove();
+				$( this ).remove();
+			});
 		} else {
-			$( this ).closest( '.wcasv-condition-wrap' ).fadeOut( 'normal', function() { $( this ).remove(); });
+			$( this ).closest( '.wpc-condition-wrap' ).slideUp( 'fast', function() { $( this ).remove(); });
 		}
 
 	});
 
 	// Add condition group
-	$( '#wcasv_conditions' ).on( 'click', '.condition-group-add', function() {
+	$( document.body ).on( 'click', '.wpc-condition-group-add', function() {
+
+		var condition_group_loading = '<div class="wpc-condition-group loading"></div>';
+		var conditions = $( this ).prev( '.wpc-conditions' );
+		var data = {
+			action: wpc.action_prefix + 'add_condition_group',
+			group: 	parseInt( $( this ).prev( '.wpc-conditions' ).find( '.wpc-condition-group' ).length ),
+			nonce: 	wpc.nonce
+		};
 
 		// Display loading icon
-		$( '.wcasv_conditions' ).append( loading_icon ).children( ':last' );
-
-		var data = {
-			action: 'wcasv_add_condition_group',
-			group: 	parseInt( $( '.condition-group' ).last().attr( 'data-group') ) + 1,
-			nonce: 	wcasv.nonce
-		};
+		conditions.append( condition_group_loading ).children( ':last' ).block({ message: null, overlayCSS: { background: '', opacity: 0.6 } });
 
 		// Insert condition group
 		$.post( ajaxurl, data, function( response ) {
-			$( '.condition-group ~ .loading-icon' ).last().remove();
-			$( '.wcasv_conditions' ).append( response ).children( ':last' ).hide().fadeIn( 'normal' );
+			conditions.find( '.wpc-condition-group.loading' ).first().replaceWith( function() {
+				return $( response ).hide().fadeIn( 'normal' );
+			});
 		});
 
 	});
 
 	// Update condition values
-	$( '#wcasv_conditions' ).on( 'change', '.wcasv-condition', function () {
+	$( document.body ).on( 'change', '.wpc-condition', function () {
 
+		var loading_wrap = '<span style="width: 30%; border: 1px solid transparent; display: inline-block;">&nbsp;</span>';
 		var data = {
-			action: 	'wcasv_update_condition_value',
+			action: 	wpc.action_prefix + 'update_condition_value',
 			id:			$( this ).attr( 'data-id' ),
 			group:		$( this ).attr( 'data-group' ),
 			condition: 	$( this ).val(),
-			nonce: 		wcasv.nonce
+			nonce: 		wpc.nonce
 		};
+		var condition_group = $( this ).parents( '.wpc-conditions' ).find( '.wpc-condition-group-' + data.group );
+		var replace = '.wpc-value-wrap-' + data.id;
 
-		var replace = '.wcasv-value-wrap-' + data.id;
+		// Loading icon
+		condition_group.find( replace ).html( loading_wrap ).block({ message: null, overlayCSS: { background: '', opacity: 0.6 } });
 
-		$( replace ).html( loading_icon );
-
+		// Replace value field
 		$.post( ajaxurl, data, function( response ) {
-			$( replace ).replaceWith( response );
+			condition_group.find( replace ).replaceWith( response );
+			$( document.body ).trigger( 'wc-enhanced-select-init' );
 		});
 
 		// Update condition description
 		var description = {
-			action:		'wcasv_update_condition_description',
+			action:		wpc.action_prefix + 'update_condition_description',
 			condition: 	data.condition,
-			nonce: 		wcasv.nonce
+			nonce: 		wpc.nonce
 		};
 
 		$.post( ajaxurl, description, function( description_response ) {
-			$( replace + ' ~ .wcasv-description' ).replaceWith( description_response );
+			condition_group.find( replace + ' ~ .wpc-description' ).replaceWith( description_response );
+			// Tooltip
+			$( '.tips, .help_tip, .woocommerce-help-tip' ).tipTip({ 'attribute': 'data-tip', 'fadeIn': 50, 'fadeOut': 50, 'delay': 200 });
 		})
 
 	});
 
 	// Sortable
-	$( '.wcasv-table tbody' ).sortable({
+	$( '.wpc-conditions-post-table tbody' ).sortable({
 		items:					'tr',
 		handle:					'.sort',
 		cursor:					'move',
@@ -103,42 +124,19 @@ jQuery( function( $ ) {
 			$table.block({ message: null, overlayCSS: { background: '#fff', opacity: 0.6 } });
 			// Update fee order
 			var data = {
-				action:	'wcasv_save_fee_order',
+				action:	wpc.action_prefix + 'save_post_order',
 				form: 	$( this ).closest( 'form' ).serialize(),
-				nonce: 	wcasv.nonce
+				nonce: 	wpc.nonce
 			};
 
 			$.post( ajaxurl, data, function( response ) {
-				$( '.wcasv-table tbody tr:even' ).addClass( 'alternate' );
-				$( '.wcasv-table tbody tr:odd' ).removeClass( 'alternate' );
+				$( '.wpc-conditions-post-table tbody tr:even' ).addClass( 'alternate' );
+				$( '.wpc-conditions-post-table tbody tr:odd' ).removeClass( 'alternate' );
 				$table.unblock();
-			})
+			});
 		}
 	});
 
-	// Advanced Cost
-	$( '.wcasv-tabbed-settings' ).on( 'click', '.tabs a', function() {
-
-		if ( $( this ).data( 'target' ) !== undefined ) {
-
-			// Tabs
-			var tabs = $( this ).parents( '.tabs' );
-			tabs.find( 'li' ).removeClass( 'active' );
-			$( this ).parent( 'li' ).addClass( 'active' );
-
-			// Panel
-			var panels = tabs.parent().find( '.panels' );
-			panels.find( '.panel' ).removeClass( 'active' ).hide();
-			panels.find( '.panel#' + $( this ).data( 'target' ) ).addClass( 'active' ).show();
-
-		}
-
-	});
-
-	// Delete repeater row
-	$( '.wcasv-tabbed-settings' ).on( 'click', '.delete-repeater-row', function() {
-		$( this ).parents( '.repeater-row' ).slideUp( function() { $( this ).remove(); });
-	});
 
 	// Price input validation / error handling
 	$( document.body ).on( 'blur', '.wcasv_input_price[type=text]', function() {

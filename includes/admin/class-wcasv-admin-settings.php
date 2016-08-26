@@ -63,7 +63,7 @@ class WCASV_Admin_Settings {
 		$settings = apply_filters( 'woocommerce_advanced_shipping_validation_settings', array(
 
 			array(
-				'title' => __( 'General', 'woocommerce-advanced-shipping-validation' ),
+				'title' => __( 'Advanced Shipping Validation', 'woocommerce-advanced-shipping-validation' ),
 				'type'  => 'title',
 			),
 
