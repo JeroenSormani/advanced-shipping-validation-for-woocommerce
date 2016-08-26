@@ -357,11 +357,51 @@ class WCASV_Match_Conditions {
 			return $match;
 		endif;
 
-		if ( '==' == $operator ) :
-			$match = ( in_array( $value, WC()->cart->applied_coupons ) );
-		elseif ( '!=' == $operator ) :
-			$match = ( ! in_array( $value, WC()->cart->applied_coupons ) );
-		endif;
+		$coupons = array( 'percent' => array(), 'fixed' => array() );
+		foreach ( WC()->cart->get_coupons() as $coupon ) {
+			$type               = str_replace( '_product', '', $coupon->discount_type );
+			$type               = str_replace( '_cart', '', $type );
+			$coupons[ $type ][] = $coupon->coupon_amount;
+		}
+
+		// Match against coupon percentage
+		if ( strpos( $value, '%' ) !== false ) {
+
+			$percentage_value = str_replace( '%', '', $value );
+			if ( '==' == $operator ) :
+				$match = in_array( $percentage_value, $coupons['percent'] );
+			elseif ( '!=' == $operator ) :
+				$match = ! in_array( $percentage_value, $coupons['percent'] );
+			elseif ( '>=' == $operator ) :
+				$match = empty( $coupons['percent'] ) ? $match : ( min( $coupons['percent'] ) >= $percentage_value );
+			elseif ( '<=' == $operator ) :
+				$match = ! is_array( $coupons['percent'] ) ? false : ( max( $coupons['percent'] ) <= $percentage_value );
+			endif;
+
+			// Match against coupon amount
+		} elseif( strpos( $value, '$' ) !== false ) {
+
+			$amount_value = str_replace( '$', '', $value );
+			if ( '==' == $operator ) :
+				$match = in_array( $amount_value, $coupons['fixed'] );
+			elseif ( '!=' == $operator ) :
+				$match = ! in_array( $amount_value, $coupons['fixed'] );
+			elseif ( '>=' == $operator ) :
+				$match = empty( $coupons['fixed'] ) ? $match : ( min( $coupons['fixed'] ) >= $amount_value );
+			elseif ( '<=' == $operator ) :
+				$match = ! is_array( $coupons['fixed'] ) ? $match : ( max( $coupons['fixed'] ) <= $amount_value );
+			endif;
+
+			// Match coupon codes
+		} else {
+
+			if ( '==' == $operator ) :
+				$match = ( in_array( $value, WC()->cart->applied_coupons ) );
+			elseif ( '!=' == $operator ) :
+				$match = ( ! in_array( $value, WC()->cart->applied_coupons ) );
+			endif;
+
+		}
 
 		return $match;
 
@@ -482,30 +522,35 @@ class WCASV_Match_Conditions {
 	 */
 	public function match_condition_zipcode( $match, $operator, $value, $package, $package_index ) {
 
-		$customer_zipcode = $package['destination']['postcode'];
+		if ( ! isset( WC()->customer ) ) return $match;
 
-		$zipcodes = (array) explode( ',', $value );
+		$user_zipcode = $package['destination']['postcode'];
+		$user_zipcode = preg_replace( '/[^0-9a-zA-Z]/', '', $user_zipcode );
+
+		// Prepare allowed values.
+		$zipcodes = (array) preg_split( '/,+ */', $value );
+
+		// Remove all non- letters and numbers
 		foreach ( $zipcodes as $key => $zipcode ) :
-			$zipcodes[ $key ] = preg_replace( '/[^0-9a-zA-Z\-]/', '', $zipcode );
+			$zipcodes[ $key ] = preg_replace( '/[^0-9a-zA-Z-\*]/', '', $zipcode );
 		endforeach;
 
 		if ( '==' == $operator ) :
 
-			// Loop through zipcodes
 			foreach ( $zipcodes as $zipcode ) :
 
+				if ( empty( $zipcode ) ) continue;
+
 				$parts = explode( '-', $zipcode );
-				if ( count( $parts ) > 1 ) : // Its a range
-					$zipcode_match = ( $customer_zipcode >= min( $parts ) && $customer_zipcode <= max( $parts ) );
-				else : // Its a regular zipcode
-					$zipcode_match = preg_match( '/^' . preg_quote( $zipcode, '/' ) . '/i', $customer_zipcode );
+				if ( count( $parts ) > 1 ) :
+					$match = ( $user_zipcode >= min( $parts ) && $user_zipcode <= max( $parts ) );
+				else :
+					$match = preg_match( '/^' . preg_quote( $zipcode, '/' ) . '/i', $user_zipcode );
 				endif;
 
-				if ( $zipcode_match ) :
+				if ( $match == true ) {
 					return true;
-				else :
-					$match = $zipcode_match;
-				endif;
+				}
 
 			endforeach;
 
@@ -514,28 +559,25 @@ class WCASV_Match_Conditions {
 			// True until proven false
 			$match = true;
 
-			// Loop through zipcodes
 			foreach ( $zipcodes as $zipcode ) :
 
 				$parts = explode( '-', $zipcode );
-				if ( count( $parts ) > 1 ) : // Its a range
-					$zipcode_match = ( $customer_zipcode >= min( $parts ) && $customer_zipcode <= max( $parts ) );
-				else : // Its a regular zipcode
-					$zipcode_match = preg_match( '/^' . preg_quote( $zipcode, '/' ) . '/i', $customer_zipcode );
+				if ( count( $parts ) > 1 ) :
+					$zipcode_match = ( $user_zipcode >= min( $parts ) && $user_zipcode <= max( $parts ) );
+				else :
+					$zipcode_match = preg_match( '/^' . preg_quote( $zipcode, '/' ) . '/i', $user_zipcode );
 				endif;
 
-				if ( $zipcode_match ) :
-					return false;
+				if ( $zipcode_match == true ) :
+					return $match = false;
 				endif;
 
 			endforeach;
 
 		elseif ( '>=' == $operator ) :
-			$zipcode = reset( $zipcodes );
-			$match   = ( $zipcode >= $value );
+			$match   = ( $user_zipcode >= $value );
 		elseif ( '<=' == $operator ) :
-			$zipcode = reset( $zipcodes );
-			$match   = ( $zipcode <= $value );
+			$match   = ( $user_zipcode <= $value );
 		endif;
 
 		return $match;
@@ -563,20 +605,23 @@ class WCASV_Match_Conditions {
 			return $match;
 		endif;
 
+		$customer_city = strtolower( WC()->customer->get_shipping_city() );
+		$value         = strtolower( $value );
+
 		if ( '==' == $operator ) :
 
 			if ( preg_match( '/\, ?/', $value ) ) :
-				$match = ( in_array( WC()->customer->get_shipping_city(), explode( ',', $value ) ) );
+				$match = ( in_array( $customer_city, preg_split( '/\, ?/', $value ) ) );
 			else :
-				$match = ( preg_match( '/^' . preg_quote( $value, '/' ) . "$/i", WC()->customer->get_shipping_city() ) );
+				$match = ( $value == $customer_city );
 			endif;
 
 		elseif ( '!=' == $operator ) :
 
 			if ( preg_match( '/\, ?/', $value ) ) :
-				$match = ( ! in_array( WC()->customer->get_shipping_city(), explode( ',', $value ) ) );
+				$match = ( ! in_array( $customer_city, preg_split( '/\, ?/', $value ) ) );
 			else :
-				$match = ( ! preg_match( '/^' . preg_quote( $value, '/' ) . "$/i", WC()->customer->get_shipping_city() ) );
+				$match = ( $value == $customer_city );
 			endif;
 
 		endif;
