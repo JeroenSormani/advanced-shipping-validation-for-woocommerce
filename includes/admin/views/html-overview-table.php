@@ -11,19 +11,20 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * @version		1.0.0
  */
 
-$validation_rules = get_posts( array( 'posts_per_page' => '-1', 'post_type' => 'shipping_validation', 'post_status' => array( 'draft', 'publish' ), 'orderby' => 'menu_order', 'order' => 'ASC' ) );
+$validation_rules = wcasv_get_validation_posts( array( 'post_status' => array( 'draft', 'publish' ) ) );
 
 ?><tr valign="top">
 	<th scope="row" class="titledesc"><?php
-		_e( 'Shipping validation rules', 'woocommerce-advanced-shipping-validation' ); ?>:<br />
+		_e( 'Shipping validation rules', 'woocommerce-advanced-shipping-validation' ); ?><br />
 	</th>
 	<td class="forminp" id="advanced-fees-table">
 
-		<table class='wp-list-table wcasv-table widefat'>
+		<table class='wp-list-table wpc-conditions-post-table widefat'>
 			<thead>
 				<tr>
 					<th style='width: 17px;'></th>
 					<th style='padding-left: 10px;'><?php _e( 'Title', 'woocommerce-advanced-shipping-validation' ); ?></th>
+					<th style='padding-left: 10px;'><?php _e( 'Message', 'woocommerce-advanced-shipping-validation' ); ?></th>
 					<th style='width: 70px;'><?php _e( '# Groups', 'woocommerce-advanced-shipping-validation' ); ?></th>
 				</tr>
 			</thead>
@@ -62,6 +63,7 @@ $validation_rules = get_posts( array( 'posts_per_page' => '-1', 'post_type' => '
 								</span>
 							</div>
 						</td>
+						<td><?php echo wp_kses_post( $message ); ?></td>
 						<td><?php echo absint( count( $conditions ) ); ?></td>
 					</tr><?php
 

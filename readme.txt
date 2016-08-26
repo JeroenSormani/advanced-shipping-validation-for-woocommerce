@@ -1,4 +1,4 @@
-=== Advaned Shipping Validation for WooCommerce ===
+=== Advanced Shipping Validation for WooCommerce ===
 Contributors: sormano
 Tags: woocommerce, shipping, woocommerce shipping, woocommerce shipping validation, woocommerce shipping validation rules, shipping rules, prevent shipping, block shipping, prohibit shipping, forbit shipping, avoid shipping, restrict shipping, stop shipping
 Requires at least: 3.6

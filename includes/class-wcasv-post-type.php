@@ -192,7 +192,6 @@ class WCASV_Post_Type {
 			return $post_id;
 		}
 
-
 		// Sanitize conditions
 		$save_conditions = array();
 		if ( isset( $_POST['conditions'] ) ) :
@@ -277,4 +276,4 @@ class WCASV_Post_Type {
 /**
  * Load condition object
  */
-require_once plugin_dir_path( __FILE__ ) . 'admin/settings/conditions/class-wcasv-condition.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/class-wcasv-condition.php';

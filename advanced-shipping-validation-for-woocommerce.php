@@ -140,6 +140,8 @@ class Woocommerce_Advanced_Shipping_Validation {
 			require_once plugin_dir_path( __FILE__ ) . '/includes/admin/class-wcasv-admin.php';
 			$this->admin = new WCASV_Admin();
 
+			require_once plugin_dir_path( __FILE__ ) . '/includes/admin/admin-functions.php';
+
 		endif;
 
 		// Include functions

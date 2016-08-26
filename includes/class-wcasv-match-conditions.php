@@ -639,10 +639,26 @@ class WCASV_Match_Conditions {
 			return $match;
 		endif;
 
+		$user_country = WC()->customer->get_shipping_country();
+
+		if ( method_exists( WC()->countries, 'get_continent_code_for_country' ) ) :
+			$user_continent = WC()->countries->get_continent_code_for_country( $user_country );
+		endif;
+
 		if ( '==' == $operator ) :
-			$match = ( preg_match( '/^' . preg_quote( $value, '/' ) . "$/i", WC()->customer->get_shipping_country() ) );
+			$match = stripos( $user_country, $value ) === 0;
+
+			// Check for continents if available
+			if ( ! $match && isset( $user_continent ) && strpos( $value, 'CO_' ) === 0 ) :
+				$match = stripos( $user_continent, str_replace( 'CO_','', $value ) ) === 0;
+			endif;
 		elseif ( '!=' == $operator ) :
-			$match = ( ! preg_match( '/^' . preg_quote( $value, '/' ) . "$/i", WC()->customer->get_shipping_country() ) );
+			$match = stripos( $user_country, $value ) === false;
+
+			// Check for continents if available
+			if ( ! $match && isset( $user_continent ) && strpos( $value, 'CO_' ) === 0 ) :
+				$match = stripos( $user_continent, str_replace( 'CO_','', $value ) ) === false;
+			endif;
 		endif;
 
 		return $match;
