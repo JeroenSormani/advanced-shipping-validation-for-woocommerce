@@ -198,7 +198,7 @@ class WCASV_Condition {
 				// WooCommerce Advanced Shipping support
 				$was_rates = get_posts( array( 'fields' => 'ids', 'post_type' => 'was', 'post_status' => 'any', 'posts_per_page' => 1000 ) );
 				foreach ( $was_rates as $was_id ) :
-					$shipping_method = get_post_meta( $was_id, '_was_shipping_method', true );
+					$shipping_method              = get_post_meta( $was_id, '_was_shipping_method', true );
 					$values['options'][ $was_id ] = isset( $shipping_method['shipping_title'] ) ? $shipping_method['shipping_title'] : 'WooCommerce Advanced Shipping rate ID ' . $was_id;
 				endforeach;
 				break;
@@ -236,13 +236,13 @@ class WCASV_Condition {
 				break;
 
 			case 'contains_shipping_class' :
-				$values['type'] = 'select';
-				$values['options']['-1'] 	= __( 'No shipping class', 'woocommerce' );
+				$values['type']          = 'select';
+				$values['options']['-1'] = __( 'No shipping class', 'woocommerce' );
 				$values['class'][]       = 'wc-enhanced-select';
 
 				// Get all shipping classes
 				foreach ( get_terms( 'product_shipping_class', array( 'hide_empty' => false ) ) as $shipping_class ) :
-					$values['options'][ $shipping_class->slug ] 	= $shipping_class->name;
+					$values['options'][ $shipping_class->slug ] = $shipping_class->name;
 				endforeach;
 
 				break;
@@ -257,7 +257,7 @@ class WCASV_Condition {
 				break;
 
 			case 'state' :
-				$values['type'] = 'select';
+				$values['type']    = 'select';
 				$values['class'][] = 'wc-enhanced-select';
 
 				foreach ( WC()->countries->states as $country => $states ) :
@@ -276,14 +276,14 @@ class WCASV_Condition {
 				break;
 
 			case 'country' :
-				$values['type']   = 'select';
+				$values['type']    = 'select';
 				$values['options'] = WC()->countries->get_allowed_countries();
 
 				break;
 
 			case 'role' :
 
-				$values['type']   = 'select';
+				$values['type']    = 'select';
 				$roles             = array_keys( get_editable_roles() );
 				$values['options'] = array_combine( $roles, $roles );
 
@@ -302,7 +302,7 @@ class WCASV_Condition {
 
 			case 'stock_status' :
 
-				$values['type']   = 'select';
+				$values['type']    = 'select';
 				$values['options'] = array(
 					'instock'    => __( 'In stock', 'woocommerce' ),
 					'outofstock' => __( 'Out of stock', 'woocommerce' ),

@@ -92,18 +92,18 @@ class WCASV_Post_Type {
 		$post_type_object = get_post_type_object( $post_type );
 
 		$messages['shipping_validation'] = array(
-			0 => '',
-			1 => __( 'Shipping validation rule updated.', 'woocommerce-advanced-shipping-validation' ),
-			2 => __( 'Custom field updated.', 'woocommerce-advanced-shipping-validation' ),
-			3 => __( 'Custom field deleted.', 'woocommerce-advanced-shipping-validation' ),
-			4 => __( 'Shipping validation rule updated.', 'woocommerce-advanced-shipping-validation' ),
-			5 => isset( $_GET['revision'] ) ?
+			0  => '',
+			1  => __( 'Shipping validation rule updated.', 'woocommerce-advanced-shipping-validation' ),
+			2  => __( 'Custom field updated.', 'woocommerce-advanced-shipping-validation' ),
+			3  => __( 'Custom field deleted.', 'woocommerce-advanced-shipping-validation' ),
+			4  => __( 'Shipping validation rule updated.', 'woocommerce-advanced-shipping-validation' ),
+			5  => isset( $_GET['revision'] ) ?
 				sprintf( __( 'Shipping validation rule restored to revision from %s', 'woocommerce-advanced-shipping-validation' ), wp_post_revision_title( (int) $_GET['revision'], false ) )
 				: false,
-			6 => __( 'Shipping validation rule published.', 'woocommerce-advanced-shipping-validation' ),
-			7 => __( 'Shipping validation rule saved.', 'woocommerce-advanced-shipping-validation' ),
-			8 => __( 'Shipping validation rule submitted.', 'woocommerce-advanced-shipping-validation' ),
-			9 => sprintf(
+			6  => __( 'Shipping validation rule published.', 'woocommerce-advanced-shipping-validation' ),
+			7  => __( 'Shipping validation rule saved.', 'woocommerce-advanced-shipping-validation' ),
+			8  => __( 'Shipping validation rule submitted.', 'woocommerce-advanced-shipping-validation' ),
+			9  => sprintf(
 				__( 'Shipping validation rule scheduled for: <strong>%1$s</strong>.', 'woocommerce-advanced-shipping-validation' ),
 				date_i18n( __( 'M j, Y @ G:i', 'woocommerce-advanced-shipping-validation' ), strtotime( $post->post_date ) )
 			),
