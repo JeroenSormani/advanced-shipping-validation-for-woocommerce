@@ -68,12 +68,12 @@ class WCASV_Admin_Settings {
 			),
 
 			array(
-				'title'   	=> __( 'Enable/Disable', 'woocommerce-advanced-shipping-validation' ),
-				'desc' 	  	=> __( 'Enable Advanced Shipping Validation','woocommerce-advanced-shipping-validation' ),
-				'id' 	  	=> 'enable_woocommerce_advanced_shipping_validation',
-				'default' 	=> 'yes',
-				'type' 	  	=> 'checkbox',
-				'autoload'	=> false
+				'title'    => __( 'Enable/Disable', 'woocommerce-advanced-shipping-validation' ),
+				'desc'     => __( 'Enable Advanced Shipping Validation', 'woocommerce-advanced-shipping-validation' ),
+				'id'       => 'enable_woocommerce_advanced_shipping_validation',
+				'default'  => 'yes',
+				'type'     => 'checkbox',
+				'autoload' => false
 			),
 
 			array(
