@@ -30,7 +30,7 @@ function wcasv_get_validation_posts( $args = array() ) {
 		'orderby'        => 'menu_order',
 		'order'          => 'ASC',
 	) ) );
-	$rules = $rule_query->get_posts();
+	$rules      = $rule_query->get_posts();
 
 	return apply_filters( 'woocommerce_advanced_shipping_validation_get_validation_rules', $rules );
 
