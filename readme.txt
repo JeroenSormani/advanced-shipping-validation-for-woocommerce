@@ -1,9 +1,9 @@
 === Advanced Shipping Validation for WooCommerce ===
 Contributors: sormano
-Tags: woocommerce, shipping, woocommerce shipping, woocommerce shipping validation, woocommerce shipping validation rules, shipping rules, prevent shipping, block shipping, prohibit shipping, forbit shipping, avoid shipping, restrict shipping, stop shipping
+Tags: woocommerce shipping, woocommerce shipping validation, woocommerce shipping validation rules, shipping rules, prevent shipping, block shipping, prohibit shipping, forbit shipping, avoid shipping, restrict shipping, stop shipping
 Requires at least: 3.6
-Tested up to: 4.5.2
-Stable tag: 1.0.1
+Tested up to: 4.6
+Stable tag: 1.0.2
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -20,7 +20,7 @@ the customer has some products that are not allowed to ship to certain locations
 
 A common use case with this is the restriction of certain products being shipped from the mainland to states like Hawaii and Alaska.
 
-**Translations, feature requests, ratings and donations are welcome and appreciated!**
+**Translations, feature requests and ratings are welcome and appreciated!**
 
 == Installation ==
 
@@ -35,6 +35,12 @@ A common use case with this is the restriction of certain products being shipped
 3. Validation overview page
 
 == Changelog ==
+
+= 1.0.2 - 26-08-2016 =
+* [Improvement] - Refactored condition code (backend)
+* [Improvement] - Allow dollar and percentage signs in the 'coupon' condition to setup the condition based on the amounts instead of solely coupon codes
+* [Improvement] - Add support for continents in the 'country' condition (requires WC 2.6+)
+* [Improvement] - Improved 'product' condition value fields (allow searching) and supports huge amounts of product
 
 = 1.0.1 =
 * [Fix] - Make sure the 'contains category' condition with 'equal to' doesn't always return true
