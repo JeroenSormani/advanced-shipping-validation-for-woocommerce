@@ -79,7 +79,7 @@ if ( ! function_exists( 'wpc_html_field' ) ) {
 
 					if ( empty( $options ) ) :
 						?><option readonly disabled><?php
-							_e( 'There are no options available', 'woocommerce-advanced-fees' );
+							_e( 'There are no options available', 'woocommerce-advanced-shipping-validation' );
 						?></option><?php
 					endif;
 
