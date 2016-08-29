@@ -575,9 +575,9 @@ class WCASV_Match_Conditions {
 			endforeach;
 
 		elseif ( '>=' == $operator ) :
-			$match   = ( $user_zipcode >= $value );
+			$match = ( $user_zipcode >= $value );
 		elseif ( '<=' == $operator ) :
-			$match   = ( $user_zipcode <= $value );
+			$match = ( $user_zipcode <= $value );
 		endif;
 
 		return $match;
@@ -695,14 +695,14 @@ class WCASV_Match_Conditions {
 
 			// Check for continents if available
 			if ( ! $match && isset( $user_continent ) && strpos( $value, 'CO_' ) === 0 ) :
-				$match = stripos( $user_continent, str_replace( 'CO_','', $value ) ) === 0;
+				$match = stripos( $user_continent, str_replace( 'CO_', '', $value ) ) === 0;
 			endif;
 		elseif ( '!=' == $operator ) :
 			$match = stripos( $user_country, $value ) === false;
 
 			// Check for continents if available
 			if ( ! $match && isset( $user_continent ) && strpos( $value, 'CO_' ) === 0 ) :
-				$match = stripos( $user_continent, str_replace( 'CO_','', $value ) ) === false;
+				$match = stripos( $user_continent, str_replace( 'CO_', '', $value ) ) === false;
 			endif;
 		endif;
 
