@@ -16,7 +16,7 @@ $condition_groups = get_post_meta( $post->ID, '_conditions', true );
 
 			?><div class='wpc-condition-group wpc-condition-group-<?php echo absint( $condition_group ); ?>' data-group='<?php echo absint( $condition_group ); ?>'>
 
-			<p class='or-match'><?php _e( 'Or match all of the following rules to apply the validation rule:', 'woocommerce-advanced-shipping-validation' );?></p><?php
+			<p class='or-match'><?php _e( 'Or match all of the following rules to apply the validation rule:', 'woocommerce-advanced-shipping-validation' ); ?></p><?php
 
 			foreach ( $conditions as $condition_id => $condition ) :
 				$wp_condition = new WCASV_Condition( $condition_id, $condition_group, $condition['condition'], $condition['operator'], $condition['value'] );
