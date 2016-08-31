@@ -44,7 +44,7 @@ class WCASV_Ajax {
 
 		check_ajax_referer( 'wpc-ajax-nonce', 'nonce' );
 
-		$wp_condition = new WAF_Condition( null, $_POST['group'] );
+		$wp_condition = new WCASV_Condition( null, $_POST['group'] );
 		$wp_condition->output_condition_row();
 
 		die();
@@ -68,7 +68,7 @@ class WCASV_Ajax {
 
 		<p class='or-match'><?php _e( 'Or match all of the following rules to apply the fee:', 'woocommerce-advanced-fees' ); ?></p><?php
 
-		$wp_condition = new WAF_Condition( null, $group );
+		$wp_condition = new WCASV_Condition( null, $group );
 		$wp_condition->output_condition_row();
 
 		?></div>
@@ -91,7 +91,7 @@ class WCASV_Ajax {
 
 		check_ajax_referer( 'wpc-ajax-nonce', 'nonce' );
 
-		$wp_condition     = new WAF_Condition( $_POST['id'], $_POST['group'], $_POST['condition'] );
+		$wp_condition     = new WCASV_Condition( $_POST['id'], $_POST['group'], $_POST['condition'] );
 		$value_field_args = $wp_condition->get_value_field_args();
 
 		?><span class='wpc-value-wrap wpc-value-wrap-<?php echo absint( $wp_condition->id ); ?>'><?php
@@ -115,7 +115,7 @@ class WCASV_Ajax {
 		check_ajax_referer( 'wpc-ajax-nonce', 'nonce' );
 
 		$condition    = sanitize_text_field( $_POST['condition'] );
-		$wp_condition = new WAF_Condition( null, null, $condition );
+		$wp_condition = new WCASV_Condition( null, null, $condition );
 
 		if ( $desc = $wp_condition->get_description() ) {
 			?><span class='wpc-description wpc-no-description <?php echo $desc; ?>-description'><?php
