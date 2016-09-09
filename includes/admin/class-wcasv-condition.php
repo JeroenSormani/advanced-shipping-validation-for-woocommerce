@@ -260,12 +260,12 @@ class WCASV_Condition {
 				$values['type']    = 'select';
 				$values['class'][] = 'wc-enhanced-select';
 
+				$country_states = array();
 				foreach ( WC()->countries->states as $country => $states ) :
 
 					if ( empty( $states ) ) continue; // Don't show country if it has no states
 					if ( ! array_key_exists( $country, WC()->countries->get_allowed_countries() ) ) continue; // Skip unallowed countries
 
-					$country_states = array();
 					foreach ( $states as $state_key => $state ) :
 						$country_states[ WC()->countries->countries[ $country ] ][ $country . '_' . $state_key ] = $state;
 					endforeach;
@@ -339,8 +339,6 @@ class WCASV_Condition {
 		endswitch;
 
 		$values = apply_filters( 'woocommerce_advanced_shipping_validation_values', $values, $this->condition );
-
-		$values = apply_filters( 'woocommerce_advanced_fees_values', $values, $this->condition );
 
 		return $values;
 

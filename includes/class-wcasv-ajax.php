@@ -66,14 +66,14 @@ class WCASV_Ajax {
 
 		?><div class='wpc-condition-group wpc-condition-group-<?php echo $group; ?>' data-group='<?php echo $group; ?>'>
 
-		<p class='or-match'><?php _e( 'Or match all of the following rules to apply the fee:', 'woocommerce-advanced-fees' ); ?></p><?php
+		<p class='or-match'><?php _e( 'Or match all of the following rules to apply the validation rule:', 'woocommerce-advanced-shipping-validation' ); ?></p><?php
 
 		$wp_condition = new WCASV_Condition( null, $group );
 		$wp_condition->output_condition_row();
 
 		?></div>
 
-		<p class='or-text'><strong><?php _e( 'Or', 'woocommerce-advanced-fees' ); ?></strong></p><?php
+		<p class='or-text'><strong><?php _e( 'Or', 'woocommerce-advanced-shipping-validation' ); ?></strong></p><?php
 
 		die();
 

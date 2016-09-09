@@ -122,6 +122,8 @@ class Woocommerce_Advanced_Shipping_Validation {
 		// AJAX
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) :
 
+			require_once plugin_dir_path( __FILE__ ) . '/includes/admin/admin-functions.php';
+
 			/**
 			 * Load ajax methods
 			 */
@@ -133,13 +135,14 @@ class Woocommerce_Advanced_Shipping_Validation {
 		// Admin
 		if ( is_admin() && ! defined( 'DOING_AJAX' ) ) :
 
+			require_once plugin_dir_path( __FILE__ ) . '/includes/admin/admin-functions.php';
+
 			/**
 			 * Admin class.
 			 */
 			require_once plugin_dir_path( __FILE__ ) . '/includes/admin/class-wcasv-admin.php';
 			$this->admin = new WCASV_Admin();
 
-			require_once plugin_dir_path( __FILE__ ) . '/includes/admin/admin-functions.php';
 
 		endif;
 

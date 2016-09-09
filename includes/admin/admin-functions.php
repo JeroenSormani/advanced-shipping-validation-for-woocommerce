@@ -89,7 +89,7 @@ if ( ! function_exists( 'wpc_html_field' ) ) {
 			default :
 			case 'hook' :
 
-				do_action( 'woocommerce_advanced_fees_condition_value_field_type_' . $args['type'], $args );
+				do_action( 'wpc_html_field_type_' . $args['type'], $args );
 				break;
 
 		endswitch;

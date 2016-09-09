@@ -1,23 +1,13 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-/**
- * Conditions table.
- *
- * Display table with all the user configured fees.
- *
- * @author		Jeroen Sormani
- * @package 	WooCommerce Advanced Fees
- * @version		1.0.0
- */
-
 $validation_rules = wcasv_get_validation_posts( array( 'post_status' => array( 'draft', 'publish' ) ) );
 
 ?><tr valign="top">
 	<th scope="row" class="titledesc"><?php
 		_e( 'Shipping validation rules', 'woocommerce-advanced-shipping-validation' ); ?><br />
 	</th>
-	<td class="forminp" id="advanced-fees-table">
+	<td class="forminp">
 
 		<table class='wp-list-table wpc-conditions-post-table widefat'>
 			<thead>
