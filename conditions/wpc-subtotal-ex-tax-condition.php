@@ -20,7 +20,7 @@ if ( ! class_exists( 'WPC_Subtotal_Ex_Tax_Condition' ) ) {
 		}
 
 		public function get_compare_value() {
-			return array_sum( (array) WC()->cart->taxes );
+			return WC()->cart->subtotal_ex_tax;
 		}
 
 	}

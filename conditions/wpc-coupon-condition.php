@@ -31,7 +31,8 @@ if ( ! class_exists( 'WPC_Coupon_Condition' ) ) {
 				elseif ( '<=' == $operator ) :
 					$match = ! is_array( $coupons['percent'] ) ? false : ( max( $coupons['percent'] ) <= $percentage_value );
 				endif;
-				// Match against coupon amount
+
+			// Match against coupon amount
 			} elseif( strpos( $value, '$' ) !== false ) {
 				$amount_value = str_replace( '$', '', $value );
 				if ( '==' == $operator ) :
@@ -43,7 +44,8 @@ if ( ! class_exists( 'WPC_Coupon_Condition' ) ) {
 				elseif ( '<=' == $operator ) :
 					$match = ! is_array( $coupons['fixed'] ) ? $match : ( max( $coupons['fixed'] ) <= $amount_value );
 				endif;
-				// Match coupon codes
+
+			// Match coupon codes
 			} else {
 				if ( '==' == $operator ) :
 					$match = ( array_intersect( preg_split( '/\, ?/', $value ), WC()->cart->get_applied_coupons() ) );

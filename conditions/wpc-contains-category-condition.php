@@ -17,7 +17,6 @@ if ( ! class_exists( 'WPC_Contains_Category_Condition' ) ) {
 		public function match( $match, $operator, $value ) {
 
 			$value = $this->get_value( $value );
-			$match = true;
 
 			if ( '==' == $operator ) :
 

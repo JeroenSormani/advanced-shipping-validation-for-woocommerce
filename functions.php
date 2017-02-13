@@ -67,7 +67,7 @@ if ( ! function_exists( 'wpc_get_registered_conditions' ) ) {
 			new WPC_Category_Condition(),
 		);
 
-		return $conditions;
+		return apply_filters( 'wp-conditions\registered_conditions', $conditions );
 
 	}
 

@@ -16,6 +16,7 @@ if ( ! function_exists( 'wpc_admin_enqueue_scripts' ) ) {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 		wp_register_script( 'wpc-repeater', plugins_url( 'assets/js/repeater/jquery.repeater' . $suffix . '.js', __FILE__ ), array( 'jquery' ), '1.0.0', true );
+		wp_register_script( 'wp-conditions', plugins_url( 'assets/js/wp-conditions' . $suffix . '.js', __FILE__ ), array( 'jquery', 'wpc-repeater' ), '1.0.0', true );
 
 	}
 	add_action( 'admin_enqueue_scripts', 'wpc_admin_enqueue_scripts', 5 );
@@ -105,6 +106,14 @@ if ( ! function_exists( 'wpc_html_field' ) ) {
 				endif;
 
 				?></select><?php
+				break;
+
+			case 'product' :
+				if ( $product = wc_get_product( $value ) ) {
+					$args['custom_attributes']['data-selected'] = $product->get_formatted_name();
+				}
+				$args['type'] = 'text';
+				wpc_html_field( $args );
 				break;
 
 			default :
