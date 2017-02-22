@@ -165,9 +165,12 @@ if ( ! function_exists( 'wpc_sanitize_conditions' ) ) {
 	function wpc_sanitize_conditions( $conditions ) {
 
 		$sanitized_conditions = array();
-		foreach ( $conditions as $key => $condition_group ) :
+		foreach ( $conditions as $group_key => $condition_group ) :
+			if ( $group_key == '9999' ) continue; // Template group
 
 			foreach ( $condition_group as $condition_id => $condition_values ) :
+				if ( $condition_id == '9999' ) continue; // Template condition
+
 				foreach ( $condition_values as $condition_key => $condition_value ) :
 
 					switch ( $condition_key ) :
@@ -194,9 +197,10 @@ if ( ! function_exists( 'wpc_sanitize_conditions' ) ) {
 
 					endswitch;
 
-					$sanitized_conditions[ $key ][ $condition_id ][ $condition_key ] = $condition_value;
+					$sanitized_conditions[ $group_key ][ $condition_id ][ $condition_key ] = $condition_value;
 
 				endforeach;
+
 			endforeach;
 
 		endforeach;
