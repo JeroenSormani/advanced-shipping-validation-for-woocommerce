@@ -7,7 +7,7 @@ if ( ! class_exists( 'WPC_Shipping_Method_Condition' ) ) {
 
 		public function __construct() {
 			$this->name        = __( 'Shipping method', 'wpc-conditions' );
-			$this->slug        = __( 'shipping__method', 'wpc-conditions' );
+			$this->slug        = __( 'shipping_method', 'wpc-conditions' );
 			$this->group       = __( 'Cart', 'wpc-conditions' );
 			$this->description = __( 'Match against the chosen shipping method', 'wpc-conditions' );
 
