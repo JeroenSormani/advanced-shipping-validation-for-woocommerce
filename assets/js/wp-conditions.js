@@ -156,7 +156,7 @@ jQuery( function( $ ) {
             $table.block({ message: null, overlayCSS: { background: '#fff', opacity: 0.6 } });
             // Update fee order
             var data = {
-                action:	wpc.action_prefix + 'save_post_order',
+                action:	'wpc_save_post_order',
                 form: 	$( this ).closest( 'form' ).serialize(),
                 nonce: 	wpc.nonce
             };
