@@ -92,7 +92,7 @@ jQuery( function( $ ) {
 
         var loading_wrap = '<span style="width: calc( 42.5% - 75px ); border: 1px solid transparent; display: inline-block;">&nbsp;</span>';
         var data = {
-            action: 	wpc.action_prefix + 'update_condition_value',
+            action: 	wpc2.action_prefix + 'update_condition_value',
             id:			$( this ).attr( 'data-id' ),
             group:		$( this ).parents( '.wpc-condition-group' ).attr( 'data-group' ),
             condition: 	$( this ).val(),
