@@ -111,9 +111,10 @@ if ( ! function_exists( 'wpc_match_conditions' ) ) {
 	 * @since 1.0.0
 	 *
 	 * @param  array $condition_groups List of condition groups containing their conditions.
-	 * @return BOOL                    TRUE if all the conditions in one of the condition groups matches true.
+	 * @param array $args Arguments to pass to the matching method.
+	 * @return BOOL TRUE if all the conditions in one of the condition groups matches true.
 	 */
-	function wpc_match_conditions( $condition_groups = array() ) {
+	function wpc_match_conditions( $condition_groups = array(), $args = array() ) {
 
 		if ( empty( $condition_groups ) || ! is_array( $condition_groups ) ) :
 			return false;
@@ -125,10 +126,20 @@ if ( ! function_exists( 'wpc_match_conditions' ) ) {
 
 			foreach ( $conditions as $condition ) :
 
-				$condition = apply_filters( 'wp-conditions\condition', $condition ); // BC helper
+				$condition     = apply_filters( 'wp-conditions\condition', $condition ); // BC helper
 				$wpc_condition = wpc_get_condition( $condition['condition'] );
-				$match = $wpc_condition->match( false, $condition['operator'], $condition['value'] );
-				$match = apply_filters( 'wp-conditions\condition\match', $match, $condition['condition'], $condition['operator'], $condition['value'] ); // BC helper
+
+				// Match the condition - pass any custom ($)args as parameters.
+				$parameters = array_merge( array( false, $condition['operator'], $condition['value'] ), $args );
+				$match = call_user_func_array( array( $wpc_condition, 'match' ), $parameters );
+
+				// Filter the matched result - BC helper
+				$parameters = array_merge( array( 'wp-conditions\condition\match', $match, $condition['condition'], $condition['operator'], $condition['value'] ), $args );
+				$match = call_user_func_array( 'apply_filters', $parameters );
+
+				// Original - simple - way
+//				$match         = $wpc_condition->match( false, $condition['operator'], $condition['value'] );
+//				$match         = apply_filters( 'wp-conditions\condition\match', $match, $condition['condition'], $condition['operator'], $condition['value'] );
 
 				if ( false == $match ) :
 					$match_condition_group = false;

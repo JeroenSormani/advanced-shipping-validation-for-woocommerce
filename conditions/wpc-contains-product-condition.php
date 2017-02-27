@@ -57,7 +57,7 @@ if ( ! class_exists( 'WPC_Contains_Product_Condition' ) ) {
 		public function get_value_field_args() {
 
 			$field_args = array(
-				'type' => 'product',
+				'type' => 'text',
 				'placeholder' => __( 'Search for a product', 'wp-conditions' ),
 				'class' => array( 'wpc-value', 'wc-product-search' ),
 			);
