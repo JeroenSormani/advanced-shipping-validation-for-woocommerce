@@ -130,11 +130,11 @@ if ( ! function_exists( 'wpc_match_conditions' ) ) {
 				$wpc_condition = wpc_get_condition( $condition['condition'] );
 
 				// Match the condition - pass any custom ($)args as parameters.
-				$parameters = array_merge( array( false, $condition['operator'], $condition['value'] ), $args );
+				$parameters = array( false, $condition['operator'], $condition['value'], $args );
 				$match = call_user_func_array( array( $wpc_condition, 'match' ), $parameters );
 
 				// Filter the matched result - BC helper
-				$parameters = array_merge( array( 'wp-conditions\condition\match', $match, $condition['condition'], $condition['operator'], $condition['value'] ), $args );
+				$parameters = array( 'wp-conditions\condition\match', $match, $condition['condition'], $condition['operator'], $condition['value'], $args );
 				$match = call_user_func_array( 'apply_filters', $parameters );
 
 				// Original - simple - way
