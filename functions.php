@@ -181,6 +181,7 @@ if ( ! function_exists( 'wpc_sanitize_conditions' ) ) {
 
 			foreach ( $condition_group as $condition_id => $condition_values ) :
 				if ( $condition_id == '9999' ) continue; // Template condition
+				if ( ! isset( $condition_values['value'] ) ) $condition_values['value'] = '';
 
 				foreach ( $condition_values as $condition_key => $condition_value ) :
 
