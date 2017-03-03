@@ -6,13 +6,16 @@ if ( ! class_exists( 'WPC_Category_Condition' ) ) {
 	class WPC_Category_Condition extends WPC_Condition {
 
 		public function __construct() {
+
 			$this->name        = __( 'Category', 'wpc-conditions' );
 			$this->slug        = __( 'category', 'wpc-conditions' );
 			$this->group       = __( 'Product', 'wpc-conditions' );
 			$this->description = __( 'All products in cart must match the given category', 'wpc-conditions' );
 
 			parent::__construct();
+
 		}
+
 
 		public function match( $match, $operator, $value ) {
 
@@ -45,6 +48,7 @@ if ( ! class_exists( 'WPC_Category_Condition' ) ) {
 
 		}
 
+
 		public function get_available_operators() {
 
 			$operators = parent::get_available_operators();
@@ -56,18 +60,20 @@ if ( ! class_exists( 'WPC_Category_Condition' ) ) {
 
 		}
 
+
 		public function get_value_field_args() {
 
 			$categories = get_terms( 'product_cat', array( 'hide_empty' => false ) );
 			$field_args = array(
-				'type' => 'select',
-				'class' => array( 'wpc-value', 'wc-enhanced-select' ),
+				'type'    => 'select',
+				'class'   => array( 'wpc-value', 'wc-enhanced-select' ),
 				'options' => wp_list_pluck( $categories, 'name', 'slug' ),
 			);
 
 			return $field_args;
 
 		}
+
 
 	}
 
