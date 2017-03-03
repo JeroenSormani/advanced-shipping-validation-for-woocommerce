@@ -32,10 +32,10 @@ jQuery( function( $ ) {
     // Assign new ID to repeater row + open collapsible + re-enable nested repeater
     jQuery( document.body ).on( 'repeater-added-row', function( e, template, container, $self ) {
         var new_id = Math.floor(Math.random()*8999999999+1000000000); // Random number sequence of 10 length
-        container.find( 'input[name], select[name]' ).attr( 'name', function( index, value ) {
+        template.find( 'input[name], select[name]' ).attr( 'name', function( index, value ) {
             return ( value.replace( '9999', new_id ) ) || value;
         });
-        container.find( '.wpc-condition[data-id]' ).attr( 'data-id', function( index, value ) {
+        template.find( '.wpc-condition[data-id]' ).attr( 'data-id', function( index, value ) {
             return ( value.replace( '9999', new_id ) ) || value;
         });
 
