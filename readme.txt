@@ -1,9 +1,9 @@
 === Advanced Shipping Validation for WooCommerce ===
 Contributors: sormano
-Tags: woocommerce shipping, woocommerce shipping validation, woocommerce shipping validation rules, shipping rules, prevent shipping, block shipping, prohibit shipping, forbit shipping, avoid shipping, restrict shipping, stop shipping
-Requires at least: 3.6
-Tested up to: 4.6
-Stable tag: 1.0.3
+Tags: woocommerce shipping, woocommerce shipping validation, woocommerce shipping validation rules, shipping rules, prevent shipping, block shipping, prohibit shipping, forbid shipping, avoid shipping, restrict shipping, stop shipping
+Requires at least: 4.0
+Tested up to: 4.7.2
+Stable tag: 1.1.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -35,6 +35,17 @@ A common use case with this is the restriction of certain products being shipped
 3. Validation overview page
 
 == Changelog ==
+
+= 1.1.0 - 03-03-2017 = IMPORTANT NOTE - As of this version, the plugin requires PHP 5.3 to function
+
+* [Improvement] - Big refactor of the backend conditions
+* [Improvement] - Smoother User Experience with conditions
+	- Instant adding of conditions / condition groups
+	- Only show valid operator options
+	- Instantly show condition descriptions
+	- Deleting entire condition groups
+	- Duplicate condition groups
+* [Improvement] - WC 2.7 compatibility changes
 
 = 1.0.3 - 09-09-2016 =
 
