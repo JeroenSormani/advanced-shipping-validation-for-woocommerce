@@ -118,7 +118,6 @@ function wcasv_add_checkout_validation_messages() {
 add_action( 'woocommerce_after_checkout_validation', 'wcasv_add_checkout_validation_messages' );
 
 
-
 /**************************************************************
  * Backwards compatibility for WP Conditions
  *************************************************************/
@@ -131,9 +130,9 @@ add_action( 'woocommerce_after_checkout_validation', 'wcasv_add_checkout_validat
 function wcasv_add_bc_filter_condition_match( $match, $condition, $operator, $value, $args = array() ) {
 
 	if ( has_filter( 'woocommerce_advanced_shipping_validation_match_condition_' . $condition ) ) {
-		$package = isset( $args['package'] ) ? $args['package'] : array();
+		$package       = isset( $args['package'] ) ? $args['package'] : array();
 		$package_index = isset( $args['package_index'] ) ? $args['package_index'] : 0;
-		$match = apply_filters( 'woocommerce_advanced_shipping_validation_match_condition_' . $condition, $match, $operator, $value, $package, $package_index );
+		$match         = apply_filters( 'woocommerce_advanced_shipping_validation_match_condition_' . $condition, $match, $operator, $value, $package, $package_index );
 	}
 
 	return $match;
@@ -148,7 +147,9 @@ add_action( 'wp-conditions\condition\match', 'wcasv_add_bc_filter_condition_matc
  * @since NEWVERSION
  */
 function wcasv_add_bc_filter_condition_descriptions( $descriptions ) {
+
 	return apply_filters( 'woocommerce_Advanced_Shipping_Validation_descriptions', $descriptions );
+
 }
 add_filter( 'wp-conditions\condition_descriptions', 'wcasv_add_bc_filter_condition_descriptions' );
 
