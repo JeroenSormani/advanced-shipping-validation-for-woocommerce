@@ -9,7 +9,7 @@ $validation_rules = wcasv_get_validation_posts( array( 'post_status' => array( '
 	</th>
 	<td class="forminp">
 
-		<table class='wp-list-table wpc-conditions-post-table widefat'>
+		<table class='wp-list-table wpc-conditions-post-table wpc-sortable-post-table widefat'>
 			<thead>
 				<tr>
 					<th style='width: 17px;'></th>

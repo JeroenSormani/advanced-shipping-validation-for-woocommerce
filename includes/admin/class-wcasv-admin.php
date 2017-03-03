@@ -43,6 +43,7 @@ class WCASV_Admin {
 		// Settings
 		require_once plugin_dir_path( __FILE__ ) . 'class-wcasv-admin-settings.php';
 		$this->settings = new WCASV_Admin_Settings();
+		$this->settings->init();
 
 		global $pagenow;
 		if ( 'plugins.php' == $pagenow ) :
@@ -81,6 +82,18 @@ class WCASV_Admin {
 	 */
 	public function admin_enqueue_scripts() {
 
+		// Style script
+		wp_register_style( 'woocommerce-advanced-shipping-validation', plugins_url( 'assets/admin/css/woocommerce-advanced-shipping-validation.css', Woocommerce_Advanced_Shipping_Validation()->file ), array(), Woocommerce_Advanced_Shipping_Validation()->version );
+
+		// Javascript
+		wp_register_script( 'woocommerce-advanced-shipping-validation', plugins_url( 'assets/admin/js/woocommerce-advanced-shipping-validation.min.js', Woocommerce_Advanced_Shipping_Validation()->file ), array( 'jquery', 'jquery-ui-sortable' ), Woocommerce_Advanced_Shipping_Validation()->version, true );
+
+		wp_localize_script( 'woocommerce-advanced-shipping-validation-js', 'wpc', array(
+			'nonce'         => wp_create_nonce( 'wpc-ajax-nonce' ),
+			'action_prefix' => 'wcasv_',
+			'asset_url'     => plugins_url( 'assets/', Woocommerce_Advanced_Shipping_Validation()->file ),
+		) );
+
 		// Only load scripts on relevant pages
 		if (
 			( isset( $_REQUEST['post'] ) && 'shipping_validation' == get_post_type( $_REQUEST['post'] ) ) ||
@@ -88,17 +101,13 @@ class WCASV_Admin {
 			( isset( $_REQUEST['section'] ) && 'shipping_validation' == $_REQUEST['section'] )
 		) :
 
-			// Style script
-			wp_enqueue_style( 'woocommerce-advanced-shipping-validation-css', plugins_url( 'assets/admin/css/woocommerce-advanced-shipping-validation.css', Woocommerce_Advanced_Shipping_Validation()->file ), array(), Woocommerce_Advanced_Shipping_Validation()->version );
-
-			// Javascript
-			wp_enqueue_script( 'woocommerce-advanced-shipping-validation-js', plugins_url( 'assets/admin/js/woocommerce-advanced-shipping-validation.min.js', Woocommerce_Advanced_Shipping_Validation()->file ), array( 'jquery', 'jquery-ui-sortable' ), Woocommerce_Advanced_Shipping_Validation()->version, true );
-
-			wp_localize_script( 'woocommerce-advanced-shipping-validation-js', 'wpc', array(
-				'nonce'         => wp_create_nonce( 'wpc-ajax-nonce' ),
+			wp_localize_script( 'wp-conditions', 'wpc2', array(
 				'action_prefix' => 'wcasv_',
-				'asset_url'     => plugins_url( 'assets/', Woocommerce_Advanced_Shipping_Validation()->file ),
 			) );
+
+			wp_enqueue_script( 'woocommerce-advanced-shipping-validation' );
+			wp_enqueue_style( 'woocommerce-advanced-shipping-validation' );
+			wp_enqueue_script( 'wp-conditions' );
 
 			wp_dequeue_script( 'autosave' );
 
