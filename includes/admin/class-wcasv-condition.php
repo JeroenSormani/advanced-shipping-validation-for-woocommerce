@@ -147,8 +147,10 @@ class WCASV_Condition {
 	 * @return array List of available operators.
 	 */
 	public function get_operators() {
+
 		$wpc_condition = wpc_get_condition( $this->condition );
 		return apply_filters( 'woocommerce_Advanced_Shipping_Validation_operators', $wpc_condition->get_available_operators() );
+
 	}
 
 
@@ -180,7 +182,7 @@ class WCASV_Condition {
 
 		if ( $this->condition == 'contains_product' && $product = wc_get_product( $this->value ) ) {
 			$field_args['custom_attributes']['data-selected'] = $product->get_formatted_name(); // WC < 2.7
-			$field_args['options'][ $this->value ] = $product->get_formatted_name(); // WC >= 2.7
+			$field_args['options'][ $this->value ]            = $product->get_formatted_name(); // WC >= 2.7
 		}
 
 		if ( $this->condition == 'shipping_cost' ) :
@@ -202,8 +204,10 @@ class WCASV_Condition {
 	 * @since 1.0.0
 	 */
 	public function get_description() {
+
 		$descriptions = apply_filters( 'woocommerce_Advanced_Shipping_Validation_descriptions', wpc_condition_descriptions() );
 		return isset( $descriptions[ $this->condition ] ) ? $descriptions[ $this->condition ] : '';
+
 	}
 
 
