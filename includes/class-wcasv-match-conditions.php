@@ -621,7 +621,7 @@ class WCASV_Match_Conditions {
 			if ( preg_match( '/\, ?/', $value ) ) :
 				$match = ( ! in_array( $customer_city, preg_split( '/\, ?/', $value ) ) );
 			else :
-				$match = ( $value == $customer_city );
+				$match = ! ( $value == $customer_city );
 			endif;
 
 		endif;
