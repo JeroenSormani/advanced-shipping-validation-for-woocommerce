@@ -6,13 +6,16 @@ if ( ! class_exists( 'WPC_Contains_Shipping_Class_Condition' ) ) {
 	class WPC_Contains_Shipping_Class_Condition extends WPC_Condition {
 
 		public function __construct() {
+
 			$this->name        = __( 'Contains shipping class', 'wpc-conditions' );
 			$this->slug        = __( 'contains_shipping_class', 'wpc-conditions' );
 			$this->group       = __( 'Cart', 'wpc-conditions' );
 			$this->description = __( 'Check if a shipping class is or is not present in the cart', 'wpc-conditions' );
 
 			parent::__construct();
+
 		}
+
 
 		public function match( $match, $operator, $value ) {
 
@@ -38,6 +41,7 @@ if ( ! class_exists( 'WPC_Contains_Shipping_Class_Condition' ) ) {
 
 		}
 
+
 		public function get_available_operators() {
 
 			$operators = parent::get_available_operators();
@@ -49,6 +53,7 @@ if ( ! class_exists( 'WPC_Contains_Shipping_Class_Condition' ) ) {
 
 		}
 
+
 		public function get_value_field_args() {
 
 			$shipping_classes = get_terms( 'product_shipping_class', array( 'hide_empty' => false ) );
@@ -58,14 +63,15 @@ if ( ! class_exists( 'WPC_Contains_Shipping_Class_Condition' ) ) {
 			);
 
 			$field_args = array(
-				'type' => 'select',
+				'type'    => 'select',
 				'options' => $shipping_classes,
-				'class' => array( 'wpc-value', 'wc-enhanced-select' ),
+				'class'   => array( 'wpc-value', 'wc-enhanced-select' ),
 			);
 
 			return $field_args;
 
 		}
+
 
 	}
 
