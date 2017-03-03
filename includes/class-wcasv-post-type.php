@@ -192,48 +192,8 @@ class WCASV_Post_Type {
 			return $post_id;
 		}
 
-		// Sanitize conditions
-		$save_conditions = array();
-		if ( isset( $_POST['conditions'] ) ) :
-			foreach ( $_POST['conditions'] as $key => $condition_group ) :
-
-				foreach ( $condition_group as $condition_id => $condition_values ) :
-					foreach ( $condition_values as $condition_key => $condition_value ) :
-
-						switch ( $condition_key ) :
-
-							case 'condition' :
-								$condition_value = sanitize_key( $condition_value );
-								break;
-
-							case 'operator' :
-								$condition_value = in_array( $condition_value, array( '==', '!=', '>=', '<=' ) ) ? $condition_value : '==';
-								break;
-
-							case 'value' :
-								if ( is_array( $condition_value ) ) :
-									$condition_value = array_map( 'sanitize_text_field', $condition_value );
-								elseif ( is_string( $condition_value ) ) :
-									$condition_value = sanitize_text_field( $condition_value );
-								endif;
-								break;
-
-							default :
-								$condition_value = sanitize_text_field( $condition_value );
-								break;
-
-						endswitch;
-
-						$save_conditions[ $key ][ $condition_id ][ $condition_key ] = $condition_value;
-
-					endforeach;
-				endforeach;
-
-			endforeach;
-		endif;
-
-		// Save conditions
-		update_post_meta( $post_id, '_conditions', $save_conditions );
+		// Save sanitized conditions
+		update_post_meta( $post_id, '_conditions', wpc_sanitize_conditions( $_POST['conditions'] ) );
 
 		// Save message
 		if ( isset( $_POST['validation_message'] ) ) :

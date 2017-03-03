@@ -19,11 +19,7 @@ class WCASV_Admin_Settings {
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct() {
-
-		add_action( 'admin_init', array( $this, 'init' ), 20 );
-
-	}
+	public function __construct() {}
 
 
 	/**

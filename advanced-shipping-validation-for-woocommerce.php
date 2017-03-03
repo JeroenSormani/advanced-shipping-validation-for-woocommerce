@@ -69,9 +69,6 @@ class Woocommerce_Advanced_Shipping_Validation {
 			endif;
 		endif;
 
-		// Initialize plugin parts
-		$this->init();
-
 		do_action( 'woocommerce_advanced_shipping_validation_init' );
 
 	}
@@ -89,9 +86,9 @@ class Woocommerce_Advanced_Shipping_Validation {
 	 */
 	public static function instance() {
 
-		if ( is_null( self::$instance ) ) :
+		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
-		endif;
+		}
 
 		return self::$instance;
 
@@ -107,6 +104,12 @@ class Woocommerce_Advanced_Shipping_Validation {
 	 */
 	public function init() {
 
+		if ( version_compare( PHP_VERSION, '5.3', 'lt' ) ) {
+			return add_action( 'admin_notices', array( $this, 'php_version_notice' ) );
+		}
+
+		require_once plugin_dir_path( __FILE__ ) . '/libraries/wp-conditions/functions.php';
+
 		/**
 		 * Require matching conditions hooks.
 		 */
@@ -121,29 +124,14 @@ class Woocommerce_Advanced_Shipping_Validation {
 
 		// AJAX
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) :
-
-			require_once plugin_dir_path( __FILE__ ) . '/includes/admin/admin-functions.php';
-
-			/**
-			 * Load ajax methods
-			 */
 			require_once plugin_dir_path( __FILE__ ) . '/includes/class-wcasv-ajax.php';
 			$this->ajax = new WCASV_Ajax();
-
 		endif;
 
 		// Admin
 		if ( is_admin() && ! defined( 'DOING_AJAX' ) ) :
-
-			require_once plugin_dir_path( __FILE__ ) . '/includes/admin/admin-functions.php';
-
-			/**
-			 * Admin class.
-			 */
 			require_once plugin_dir_path( __FILE__ ) . '/includes/admin/class-wcasv-admin.php';
 			$this->admin = new WCASV_Admin();
-
-
 		endif;
 
 		// Include functions
@@ -173,6 +161,22 @@ class Woocommerce_Advanced_Shipping_Validation {
 	}
 
 
+	/**
+	 * Display PHP 5.3 required notice.
+	 *
+	 * Display a notice when the required PHP version is not met.
+	 *
+	 * @since 1.0.6
+	 */
+	public function php_version_notice() {
+
+		?><div class='updated'>
+			<p><?php echo sprintf( __( 'Advanced Shipping Validation requires PHP 5.3 or higher and your current PHP version is %s. Please (contact your host to) update your PHP version.', 'woocommerce-advanced-messages' ), PHP_VERSION ); ?></p>
+		</div><?php
+
+	}
+
+
 }
 
 
@@ -197,4 +201,4 @@ if ( ! function_exists( 'Woocommerce_Advanced_Shipping_Validation' ) ) :
 
 
 endif;
-Woocommerce_Advanced_Shipping_Validation();
+Woocommerce_Advanced_Shipping_Validation()->init();
