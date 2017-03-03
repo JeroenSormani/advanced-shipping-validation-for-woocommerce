@@ -27,6 +27,7 @@ if ( ! function_exists( 'wpc_admin_enqueue_scripts' ) ) {
 	}
 	add_action( 'admin_enqueue_scripts', 'wpc_admin_enqueue_scripts', 5 );
 
+
 }
 
 if ( ! function_exists( 'wpc_html_field' ) ) {
@@ -177,5 +178,6 @@ if ( ! function_exists( 'wpc_ajax_save_post_order' ) ) {
 
 	}
 	add_action( 'wp_ajax_wpc_save_post_order', 'wpc_ajax_save_post_order' );
+
 
 }
