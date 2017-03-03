@@ -18,23 +18,34 @@ if ( ! class_exists( 'WPC_Condition' ) ) {
 		 * @since 1.0.0
 		 */
 		public function __construct() {
+
 			if ( is_null( $this->get_slug() ) ) {
 				$this->slug = sanitize_key( $this->get_name() );
 			}
+
 		}
 
 
 		public function get_name() {
+
 			return $this->name;
+
 		}
+
 
 		public function get_slug() {
+
 			return $this->slug;
+
 		}
 
+
 		public function get_group() {
+
 			return $this->group;
+
 		}
+
 
 		/**
 		 * @return array
@@ -54,6 +65,7 @@ if ( ! class_exists( 'WPC_Condition' ) ) {
 
 		}
 
+
 		public function get_value_field_args() {
 
 			if ( empty( $this->value_field_args ) ) {
@@ -68,6 +80,7 @@ if ( ! class_exists( 'WPC_Condition' ) ) {
 
 		}
 
+
 		/**
 		 * Get condition value.
 		 *
@@ -75,12 +88,15 @@ if ( ! class_exists( 'WPC_Condition' ) ) {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param $value
+		 * @param         $value
 		 * @return string
 		 */
 		public function get_value( $value ) {
+
 			return $value;
+
 		}
+
 
 		/**
 		 * Get the compare value.
@@ -95,11 +111,13 @@ if ( ! class_exists( 'WPC_Condition' ) ) {
 
 			$compare_value = '';
 			return $compare_value;
+
 		}
+
 
 		public function match( $match, $operator, $value ) {
 
-			$value = $this->get_value( $value );
+			$value         = $this->get_value( $value );
 			$compare_value = $this->get_compare_value();
 
 			if ( '==' == $operator ) :
@@ -113,12 +131,16 @@ if ( ! class_exists( 'WPC_Condition' ) ) {
 			endif;
 
 			return $match;
+
 		}
 
 
 		public function get_description() {
+
 			return $this->description;
+
 		}
+
 
 	}
 
