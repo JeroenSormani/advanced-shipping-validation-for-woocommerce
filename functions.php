@@ -6,6 +6,13 @@ if ( is_admin() ) {
 }
 
 require_once 'conditions/wpc-condition.php';
+
+// General
+require_once 'conditions/wpc-page-condition.php';
+require_once 'conditions/wpc-day-condition.php';
+require_once 'conditions/wpc-date-condition.php';
+require_once 'conditions/wpc-time-condition.php';
+
 require_once 'conditions/wpc-subtotal-condition.php';
 require_once 'conditions/wpc-subtotal-ex-tax-condition.php';
 require_once 'conditions/wpc-tax-condition.php';
@@ -41,6 +48,11 @@ if ( ! function_exists( 'wpc_get_registered_conditions' ) ) {
 	function wpc_get_registered_conditions() {
 
 		$conditions = array(
+			new WPC_Page_Condition(),
+			new WPC_Day_Condition(),
+			new WPC_Date_Condition(),
+			new WPC_Time_Condition(),
+
 			new WPC_Subtotal_Condition(),
 			new WPC_Subtotal_Ex_Tax_Condition(),
 			new WPC_Tax_Condition(),
