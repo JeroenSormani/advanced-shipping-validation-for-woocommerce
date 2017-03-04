@@ -32,10 +32,10 @@ jQuery( function( $ ) {
     // Assign new ID to repeater row + open collapsible + re-enable nested repeater
     jQuery( document.body ).on( 'repeater-added-row', function( e, template, container, $self ) {
         var new_id = Math.floor(Math.random()*8999999999+1000000000); // Random number sequence of 10 length
-        container.find( 'input[name], select[name]' ).attr( 'name', function( index, value ) {
+        template.find( 'input[name], select[name]' ).attr( 'name', function( index, value ) {
             return ( value.replace( '9999', new_id ) ) || value;
         });
-        container.find( '.wpc-condition[data-id]' ).attr( 'data-id', function( index, value ) {
+        template.find( '.wpc-condition[data-id]' ).attr( 'data-id', function( index, value ) {
             return ( value.replace( '9999', new_id ) ) || value;
         });
 
@@ -92,7 +92,7 @@ jQuery( function( $ ) {
 
         var loading_wrap = '<span style="width: calc( 42.5% - 75px ); border: 1px solid transparent; display: inline-block;">&nbsp;</span>';
         var data = {
-            action: 	wpc.action_prefix + 'update_condition_value',
+            action: 	wpc2.action_prefix + 'update_condition_value',
             id:			$( this ).attr( 'data-id' ),
             group:		$( this ).parents( '.wpc-condition-group' ).attr( 'data-group' ),
             condition: 	$( this ).val(),
@@ -156,7 +156,7 @@ jQuery( function( $ ) {
             $table.block({ message: null, overlayCSS: { background: '#fff', opacity: 0.6 } });
             // Update fee order
             var data = {
-                action:	wpc.action_prefix + 'save_post_order',
+                action:	'wpc_save_post_order',
                 form: 	$( this ).closest( 'form' ).serialize(),
                 nonce: 	wpc.nonce
             };

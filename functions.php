@@ -6,13 +6,13 @@ if ( is_admin() ) {
 }
 
 require_once 'conditions/wpc-condition.php';
+require_once 'conditions/wpc-fallback-condition.php';
 
 // General
 require_once 'conditions/wpc-page-condition.php';
 require_once 'conditions/wpc-day-condition.php';
 require_once 'conditions/wpc-date-condition.php';
 require_once 'conditions/wpc-time-condition.php';
-
 require_once 'conditions/wpc-subtotal-condition.php';
 require_once 'conditions/wpc-subtotal-ex-tax-condition.php';
 require_once 'conditions/wpc-tax-condition.php';
@@ -104,7 +104,7 @@ if ( ! function_exists( 'wpc_get_condition' ) ) {
 		if ( class_exists( $class_name ) ) {
 			return new $class_name();
 		} else {
-			return new WPC_Subtotal_Condition();
+			return new WPC_Fallback_Condition();
 		}
 
 	}
@@ -123,9 +123,10 @@ if ( ! function_exists( 'wpc_match_conditions' ) ) {
 	 * @since 1.0.0
 	 *
 	 * @param  array $condition_groups List of condition groups containing their conditions.
-	 * @return BOOL                    TRUE if all the conditions in one of the condition groups matches true.
+	 * @param array $args Arguments to pass to the matching method.
+	 * @return BOOL TRUE if all the conditions in one of the condition groups matches true.
 	 */
-	function wpc_match_conditions( $condition_groups = array() ) {
+	function wpc_match_conditions( $condition_groups = array(), $args = array() ) {
 
 		if ( empty( $condition_groups ) || ! is_array( $condition_groups ) ) :
 			return false;
@@ -137,10 +138,19 @@ if ( ! function_exists( 'wpc_match_conditions' ) ) {
 
 			foreach ( $conditions as $condition ) :
 
-				$condition = apply_filters( 'wp-conditions\condition', $condition ); // BC helper
+				$condition     = apply_filters( 'wp-conditions\condition', $condition ); // BC helper
 				$wpc_condition = wpc_get_condition( $condition['condition'] );
-				$match = $wpc_condition->match( false, $condition['operator'], $condition['value'] );
-				$match = apply_filters( 'wp-conditions\condition\match', $match, $condition['condition'], $condition['operator'], $condition['value'] ); // BC helper
+
+				// Match the condition - pass any custom ($)args as parameters.
+				$match = call_user_func_array( array( $wpc_condition, 'match' ), array( false, $condition['operator'], $condition['value'], $args ) );
+
+				// Filter the matched result - BC helper
+				$parameters = array( 'wp-conditions\condition\match', $match, $condition['condition'], $condition['operator'], $condition['value'], $args );
+				$match = call_user_func_array( 'apply_filters', $parameters );
+
+				// Original - simple - way
+//				$match         = $wpc_condition->match( false, $condition['operator'], $condition['value'] );
+//				$match         = apply_filters( 'wp-conditions\condition\match', $match, $condition['condition'], $condition['operator'], $condition['value'] );
 
 				if ( false == $match ) :
 					$match_condition_group = false;
@@ -177,9 +187,13 @@ if ( ! function_exists( 'wpc_sanitize_conditions' ) ) {
 	function wpc_sanitize_conditions( $conditions ) {
 
 		$sanitized_conditions = array();
-		foreach ( $conditions as $key => $condition_group ) :
+		foreach ( $conditions as $group_key => $condition_group ) :
+			if ( $group_key == '9999' ) continue; // Template group
 
 			foreach ( $condition_group as $condition_id => $condition_values ) :
+				if ( $condition_id == '9999' ) continue; // Template condition
+				if ( ! isset( $condition_values['value'] ) ) $condition_values['value'] = '';
+
 				foreach ( $condition_values as $condition_key => $condition_value ) :
 
 					switch ( $condition_key ) :
@@ -206,9 +220,10 @@ if ( ! function_exists( 'wpc_sanitize_conditions' ) ) {
 
 					endswitch;
 
-					$sanitized_conditions[ $key ][ $condition_id ][ $condition_key ] = $condition_value;
+					$sanitized_conditions[ $group_key ][ $condition_id ][ $condition_key ] = $condition_value;
 
 				endforeach;
+
 			endforeach;
 
 		endforeach;

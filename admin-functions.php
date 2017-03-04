@@ -16,7 +16,13 @@ if ( ! function_exists( 'wpc_admin_enqueue_scripts' ) ) {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 		wp_register_script( 'wpc-repeater', plugins_url( 'assets/js/repeater/jquery.repeater' . $suffix . '.js', __FILE__ ), array( 'jquery' ), '1.0.0', true );
-		wp_register_script( 'wp-conditions', plugins_url( 'assets/js/wp-conditions' . $suffix . '.js', __FILE__ ), array( 'jquery', 'wpc-repeater' ), '1.0.0', true );
+		wp_register_script( 'wp-conditions', plugins_url( 'assets/js/wp-conditions' . $suffix . '.js', __FILE__ ), array( 'jquery', 'wpc-repeater', 'select2' ), '1.0.0', true );
+
+		wp_localize_script( 'wp-conditions', 'wpc', array(
+			'nonce'                  => wp_create_nonce( 'wpc-ajax-nonce' ),
+			'condition_operators'    => wpc_condition_operators(),
+			'condition_descriptions' => wpc_condition_descriptions(),
+		) );
 
 	}
 	add_action( 'admin_enqueue_scripts', 'wpc_admin_enqueue_scripts', 5 );
@@ -101,7 +107,7 @@ if ( ! function_exists( 'wpc_html_field' ) ) {
 
 				if ( empty( $options ) ) :
 					?><option readonly disabled><?php
-						_e( 'There are no options available', 'woocommerce-advanced-fees' );
+						_e( 'There are no options available', 'wp-conditions' );
 					?></option><?php
 				endif;
 
@@ -127,5 +133,49 @@ if ( ! function_exists( 'wpc_html_field' ) ) {
 
 	}
 
+
+}
+
+
+if ( ! function_exists( 'wpc_ajax_save_post_order' ) ) {
+
+	/**
+	 * Save post order.
+	 *
+	 * Save the order of the posts in the overview table.
+	 *
+	 * @since 1.0.0
+	 */
+	function wpc_ajax_save_post_order() {
+
+		global $wpdb;
+
+		check_ajax_referer( 'wpc-ajax-nonce', 'nonce' );
+
+		$args = wp_parse_args( $_POST['form'] );
+
+		if ( ! isset( $args['sort'] ) ) {
+			die( '-1' );
+		}
+
+		$menu_order = 0;
+		foreach ( $args['sort'] as $sort ) :
+
+			$wpdb->update(
+				$wpdb->posts,
+				array( 'menu_order' => $menu_order ),
+				array( 'ID' => $sort ),
+				array( '%d' ),
+				array( '%d' )
+			);
+
+			$menu_order++;
+
+		endforeach;
+
+		die;
+
+	}
+	add_action( 'wp_ajax_wpc_save_post_order', 'wpc_ajax_save_post_order' );
 
 }
