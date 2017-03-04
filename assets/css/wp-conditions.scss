@@ -234,7 +234,20 @@
 		content: "\e007";
 	}
 }
+@media screen and (max-width: 782px) {
+	.wpc-conditions-post-table {
 
+		th {
+			padding: 8px;
+		}
+		td {
+			padding: 8px 10px;
+		}
+		tfoot .button {
+			margin-bottom: 0;
+		}
+	}
+}
 
 // Currency
 .wpc-currency {
