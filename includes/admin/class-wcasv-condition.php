@@ -172,10 +172,9 @@ class WCASV_Condition {
 			'class'       => array( 'wpc-value' ),
 		);
 
-
 		$field_args = $default_field_args;
 		if ( $condition = wpc_get_condition( $this->condition ) ) {
-			$field_args = wp_parse_args( $condition->get_value_field_args(), $default_field_args );
+			$field_args = wp_parse_args( $condition->get_value_field_args(), $field_args );
 		}
 
 		if ( $this->condition == 'contains_product' && $product = wc_get_product( $this->value ) ) {
