@@ -65,7 +65,6 @@ jQuery( function( $ ) {
         // Assign proper names
         new_group.find( '.wpc-condition-group' ).attr( 'data-group', new_group_id );
         new_group.find( 'input[name], select[name]' ).attr( 'name', function( index, name ) {
-            console.log( 'Condition Group ID: ' + condition_group_id + ' New ID: ' + new_group_id + ' Old: ' + name + ' New: ' + name.replace( 'conditions[' + condition_group_id + ']', 'conditions[' + new_group_id + ']' ) );
             return name.replace( 'conditions[' + condition_group_id + ']', 'conditions[' + new_group_id + ']' );
         });
 
