@@ -50,7 +50,7 @@ jQuery( function( $ ) {
     $( document.body ).on ( 'click', '.wpc-conditions .duplicate', function() {
         var condition_group_wrap = $( this ).parents( '.wpc-condition-group-wrap' ),
             condition_group_id   = condition_group_wrap.find( '.wpc-condition-group' ).attr( 'data-group' ),
-            condition_group_list = $( '.wpc-conditions' ),
+            condition_group_list = $( this ).parents( '.wpc-conditions' ),
             new_group            = condition_group_wrap.clone(),
             new_group_id         = Math.floor(Math.random()*8999999999+1000000000); // Random number sequence of 10 length
 
