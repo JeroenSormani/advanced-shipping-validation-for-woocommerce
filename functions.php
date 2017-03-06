@@ -6,6 +6,14 @@ if ( is_admin() ) {
 }
 
 require_once 'conditions/wpc-condition.php';
+require_once 'conditions/wpc-fallback-condition.php';
+
+// General
+require_once 'conditions/wpc-page-condition.php';
+require_once 'conditions/wpc-day-condition.php';
+require_once 'conditions/wpc-date-condition.php';
+require_once 'conditions/wpc-time-condition.php';
+
 require_once 'conditions/wpc-subtotal-condition.php';
 require_once 'conditions/wpc-subtotal-ex-tax-condition.php';
 require_once 'conditions/wpc-tax-condition.php';
@@ -41,6 +49,11 @@ if ( ! function_exists( 'wpc_get_registered_conditions' ) ) {
 	function wpc_get_registered_conditions() {
 
 		$conditions = array(
+			new WPC_Page_Condition(),
+			new WPC_Day_Condition(),
+			new WPC_Date_Condition(),
+			new WPC_Time_Condition(),
+
 			new WPC_Subtotal_Condition(),
 			new WPC_Subtotal_Ex_Tax_Condition(),
 			new WPC_Tax_Condition(),
@@ -92,7 +105,7 @@ if ( ! function_exists( 'wpc_get_condition' ) ) {
 		if ( class_exists( $class_name ) ) {
 			return new $class_name();
 		} else {
-			return new WPC_Subtotal_Condition();
+			return new WPC_Fallback_Condition();
 		}
 
 	}
@@ -130,8 +143,7 @@ if ( ! function_exists( 'wpc_match_conditions' ) ) {
 				$wpc_condition = wpc_get_condition( $condition['condition'] );
 
 				// Match the condition - pass any custom ($)args as parameters.
-				$parameters = array( false, $condition['operator'], $condition['value'], $args );
-				$match = call_user_func_array( array( $wpc_condition, 'match' ), $parameters );
+				$match = call_user_func_array( array( $wpc_condition, 'match' ), array( false, $condition['operator'], $condition['value'], $args ) );
 
 				// Filter the matched result - BC helper
 				$parameters = array( 'wp-conditions\condition\match', $match, $condition['condition'], $condition['operator'], $condition['value'], $args );
@@ -181,6 +193,7 @@ if ( ! function_exists( 'wpc_sanitize_conditions' ) ) {
 
 			foreach ( $condition_group as $condition_id => $condition_values ) :
 				if ( $condition_id == '9999' ) continue; // Template condition
+				if ( ! isset( $condition_values['value'] ) ) $condition_values['value'] = '';
 
 				foreach ( $condition_values as $condition_key => $condition_value ) :
 
