@@ -113,6 +113,7 @@ class WCASV_Condition {
 				'coupon'                  => __( 'Coupon', 'woocommerce-advanced-shipping-validation' ),
 				'weight'                  => __( 'Weight', 'woocommerce-advanced-shipping-validation' ),
 				'contains_shipping_class' => __( 'Contains shipping class', 'woocommerce-advanced-shipping-validation' ),
+				'contains_category' => __( 'Contains category', 'woocommerce-advanced-shipping-validation' ),
 			),
 			__( 'User Details', 'woocommerce-advanced-shipping-validation' ) => array(
 				'zipcode' => __( 'Zipcode', 'woocommerce-advanced-shipping-validation' ),
@@ -127,7 +128,6 @@ class WCASV_Condition {
 				'length'            => __( 'Length', 'woocommerce-advanced-shipping-validation' ),
 				'stock'             => __( 'Stock', 'woocommerce-advanced-shipping-validation' ),
 				'stock_status'      => __( 'Stock status', 'woocommerce-advanced-shipping-validation' ),
-				'contains_category' => __( 'Contains category', 'woocommerce-advanced-shipping-validation' ),
 			),
 		);
 		$conditions = apply_filters( 'woocommerce_advanced_shipping_validation_conditions', $conditions );

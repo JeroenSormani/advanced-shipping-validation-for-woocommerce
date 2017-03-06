@@ -176,22 +176,6 @@ class WCASV_Match_Conditions {
 
 
 	/**
-	 * Coupon.
-	 *
-	 * Match the condition value against the applied coupons.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param  bool   $match         Current match value.
-	 * @param  string $operator      Operator selected by the user in the condition row.
-	 * @param  mixed  $value         Value given by the user in the condition row.
-	 * @param  array  $package       List of shipping package details.
-	 * @param  int    $package_index Current shipping package index.
-	 * @return BOOL                  Matching result, TRUE if results match, otherwise FALSE.
-	 */
-
-
-	/**
 	 * Weight.
 	 *
 	 * Match the condition value against the cart weight.
