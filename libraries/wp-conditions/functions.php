@@ -13,6 +13,7 @@ require_once 'conditions/wpc-page-condition.php';
 require_once 'conditions/wpc-day-condition.php';
 require_once 'conditions/wpc-date-condition.php';
 require_once 'conditions/wpc-time-condition.php';
+
 require_once 'conditions/wpc-subtotal-condition.php';
 require_once 'conditions/wpc-subtotal-ex-tax-condition.php';
 require_once 'conditions/wpc-tax-condition.php';
