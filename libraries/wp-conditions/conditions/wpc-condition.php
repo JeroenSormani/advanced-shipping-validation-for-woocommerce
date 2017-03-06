@@ -23,7 +23,6 @@ if ( ! class_exists( 'WPC_Condition' ) ) {
 			}
 		}
 
-
 		public function get_name() {
 			return $this->name;
 		}
@@ -114,7 +113,6 @@ if ( ! class_exists( 'WPC_Condition' ) ) {
 
 			return $match;
 		}
-
 
 		public function get_description() {
 			return $this->description;

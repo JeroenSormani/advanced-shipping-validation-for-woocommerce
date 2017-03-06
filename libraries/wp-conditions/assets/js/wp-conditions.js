@@ -38,11 +38,14 @@ jQuery( function( $ ) {
         template.find( '.wpc-condition[data-id]' ).attr( 'data-id', function( index, value ) {
             return ( value.replace( '9999', new_id ) ) || value;
         });
+        template.find( '[data-group]' ).attr( 'data-group', function( index, value ) {
+            return ( value.replace( '9999', new_id ) ) || value;
+        });
 
         template.find( '.repeater-active' ).removeClass( 'repeater-active' );
 
         // Init condition group repeater
-        wpc_condition_group_repeater();
+        wpc_condition_row_repeater();
     });
 
 
@@ -50,7 +53,7 @@ jQuery( function( $ ) {
     $( document.body ).on ( 'click', '.wpc-conditions .duplicate', function() {
         var condition_group_wrap = $( this ).parents( '.wpc-condition-group-wrap' ),
             condition_group_id   = condition_group_wrap.find( '.wpc-condition-group' ).attr( 'data-group' ),
-            condition_group_list = $( '.wpc-conditions' ),
+            condition_group_list = $( this ).parents( '.wpc-conditions' ),
             new_group            = condition_group_wrap.clone(),
             new_group_id         = Math.floor(Math.random()*8999999999+1000000000); // Random number sequence of 10 length
 
@@ -62,6 +65,7 @@ jQuery( function( $ ) {
         // Assign proper names
         new_group.find( '.wpc-condition-group' ).attr( 'data-group', new_group_id );
         new_group.find( 'input[name], select[name]' ).attr( 'name', function( index, name ) {
+            console.log( 'Condition Group ID: ' + condition_group_id + ' New ID: ' + new_group_id + ' Old: ' + name + ' New: ' + name.replace( 'conditions[' + condition_group_id + ']', 'conditions[' + new_group_id + ']' ) );
             return name.replace( 'conditions[' + condition_group_id + ']', 'conditions[' + new_group_id + ']' );
         });
 
