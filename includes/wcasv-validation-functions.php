@@ -165,4 +165,4 @@ function wcasv_add_bc_action_custom_fields( $type, $args ) {
 	}
 
 }
-add_action( 'wp-conditions\html_field_hook', 'wcasv_add_bc_action_custom_fields' );
+add_action( 'wp-conditions\html_field_hook', 'wcasv_add_bc_action_custom_fields', 10, 2 );
