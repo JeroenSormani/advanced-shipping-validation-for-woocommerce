@@ -31,7 +31,7 @@ if ( ! class_exists( 'WPC_Contains_Product_Condition' ) ) {
 		public function get_compare_value() {
 
 			$product_ids = array();
-			foreach ( WC()->cart->cart_contents as $product ) :
+			foreach ( WC()->cart->get_cart() as $product ) :
 				$product_ids[] = $product['product_id'];
 				if ( isset( $product['variation_id'] ) ) {
 					$product_ids[] = $product['variation_id'];
