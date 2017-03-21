@@ -160,6 +160,7 @@ class WCASV_Match_Conditions {
 			return $match;
 		endif;
 
+		$product_ids = array();
 		foreach ( $package['contents'] as $product ) :
 			$product_ids[] = $product['product_id'];
 		endforeach;
@@ -248,7 +249,7 @@ class WCASV_Match_Conditions {
 		foreach ( WC()->cart->cart_contents as $product ) :
 
 			$id      = ! empty( $product['variation_id'] ) ? $product['variation_id'] : $product['product_id'];
-			$product = get_product( $id );
+			$product = wc_get_product( $id );
 
 			if ( $operator == '==' ) :
 				if ( $product->get_shipping_class() == $value ) :

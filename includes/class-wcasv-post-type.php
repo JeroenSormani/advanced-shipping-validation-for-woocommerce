@@ -26,7 +26,7 @@ class WCASV_Post_Type {
 
 		// Add/save meta boxes
 		add_action( 'add_meta_boxes', array( $this, 'post_type_meta_box' ) );
-		add_action( 'save_post', array( $this, 'save_meta_boxes' ) );
+		add_action( 'save_post', array( $this, 'save_meta' ) );
 
 		// Edit user notices
 		add_filter( 'post_updated_messages', array( $this, 'custom_post_type_messages' ) );
@@ -178,7 +178,7 @@ class WCASV_Post_Type {
 	 *
 	 * @param int/numberic $post_id ID of the post being saved.
 	 */
-	public function save_meta_boxes( $post_id ) {
+	public function save_meta( $post_id ) {
 
 		if ( ! isset( $_POST['wcasv_settings_meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['wcasv_settings_meta_box_nonce'], 'wcasv_settings_meta_box ' ) ) {
 			return $post_id;
