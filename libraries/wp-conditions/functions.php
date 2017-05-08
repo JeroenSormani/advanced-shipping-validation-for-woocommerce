@@ -39,6 +39,7 @@ require_once 'conditions/wpc-height-condition.php';
 require_once 'conditions/wpc-stock-status-condition.php';
 require_once 'conditions/wpc-stock-condition.php';
 require_once 'conditions/wpc-category-condition.php';
+require_once 'conditions/wpc-volume-condition.php';
 
 // Product (single based)
 require_once 'conditions/wpc-product-condition.php';
@@ -95,6 +96,7 @@ if ( ! function_exists( 'wpc_get_registered_conditions' ) ) {
 			new WPC_Stock_Status_Condition(),
 			new WPC_Stock_Condition(),
 			new WPC_Category_Condition(),
+			new WPC_Volume_Condition(),
 
 			new WPC_Product_Condition(),
 			new WPC_Product_Age_Condition(),
