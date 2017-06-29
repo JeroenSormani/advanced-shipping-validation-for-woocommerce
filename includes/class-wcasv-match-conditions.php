@@ -116,10 +116,6 @@ class WCASV_Match_Conditions {
 	 */
 	public function match_condition_quantity( $match, $operator, $value, $package, $package_index ) {
 
-		if ( ! isset( WC()->cart ) ) :
-			return $match;
-		endif;
-
 		$quantity = 0;
 		foreach ( $package['contents'] as $item_key => $item ) :
 			$quantity += $item['quantity'];
@@ -156,10 +152,6 @@ class WCASV_Match_Conditions {
 	 */
 	public function match_condition_contains_product( $match, $operator, $value, $package, $package_index ) {
 
-		if ( ! isset( WC()->cart ) ) :
-			return $match;
-		endif;
-
 		$product_ids = array();
 		foreach ( $package['contents'] as $product ) :
 			$product_ids[] = $product['product_id'];
@@ -191,10 +183,6 @@ class WCASV_Match_Conditions {
 	 * @return BOOL                  Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_weight( $match, $operator, $value, $package, $package_index ) {
-
-		if ( ! isset( WC()->cart ) ) :
-			return $match;
-		endif;
 
 		$weight = 0;
 		foreach ( $package['contents'] as $key => $item ) :
@@ -236,10 +224,6 @@ class WCASV_Match_Conditions {
 	 * @return BOOL                  Matching result, TRUE if results match, otherwise FALSE.
 	 */
 	public function match_condition_contains_shipping_class( $match, $operator, $value, $package, $package_index ) {
-
-		if ( ! isset( WC()->cart ) ) :
-			return $match;
-		endif;
 
 		if ( $operator == '!=' ) :
 			// True until proven false

@@ -95,13 +95,14 @@ function wcasv_add_checkout_validation_messages() {
 		return;
 	endif;
 
+	$context = 'asvwc';
 	$validation_rules = wcasv_get_validation_posts( array( 'fields' => 'ids' ) );
 	if ( $packages = WC()->shipping->get_packages() ) :
 		foreach ( $packages as $package_index => $package ) :
 			foreach ( $validation_rules as $post_id ) :
 
 				$condition_groups = get_post_meta( $post_id, '_conditions', true );
-				if ( wpc_match_conditions( $condition_groups, compact( 'package', 'package_index' ) ) ) :
+				if ( wpc_match_conditions( $condition_groups, compact( 'package', 'package_index', 'context' ) ) ) :
 					$message = get_post_meta( $post_id, '_message', true );
 					wc_add_notice( $message, 'error' );
 				endif;
@@ -129,6 +130,10 @@ add_action( 'woocommerce_after_checkout_validation', 'wcasv_add_checkout_validat
  * @since NEWVERSION
  */
 function wcasv_add_bc_filter_condition_match( $match, $condition, $operator, $value, $args = array() ) {
+
+	if ( ! isset( $args['context'] ) || $args['context'] != 'asvwc' ) {
+		return $match;
+	}
 
 	if ( has_filter( 'woocommerce_advanced_shipping_validation_match_condition_' . $condition ) ) {
 		$package = isset( $args['package'] ) ? $args['package'] : array();
