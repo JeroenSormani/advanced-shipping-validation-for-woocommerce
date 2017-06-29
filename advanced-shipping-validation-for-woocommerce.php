@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: 	WooCommerce Advanced Shipping Validation
+ * Plugin Name: 	Advanced Shipping Validation for WooCommerce
  * Plugin URI: 		http://jeroensormani.com/
  * Description: 	Setup shipping validation rules based on your own conditions. Show customers a specific message why they can't continue to checkout.
- * Version: 		1.1.1
+ * Version: 		1.1.2
  * Author: 			Jeroen Sormani
  * Author URI: 		http://jeroensormani.com/
  * Text Domain:     woocommerce-advanced-shipping-validation
@@ -29,7 +29,7 @@ class Woocommerce_Advanced_Shipping_Validation {
 	 * @since 1.0.0
 	 * @var string $version Plugin version number.
 	 */
-	public $version = '1.1.1';
+	public $version = '1.1.2';
 
 
 	/**

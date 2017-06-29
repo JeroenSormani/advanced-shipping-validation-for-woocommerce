@@ -2,8 +2,8 @@
 Contributors: sormano
 Tags: woocommerce woocommerce, shipping, woocommerce shipping validation, woocommerce shipping validation rules, shipping rules, prevent shipping, block shipping, prohibit shipping, forbid shipping, avoid shipping, restrict shipping, stop shipping
 Requires at least: 4.0
-Tested up to: 4.7.2
-Stable tag: 1.1.1
+Tested up to: 4.8
+Stable tag: 1.1.2
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -35,6 +35,13 @@ A common use case with this is the restriction of certain products being shipped
 3. Validation overview page
 
 == Changelog ==
+
+= 1.1.2 - 29-06-2017 =
+
+* [Improvement] - Update WP Conditions to 1.0.3
+		- [Fix] - 'User role' condition 'Guest' wasn't working
+        - [Improvement] - Allow conditions outside postbox / multiple times inside. Not limited to .postbox class.
+        - [Add] - Zipcode range support. E.g. 'Zipcode' = 'equal to' = '10000-20000,30000-40000'
 
 = 1.1.1 - 21-03-2017 =
 
