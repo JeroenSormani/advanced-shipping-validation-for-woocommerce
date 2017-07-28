@@ -24,7 +24,6 @@ class WCASV_Match_Conditions {
 		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_shipping_cost', array( $this, 'match_condition_shipping_cost' ), 10, 5 );
 		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_shipping_method', array( $this, 'match_condition_shipping_method' ), 10, 5 );
 		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_quantity', array( $this, 'match_condition_quantity' ), 10, 5 );
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_contains_product', array( $this, 'match_condition_contains_product' ), 10, 5 );
 		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_weight', array( $this, 'match_condition_weight' ), 10, 5 );
 		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_contains_shipping_class', array( $this, 'match_condition_contains_shipping_class' ), 10, 5 );
 
@@ -129,38 +128,6 @@ class WCASV_Match_Conditions {
 			$match = ( $quantity >= $value );
 		elseif ( '<=' == $operator ) :
 			$match = ( $quantity <= $value );
-		endif;
-
-		return $match;
-
-	}
-
-
-	/**
-	 * Contains product.
-	 *
-	 * Matches if the condition value product is in the cart.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param  bool   $match         Current match value.
-	 * @param  string $operator      Operator selected by the user in the condition row.
-	 * @param  mixed  $value         Value given by the user in the condition row.
-	 * @param  array  $package       List of shipping package details.
-	 * @param  int    $package_index Current shipping package index.
-	 * @return BOOL                  Matching result, TRUE if results match, otherwise FALSE.
-	 */
-	public function match_condition_contains_product( $match, $operator, $value, $package, $package_index ) {
-
-		$product_ids = array();
-		foreach ( $package['contents'] as $product ) :
-			$product_ids[] = $product['product_id'];
-		endforeach;
-
-		if ( '==' == $operator ) :
-			$match = ( in_array( $value, $product_ids ) );
-		elseif ( '!=' == $operator ) :
-			$match = ( ! in_array( $value, $product_ids ) );
 		endif;
 
 		return $match;
