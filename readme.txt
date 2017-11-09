@@ -2,7 +2,7 @@
 Contributors: sormano
 Tags: woocommerce woocommerce, shipping, woocommerce shipping validation, woocommerce shipping validation rules, shipping rules, prevent shipping, block shipping, prohibit shipping, forbid shipping, avoid shipping, restrict shipping, stop shipping
 Requires at least: 4.0
-Tested up to: 4.8
+Tested up to: 4.9
 Stable tag: 1.1.2
 Requires PHP: 5.3
 License: GPLv3 or later
