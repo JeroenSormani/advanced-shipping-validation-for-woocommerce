@@ -12,8 +12,8 @@ $validation_rules = wcasv_get_validation_posts( array( 'post_status' => array( '
 		<table class='wp-list-table wpc-conditions-post-table wpc-sortable-post-table widefat'>
 			<thead>
 				<tr>
-					<th style='width: 17px;'></th>
-					<th style='padding-left: 10px;'><?php _e( 'Title', 'woocommerce-advanced-shipping-validation' ); ?></th>
+					<th style='width: 17px;' class="column-cb check-column"></th>
+					<th style='padding-left: 10px;' class="column-primary"><?php _e( 'Title', 'woocommerce-advanced-shipping-validation' ); ?></th>
 					<th style='padding-left: 10px;'><?php _e( 'Message', 'woocommerce-advanced-shipping-validation' ); ?></th>
 					<th style='width: 70px;'><?php _e( '# Groups', 'woocommerce-advanced-shipping-validation' ); ?></th>
 				</tr>
@@ -29,10 +29,10 @@ $validation_rules = wcasv_get_validation_posts( array( 'post_status' => array( '
 					$alt = ( $i++ ) % 2 == 0 ? 'alternate' : '';
 					?><tr class='<?php echo $alt; ?>'>
 
-						<td class='sort'>
+						<th style='width: 17px;' class="column-cb check-column">
 							<input type='hidden' name='sort[]' value='<?php echo absint( $rule->ID ); ?>' />
-						</td>
-						<td>
+						</th>
+						<td class="column-primary">
 							<strong>
 								<a href='<?php echo get_edit_post_link( $rule->ID ); ?>' class='row-title' title='<?php _e( 'Edit Method', 'woocommerce-advanced-shipping-validation' ); ?>'><?php
 									echo _draft_or_post_title( $rule->ID );
@@ -62,7 +62,7 @@ $validation_rules = wcasv_get_validation_posts( array( 'post_status' => array( '
 				if ( empty( $rule ) ) :
 
 					?><tr>
-						<td colspan='2'><?php _e( 'There are no shipping validation rules. Yet...', 'woocommerce-advanced-shipping-validation' ); ?></td>
+						<td colspan='2' style="display: table-cell;"><?php _e( 'There are no shipping validation rules. Yet...', 'woocommerce-advanced-shipping-validation' ); ?></td>
 					</tr><?php
 
 				endif;
@@ -70,10 +70,8 @@ $validation_rules = wcasv_get_validation_posts( array( 'post_status' => array( '
 			?></tbody>
 			<tfoot>
 				<tr>
-					<th colspan='5' style='padding-left: 10px;'>
-						<a href='<?php echo admin_url( 'post-new.php?post_type=shipping_validation' ); ?>' class='add button'>
-							<?php _e( 'Add Shipping Validation Rule', 'woocommerce-advanced-shipping-validation' ); ?>
-						</a>
+					<th colspan='5' style='padding-left: 10px; display: table-cell;'>
+						<a href='<?php echo admin_url( 'post-new.php?post_type=shipping_validation' ); ?>' class='add button'><?php _e( 'Add Shipping Validation Rule', 'woocommerce-advanced-shipping-validation' ); ?></a>
 					</th>
 				</tr>
 			</tfoot>
