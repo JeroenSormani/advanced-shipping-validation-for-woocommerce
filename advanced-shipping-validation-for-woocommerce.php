@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: 	Advanced Shipping Validation for WooCommerce
- * Plugin URI: 		http://jeroensormani.com/
+ * Plugin URI: 		https://jeroensormani.com/
  * Description: 	Setup shipping validation rules based on your own conditions. Show customers a specific message why they can't continue to checkout.
- * Version: 		1.1.2
+ * Version: 		1.1.3
  * Author: 			Jeroen Sormani
- * Author URI: 		http://jeroensormani.com/
+ * Author URI: 		https://jeroensormani.com/
  * Text Domain:     woocommerce-advanced-shipping-validation
  */
 
@@ -29,7 +29,7 @@ class Woocommerce_Advanced_Shipping_Validation {
 	 * @since 1.0.0
 	 * @var string $version Plugin version number.
 	 */
-	public $version = '1.1.2';
+	public $version = '1.1.3';
 
 
 	/**
@@ -59,15 +59,10 @@ class Woocommerce_Advanced_Shipping_Validation {
 	public function __construct() {
 
 		// Check if WooCommerce is active
-		if ( ! function_exists( 'is_plugin_active_for_network' ) ) :
-			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
-		endif;
-
-		if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) :
-			if ( ! is_plugin_active_for_network( 'woocommerce/woocommerce.php' ) ) :
-				return;
-			endif;
-		endif;
+		require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+		if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) && ! function_exists( 'WC' ) ) {
+			return;
+		}
 
 		do_action( 'woocommerce_advanced_shipping_validation_init' );
 
@@ -151,13 +146,7 @@ class Woocommerce_Advanced_Shipping_Validation {
 	 * @since 1.0.0
 	 */
 	public function load_textdomain() {
-
-		$locale = apply_filters( 'plugin_locale', get_locale(), 'woocommerce-advanced-shipping-validation' );
-
-		// Load textdomain
-		load_textdomain( 'woocommerce-advanced-shipping-validation', WP_LANG_DIR . '/woocommerce-advanced-shipping-validation/woocommerce-advanced-shipping-validation-' . $locale . '.mo' );
 		load_plugin_textdomain( 'woocommerce-advanced-shipping-validation', false, basename( dirname( __FILE__ ) ) . '/languages' );
-
 	}
 
 

@@ -3,7 +3,7 @@ Contributors: sormano
 Tags: woocommerce woocommerce, shipping, woocommerce shipping validation, woocommerce shipping validation rules, shipping rules, prevent shipping, block shipping, prohibit shipping, forbid shipping, avoid shipping, restrict shipping, stop shipping
 Requires at least: 4.0
 Tested up to: 4.9
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 Requires PHP: 5.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -36,6 +36,12 @@ A common use case with this is the restriction of certain products being shipped
 3. Validation overview page
 
 == Changelog ==
+
+= 1.1.3 - 12-11-2018 =
+
+* [Improvement] - Update WP Conditions to 1.0.8
+* [Improvement] - Responsive overview table
+* [Fix] - Product condition not working for variations
 
 = 1.1.2 - 29-06-2017 =
 
