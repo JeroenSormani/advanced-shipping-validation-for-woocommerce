@@ -4,9 +4,16 @@ It is intended to be used on plugins like build by Jeroen such as Advanced Shipp
 Copyright © 2017 Jeroen Sormani
 
 
-# Current version: 1.0.8
+# Current version: 1.0.9
 
 # Changelog
+
+= 1.0.9 - 05/07/2019 =
+
+* [Fix] - 'No shipping class' in shipping class condition not always working as expected
+* [Fix] - Possible notice from 'Page' condition on non-pages
+* [Fix] - Duplicating condition groups with conditions using Select2 now continue to work
+* [Improvement] - Shipping method condition matches only against chosen methods of available shipping packages
 
 = 1.0.8 - 20/08/2018 =
 

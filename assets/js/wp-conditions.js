@@ -57,8 +57,11 @@ jQuery( function( $ ) {
         var condition_group_wrap = $( this ).parents( '.wpc-condition-group-wrap' ),
             condition_group_id   = condition_group_wrap.find( '.wpc-condition-group' ).attr( 'data-group' ),
             condition_group_list = $( this ).parents( '.wpc-condition-groups' ),
-            new_group            = condition_group_wrap.clone(),
             new_group_id         = Math.floor(Math.random()*899999999+100000000); // Random number sequence of 9 length
+
+        condition_group_wrap.find('.enhanced').select2('destroy').removeClass('enhanced'); // Select2 need to be re-init for clones
+
+        var new_group = condition_group_wrap.clone();
 
         // Fix dropdown selected not being cloned properly
         $( condition_group_wrap ).find( 'select' ).each(function(i) {
@@ -75,7 +78,7 @@ jQuery( function( $ ) {
         condition_group_list.append( new_group );
 
         // Enable Select2's
-        //$( document.body ).trigger( 'wc-enhanced-select-init' );
+        $( document.body ).trigger( 'wc-enhanced-select-init' );
 
         // Init condition repeater
         wpc_condition_row_repeater();
