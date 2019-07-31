@@ -35,15 +35,17 @@ class WCASV_Admin_Settings {
 		// Add 'extra shipping options' shipping section
 		add_action( 'woocommerce_get_sections_shipping', array( $this, 'add_shipping_section' ) );
 
-		// Add settings to Extra shipping options section
+		// Settings < 3.5
 		add_action( 'woocommerce_settings_shipping', array( $this, 'shipping_validation_section_settings' ) );
+
+		// Add settings >= 3.6
+		add_action( 'woocommerce_get_settings_shipping', array( $this, 'section_settings' ), 10, 2 );
 
 		// Save settings
 		add_action( 'woocommerce_settings_save_shipping', array( $this, 'update_options' ) );
 
 		// Table field type
 		add_action( 'woocommerce_admin_field_shipping_validation_table', array( $this, 'generate_table_field' ) );
-
 	}
 
 
@@ -84,7 +86,6 @@ class WCASV_Admin_Settings {
 		) );
 
 		return $settings;
-
 	}
 
 
@@ -102,7 +103,6 @@ class WCASV_Admin_Settings {
 		if ( $current_section == 'shipping_validation' ) {
 			WC_Admin_Settings::save_fields( $this->get_settings() );
 		}
-
 	}
 
 
@@ -114,10 +114,7 @@ class WCASV_Admin_Settings {
 	 * @return string
 	 */
 	public function generate_table_field() {
-
-		// Overview table
-		require_once plugin_dir_path( __FILE__ ) . 'views/html-overview-table.php';
-
+		require plugin_dir_path( __FILE__ ) . 'views/html-overview-table.php';
 	}
 
 
@@ -132,11 +129,28 @@ class WCASV_Admin_Settings {
 	 * @return array           List of modified shipping sections.
 	 */
 	public function add_shipping_section( $sections ) {
-
 		$sections['shipping_validation'] = __( 'Validation rules', 'woocommerce-advanced-shipping-validation' );
 
 		return $sections;
+	}
 
+
+	/**
+	 * Shipping validation settings.
+	 *
+	 * Add the settings to the shipping validation shipping section.
+	 * Only here for WC 3.5 support. @todo remove when WC 4.0 releases
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $current_section Slug of the current section
+	 */
+	public function shipping_validation_section_settings( $current_section ) {
+		global $current_section;
+
+		if ( 'shipping_validation' === $current_section && version_compare( WC()->version, '3.6', '<' ) ) {
+			WC_Admin_Settings::output_fields( $this->get_settings() );
+		}
 	}
 
 
@@ -145,21 +159,18 @@ class WCASV_Admin_Settings {
 	 *
 	 * Add the settings to the shipping validation shipping section.
 	 *
-	 * @since 1.0.0
+	 * @since NEWVERSION
 	 *
-	 * @param string $current_section Slug of the current section
+	 * @param  array  $settings        Current settings.
+	 * @param  string $current_section Slug of the current section
+	 * @return array                   Modified settings.
 	 */
-	public function shipping_validation_section_settings( $current_section ) {
+	public function section_settings( $settings, $current_section ) {
+		if ( 'shipping_validation' === $current_section ) {
+			$settings = $this->get_settings();
+		}
 
-		global $current_section;
-
-		if ( 'shipping_validation' !== $current_section ) :
-			return;
-		endif;
-
-		$settings = $this->get_settings();
-		WC_Admin_Settings::output_fields( $settings );
-
+		return $settings;
 	}
 
 
