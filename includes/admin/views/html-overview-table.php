@@ -24,7 +24,7 @@ $validation_rules = wcasv_get_validation_posts( array( 'post_status' => array( '
 				foreach ( $validation_rules as $rule ) :
 
 					$message    = get_post_meta( $rule->ID, '_message', true );
-					$conditions = get_post_meta( $rule->ID, 'conditions', true );
+					$conditions = get_post_meta( $rule->ID, '_conditions', true );
 
 					$alt = ( $i++ ) % 2 == 0 ? 'alternate' : '';
 					?><tr class='<?php echo $alt; ?>'>
