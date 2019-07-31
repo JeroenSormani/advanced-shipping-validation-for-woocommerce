@@ -22,11 +22,9 @@ class WCASV_Match_Conditions {
 	public function __construct() {
 
 		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_shipping_cost', array( $this, 'match_condition_shipping_cost' ), 10, 5 );
-		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_shipping_method', array( $this, 'match_condition_shipping_method' ), 10, 5 );
 		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_quantity', array( $this, 'match_condition_quantity' ), 10, 5 );
 		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_weight', array( $this, 'match_condition_weight' ), 10, 5 );
 		add_filter( 'woocommerce_advanced_shipping_validation_match_condition_contains_shipping_class', array( $this, 'match_condition_contains_shipping_class' ), 10, 5 );
-
 	}
 
 
@@ -61,36 +59,6 @@ class WCASV_Match_Conditions {
 			$match = ( $shipping_cost >= $value );
 		elseif ( '<=' == $operator ) :
 			$match = ( $shipping_cost <= $value );
-		endif;
-
-		return $match;
-
-	}
-
-
-	/**
-	 * Shipping method.
-	 *
-	 * Matches if the condition value equals the selected shipping method(s).
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param  bool   $match         Current match value.
-	 * @param  string $operator      Operator selected by the user in the condition row.
-	 * @param  mixed  $value         Value given by the user in the condition row.
-	 * @param  array  $package       List of shipping package details.
-	 * @param  int    $package_index Current shipping package index.
-	 * @return BOOL                  Matching result, TRUE if results match, otherwise FALSE.
-	 */
-	public function match_condition_shipping_method( $match, $operator, $value, $package, $package_index ) {
-
-		$chosen_shipping_methods = WC()->session->get( 'chosen_shipping_methods' );
-		$chosen_shipping_method  = isset( $chosen_shipping_methods[ $package_index ] ) ? $chosen_shipping_methods[ $package_index ] : null;
-
-		if ( '==' == $operator ) :
-			$match = ( $value == $chosen_shipping_method );
-		elseif ( '!=' == $operator ) :
-			$match = ( $value != $chosen_shipping_method );
 		endif;
 
 		return $match;
