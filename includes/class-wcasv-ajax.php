@@ -21,7 +21,6 @@ class WCASV_Ajax {
 
 		// Update elements
 		add_action( 'wp_ajax_wcasv_update_condition_value', array( $this, 'update_condition_value' ) );
-
 	}
 
 
@@ -44,7 +43,6 @@ class WCASV_Ajax {
 		?></span><?php
 
 		die();
-
 	}
 
 

@@ -33,7 +33,6 @@ function wcasv_get_validation_posts( $args = array() ) {
 	$rules      = $rule_query->posts;
 
 	return apply_filters( 'woocommerce_advanced_shipping_validation_get_validation_rules', $rules );
-
 }
 
 
@@ -50,34 +49,31 @@ function wcasv_get_validation_posts( $args = array() ) {
  */
 function wcasv_match_conditions( $condition_groups = array(), $package, $package_index ) {
 
-	if ( empty( $condition_groups ) || ! is_array( $condition_groups ) ) :
+	if ( empty( $condition_groups ) || ! is_array( $condition_groups ) ) {
 		return false;
-	endif;
+	}
 
-	foreach ( $condition_groups as $condition_group => $conditions ) :
+	foreach ( $condition_groups as $condition_group => $conditions ) {
 
 		$match_condition_group = true;
 
-		foreach ( $conditions as $condition ) :
+		foreach ( $conditions as $condition ) {
 
 			$condition = apply_filters( 'woocommerce_advanced_shipping_validation_condition_values', $condition );
 			$match     = apply_filters( 'woocommerce_advanced_shipping_validation_match_condition_' . $condition['condition'], false, $condition['operator'], $condition['value'], $package, $package_index );
 
-			if ( false == $match ) :
+			if ( false == $match ) {
 				$match_condition_group = false;
-			endif;
-
-		endforeach;
+			}
+		}
 
 		// return true if one condition group matches
-		if ( true == $match_condition_group ) :
+		if ( true == $match_condition_group ) {
 			return true;
-		endif;
-
-	endforeach;
+		}
+	}
 
 	return false;
-
 }
 
 
@@ -91,28 +87,27 @@ function wcasv_match_conditions( $condition_groups = array(), $package, $package
 function wcasv_add_checkout_validation_messages() {
 
 	// Check if validation is enabled
-	if ( 'yes' !== get_option( 'enable_woocommerce_advanced_shipping_validation', 'yes' ) ) :
+	if ( 'yes' !== get_option( 'enable_woocommerce_advanced_shipping_validation', 'yes' ) ) {
 		return;
-	endif;
+	}
 
 	$context = 'asvwc';
 	$validation_rules = wcasv_get_validation_posts( array( 'fields' => 'ids' ) );
-	if ( $packages = WC()->shipping->get_packages() ) :
-		foreach ( $packages as $package_index => $package ) :
-			foreach ( $validation_rules as $post_id ) :
+	if ( $packages = WC()->shipping->get_packages() ) {
+		foreach ( $packages as $package_index => $package ) {
+			foreach ( $validation_rules as $post_id ) {
 
 				$condition_groups = get_post_meta( $post_id, '_conditions', true );
-				if ( wpc_match_conditions( $condition_groups, compact( 'package', 'package_index', 'context' ) ) ) :
+				if ( wpc_match_conditions( $condition_groups, compact( 'package', 'package_index', 'context' ) ) ) {
 					$message = get_post_meta( $post_id, '_message', true );
 					wc_add_notice( $message, 'error' );
-				endif;
+				}
 
-			endforeach;
-		endforeach;
-	endif;
+			}
+		}
+	}
 
-	return ;
-
+	return;
 }
 
 

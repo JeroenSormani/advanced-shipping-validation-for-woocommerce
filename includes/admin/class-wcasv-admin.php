@@ -46,10 +46,9 @@ class WCASV_Admin {
 		$this->settings->init();
 
 		global $pagenow;
-		if ( 'plugins.php' == $pagenow ) :
-			// Plugins page
+		if ( 'plugins.php' == $pagenow ) {
 			add_filter( 'plugin_action_links_' . plugin_basename( Woocommerce_Advanced_Shipping_Validation()->file ), array( $this, 'add_plugin_action_links' ), 10, 2 );
-		endif;
+		}
 
 	}
 
@@ -65,11 +64,9 @@ class WCASV_Admin {
 	 * @return array             List of modified screen IDs.
 	 */
 	public function add_wcasv_screen_ids( $screen_ids ) {
-
 		$screen_ids[] = 'shipping_validation';
 
 		return $screen_ids;
-
 	}
 
 
@@ -99,7 +96,7 @@ class WCASV_Admin {
 			( isset( $_REQUEST['post'] ) && 'shipping_validation' == get_post_type( $_REQUEST['post'] ) ) ||
 			( isset( $_REQUEST['post_type'] ) && 'shipping_validation' == $_REQUEST['post_type'] ) ||
 			( isset( $_REQUEST['section'] ) && 'shipping_validation' == $_REQUEST['section'] )
-		) :
+		) {
 
 			wp_localize_script( 'wp-conditions', 'wpc2', array(
 				'action_prefix' => 'wcasv_',
@@ -110,9 +107,7 @@ class WCASV_Admin {
 			wp_enqueue_script( 'wp-conditions' );
 
 			wp_dequeue_script( 'autosave' );
-
-		endif;
-
+		}
 	}
 
 
@@ -124,14 +119,12 @@ class WCASV_Admin {
 	 * @since 1.0.0
 	 */
 	public function menu_highlight() {
-
 		global $parent_file, $submenu_file, $post_type;
 
-		if ( 'shipping_validation' == $post_type ) :
+		if ( 'shipping_validation' == $post_type ) {
 			$parent_file  = 'woocommerce';
 			$submenu_file = 'wc-settings';
-		endif;
-
+		}
 	}
 
 
@@ -149,14 +142,13 @@ class WCASV_Admin {
 	 */
 	public function add_plugin_action_links( $links, $file ) {
 
-		if ( $file == plugin_basename( Woocommerce_Advanced_Shipping_Validation()->file ) ) :
+		if ( $file == plugin_basename( Woocommerce_Advanced_Shipping_Validation()->file ) ) {
 			$links = array_merge( array(
 				'<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=shipping&section=shipping_validation' ) ) . '">' . __( 'Settings', 'woocommerce-advanced-shipping-validation' ) . '</a>'
 			), $links );
-		endif;
+		}
 
 		return $links;
-
 	}
 
 

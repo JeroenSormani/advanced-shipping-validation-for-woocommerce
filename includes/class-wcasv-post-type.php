@@ -33,7 +33,6 @@ class WCASV_Post_Type {
 
 		// Redirect after delete
 		add_action( 'load-edit.php', array( $this, 'redirect_after_trash' ) );
-
 	}
 
 
@@ -71,7 +70,6 @@ class WCASV_Post_Type {
 			'supports'        => array( 'title' ),
 			'labels'          => $labels,
 		) );
-
 	}
 
 
@@ -119,7 +117,6 @@ class WCASV_Post_Type {
 		$messages['shipping_validation'][10] .= $overview_link;
 
 		return $messages;
-
 	}
 
 
@@ -134,7 +131,6 @@ class WCASV_Post_Type {
 
 		add_meta_box( 'wcasv_conditions', __( 'Shipping validation conditions', 'woocommerce-advanced-shipping-validation' ), array( $this, 'render_conditions' ), 'shipping_validation', 'normal' );
 		add_meta_box( 'wcasv_settings', __( 'Validation settings', 'woocommerce-advanced-shipping-validation' ), array( $this, 'render_settings' ), 'shipping_validation', 'normal' );
-
 	}
 
 
@@ -146,10 +142,7 @@ class WCASV_Post_Type {
 	 * @since 1.0.0
 	 */
 	public function render_conditions() {
-
-		// Conditions meta box
 		require_once plugin_dir_path( __FILE__ ) . 'admin/views/html-meta-box-conditions.php';
-
 	}
 
 
@@ -161,10 +154,7 @@ class WCASV_Post_Type {
 	 * @since 1.0.0
 	 */
 	public function render_settings() {
-
-		// Settings meta box
 		require_once plugin_dir_path( __FILE__ ) . 'admin/views/html-meta-box-settings.php';
-
 	}
 
 
@@ -196,12 +186,11 @@ class WCASV_Post_Type {
 		update_post_meta( $post_id, '_conditions', wpc_sanitize_conditions( $_POST['conditions'] ) );
 
 		// Save message
-		if ( isset( $_POST['validation_message'] ) ) :
+		if ( isset( $_POST['validation_message'] ) ) {
 			update_post_meta( $post_id, '_message', wp_kses_post( $_POST['validation_message'] ) );
-		endif;
+		}
 
 		do_action( 'woocommerce_advanced_shipping_validation_save_meta_boxes', $post_id );
-
 	}
 
 
@@ -216,18 +205,15 @@ class WCASV_Post_Type {
 
 		$screen = get_current_screen();
 
-		if ( 'edit-shipping_validation' == $screen->id ) :
+		if ( 'edit-shipping_validation' == $screen->id ) {
 
-			if ( isset( $_GET['trashed'] ) && intval( $_GET['trashed'] ) > 0 ) :
+			if ( isset( $_GET['trashed'] ) && intval( $_GET['trashed'] ) > 0 ) {
 
 				$redirect = admin_url( 'admin.php?page=wc-settings&tab=shipping&section=shipping_validation' );
 				wp_redirect( $redirect );
 				exit();
-
-			endif;
-
-		endif;
-
+			}
+		}
 	}
 
 

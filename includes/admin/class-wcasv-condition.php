@@ -82,10 +82,8 @@ class WCASV_Condition {
 	 * @since 1.1.6
 	 */
 	public function output_condition_row() {
-
 		$wp_condition = $this;
 		require 'views/html-condition-row.php';
-
 	}
 
 
@@ -133,7 +131,6 @@ class WCASV_Condition {
 		$conditions = apply_filters( 'woocommerce_advanced_shipping_validation_conditions', $conditions );
 
 		return $conditions;
-
 	}
 
 
@@ -182,14 +179,13 @@ class WCASV_Condition {
 			$field_args['options'][ $this->value ] = $product->get_formatted_name(); // WC >= 2.7
 		}
 
-		if ( $this->condition == 'shipping_cost' ) :
+		if ( $this->condition == 'shipping_cost' ) {
 			$field_args['field'] = 'text';
-		endif;
+		}
 
 		$field_args = apply_filters( 'woocommerce_advanced_shipping_validation_values', $field_args, $this->condition );
 
 		return $field_args;
-
 	}
 
 

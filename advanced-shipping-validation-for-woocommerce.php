@@ -65,7 +65,6 @@ class Woocommerce_Advanced_Shipping_Validation {
 		}
 
 		do_action( 'woocommerce_advanced_shipping_validation_init' );
-
 	}
 
 
@@ -80,13 +79,11 @@ class Woocommerce_Advanced_Shipping_Validation {
 	 * @return object Instance of the class.
 	 */
 	public static function instance() {
-
 		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
 		}
 
 		return self::$instance;
-
 	}
 
 
@@ -118,23 +115,22 @@ class Woocommerce_Advanced_Shipping_Validation {
 		$this->post_type = new WCASV_Post_Type();
 
 		// AJAX
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) :
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			require_once plugin_dir_path( __FILE__ ) . '/includes/class-wcasv-ajax.php';
 			$this->ajax = new WCASV_Ajax();
-		endif;
+		}
 
 		// Admin
-		if ( is_admin() && ! defined( 'DOING_AJAX' ) ) :
+		if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
 			require_once plugin_dir_path( __FILE__ ) . '/includes/admin/class-wcasv-admin.php';
 			$this->admin = new WCASV_Admin();
-		endif;
+		}
 
 		// Include functions
 		require_once plugin_dir_path( __FILE__ ) . 'includes/wcasv-validation-functions.php';
 
 		// Load textdomain
 		$this->load_textdomain();
-
 	}
 
 
@@ -158,36 +154,32 @@ class Woocommerce_Advanced_Shipping_Validation {
 	 * @since 1.0.6
 	 */
 	public function php_version_notice() {
-
 		?><div class='updated'>
 			<p><?php echo sprintf( __( 'Advanced Shipping Validation requires PHP 5.3 or higher and your current PHP version is %s. Please (contact your host to) update your PHP version.', 'woocommerce-advanced-messages' ), PHP_VERSION ); ?></p>
 		</div><?php
-
 	}
 
 
 }
 
 
-/**
- * The main function responsible for returning the Woocommerce_Advanced_Shipping_Validation object.
- *
- * Use this function like you would a global variable, except without needing to declare the global.
- *
- * Example: <?php Woocommerce_Advanced_Shipping_Validation()->method_name(); ?>
- *
- * @since 1.0.0
- *
- * @return object Woocommerce_Advanced_Shipping_Validation class object.
- */
-if ( ! function_exists( 'Woocommerce_Advanced_Shipping_Validation' ) ) :
+if ( ! function_exists( 'Woocommerce_Advanced_Shipping_Validation' ) ) {
 
+	/**
+	 * The main function responsible for returning the Woocommerce_Advanced_Shipping_Validation object.
+	 *
+	 * Use this function like you would a global variable, except without needing to declare the global.
+	 *
+	 * Example: <?php Woocommerce_Advanced_Shipping_Validation()->method_name(); ?>
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return object Woocommerce_Advanced_Shipping_Validation class object.
+	 */
 	function Woocommerce_Advanced_Shipping_Validation() {
 
 		return Woocommerce_Advanced_Shipping_Validation::instance();
 
 	}
-
-
-endif;
+}
 Woocommerce_Advanced_Shipping_Validation()->init();
