@@ -142,10 +142,8 @@ class WCASV_Admin_Settings {
 	 * Only here for WC 3.5 support. @todo remove when WC 4.0 releases
 	 *
 	 * @since 1.0.0
-	 *
-	 * @param string $current_section Slug of the current section
 	 */
-	public function shipping_validation_section_settings( $current_section ) {
+	public function shipping_validation_section_settings() {
 		global $current_section;
 
 		if ( 'shipping_validation' === $current_section && version_compare( WC()->version, '3.6', '<' ) ) {
