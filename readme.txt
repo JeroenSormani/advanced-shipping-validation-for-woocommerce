@@ -10,6 +10,7 @@ Copyright © 2017 Jeroen Sormani
 
 = 1.0.9 - 05/07/2019 =
 
+* [Add] - Value field input validation for order amount / weight conditions
 * [Fix] - 'No shipping class' in shipping class condition not always working as expected
 * [Fix] - Possible notice from 'Page' condition on non-pages
 * [Fix] - Duplicating condition groups with conditions using Select2 now continue to work
