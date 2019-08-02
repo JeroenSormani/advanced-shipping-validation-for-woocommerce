@@ -122,7 +122,7 @@ add_action( 'woocommerce_after_checkout_validation', 'wcasv_add_checkout_validat
 /**
  * Add the filters required for backwards-compatibility for the matching functionality.
  *
- * @since NEWVERSION
+ * @since 1.1.4
  */
 function wcasv_add_bc_filter_condition_match( $match, $condition, $operator, $value, $args = array() ) {
 
@@ -145,7 +145,7 @@ add_action( 'wp-conditions\condition\match', 'wcasv_add_bc_filter_condition_matc
 /**
  * Add condition descriptions of custom conditions.
  *
- * @since NEWVERSION
+ * @since 1.1.4
  */
 function wcasv_add_bc_filter_condition_descriptions( $descriptions ) {
 	return apply_filters( 'woocommerce_Advanced_Shipping_Validation_descriptions', $descriptions );
@@ -156,7 +156,7 @@ add_filter( 'wp-conditions\condition_descriptions', 'wcasv_add_bc_filter_conditi
 /**
  * Add custom field BC.
  *
- * @since NEWVERSION
+ * @since 1.1.4
  */
 function wcasv_add_bc_action_custom_fields( $type, $args ) {
 

@@ -157,7 +157,7 @@ class WCASV_Admin_Settings {
 	 *
 	 * Add the settings to the shipping validation shipping section.
 	 *
-	 * @since NEWVERSION
+	 * @since 1.1.4
 	 *
 	 * @param  array  $settings        Current settings.
 	 * @param  string $current_section Slug of the current section
