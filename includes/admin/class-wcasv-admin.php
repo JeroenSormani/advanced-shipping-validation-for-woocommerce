@@ -19,18 +19,6 @@ class WCASV_Admin {
 	 */
 	public function __construct() {
 
-		add_action( 'admin_init', array( $this, 'init' ) );
-
-	}
-
-
-	/**
-	 * Initialize admin.
-	 *
-	 * @since 1.0.0
-	 */
-	public function init() {
-
 		// Add to WC Screen IDs to load scripts.
 		add_filter( 'woocommerce_screen_ids', array( $this, 'add_wcasv_screen_ids' ) );
 
@@ -45,11 +33,20 @@ class WCASV_Admin {
 		$this->settings = new WCASV_Admin_Settings();
 		$this->settings->init();
 
+		add_action( 'admin_init', array( $this, 'init' ) );
+	}
+
+
+	/**
+	 * Initialize admin.
+	 *
+	 * @since 1.0.0
+	 */
+	public function init() {
 		global $pagenow;
 		if ( 'plugins.php' == $pagenow ) {
 			add_filter( 'plugin_action_links_' . plugin_basename( Woocommerce_Advanced_Shipping_Validation()->file ), array( $this, 'add_plugin_action_links' ), 10, 2 );
 		}
-
 	}
 
 

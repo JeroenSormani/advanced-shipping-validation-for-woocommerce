@@ -29,23 +29,18 @@ class WCASV_Admin_Settings {
 	 */
 	public function init() {
 
-		// Save settings page
-		add_action( 'woocommerce_update_options_shipping_validation', array( $this, 'update_options' ) );
+		// Table field type
+		add_action( 'woocommerce_admin_field_shipping_validation_table', array( $this, 'generate_table_field' ) );
 
 		// Add 'extra shipping options' shipping section
 		add_action( 'woocommerce_get_sections_shipping', array( $this, 'add_shipping_section' ) );
 
 		// Settings < 3.5
-		add_action( 'woocommerce_settings_shipping', array( $this, 'shipping_validation_section_settings' ) );
+		add_action( 'woocommerce_settings_shipping', array( $this, 'section_settings_pre_3_6' ) );
+		add_action( 'woocommerce_settings_save_shipping', array( $this, 'update_options_pre_3_6' ) );
 
 		// Add settings >= 3.6
 		add_action( 'woocommerce_get_settings_shipping', array( $this, 'section_settings' ), 10, 2 );
-
-		// Save settings
-		add_action( 'woocommerce_settings_save_shipping', array( $this, 'update_options' ) );
-
-		// Table field type
-		add_action( 'woocommerce_admin_field_shipping_validation_table', array( $this, 'generate_table_field' ) );
 	}
 
 
@@ -90,23 +85,6 @@ class WCASV_Admin_Settings {
 
 
 	/**
-	 * Save settings.
-	 *
-	 * Save settings based on WooCommerce save_fields() method.
-	 *
-	 * @since 1.0.0
-	 */
-	public function update_options() {
-
-		global $current_section;
-
-		if ( $current_section == 'shipping_validation' ) {
-			WC_Admin_Settings::save_fields( $this->get_settings() );
-		}
-	}
-
-
-	/**
 	 * Table field type.
 	 *
 	 * Load and render table as a field type.
@@ -143,11 +121,28 @@ class WCASV_Admin_Settings {
 	 *
 	 * @since 1.0.0
 	 */
-	public function shipping_validation_section_settings() {
+	public function section_settings_pre_3_6() {
 		global $current_section;
 
 		if ( 'shipping_validation' === $current_section && version_compare( WC()->version, '3.6', '<' ) ) {
 			WC_Admin_Settings::output_fields( $this->get_settings() );
+		}
+	}
+
+
+	/**
+	 * Save settings.
+	 *
+	 * Save settings based on WooCommerce save_fields() method.
+	 * Only here for WC <= 3.5 support. @todo remove when WC 4.0 releases
+	 *
+	 * @since 1.0.0
+	 */
+	public function update_options_pre_3_6() {
+		global $current_section;
+
+		if ( $current_section == 'shipping_validation' && version_compare( WC()->version, '3.6', '<' ) ) {
+			WC_Admin_Settings::save_fields( $this->get_settings() );
 		}
 	}
 
