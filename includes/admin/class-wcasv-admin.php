@@ -77,7 +77,7 @@ class WCASV_Admin {
 	public function admin_enqueue_scripts() {
 
 		// Style script
-		wp_register_style( 'woocommerce-advanced-shipping-validation', plugins_url( 'assets/admin/css/woocommerce-advanced-shipping-validation.css', Woocommerce_Advanced_Shipping_Validation()->file ), array(), Woocommerce_Advanced_Shipping_Validation()->version );
+		wp_register_style( 'woocommerce-advanced-shipping-validation', plugins_url( 'assets/admin/css/woocommerce-advanced-shipping-validation.min.css', Woocommerce_Advanced_Shipping_Validation()->file ), array(), Woocommerce_Advanced_Shipping_Validation()->version );
 
 		// Javascript
 		wp_register_script( 'woocommerce-advanced-shipping-validation', plugins_url( 'assets/admin/js/woocommerce-advanced-shipping-validation.min.js', Woocommerce_Advanced_Shipping_Validation()->file ), array( 'jquery', 'jquery-ui-sortable' ), Woocommerce_Advanced_Shipping_Validation()->version, true );
