@@ -47,7 +47,7 @@ function wcasv_get_validation_posts( $args = array() ) {
  * @param  array $condition_groups List of condition groups containing their conditions.
  * @return bool                    true if all the conditions in one of the condition groups matches true.
  */
-function wcasv_match_conditions( $condition_groups = array(), $package, $package_index ) {
+function wcasv_match_conditions( $condition_groups, $package, $package_index ) {
 
 	if ( empty( $condition_groups ) || ! is_array( $condition_groups ) ) {
 		return false;
@@ -109,8 +109,6 @@ function wcasv_add_checkout_validation_messages() {
 
 	return;
 }
-
-
 add_action( 'woocommerce_after_checkout_validation', 'wcasv_add_checkout_validation_messages' );
 
 
