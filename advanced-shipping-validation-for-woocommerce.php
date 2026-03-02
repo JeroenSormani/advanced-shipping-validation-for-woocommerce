@@ -49,6 +49,10 @@ class Woocommerce_Advanced_Shipping_Validation {
 	 * @var object $instance The instance of WCASV.
 	 */
 	private static $instance;
+	public WCASV_Post_Type $post_type;
+	public WCASV_Match_Conditions $matcher;
+	public WCASV_Ajax $ajax;
+	public WCASV_Admin $admin;
 
 
 	/**

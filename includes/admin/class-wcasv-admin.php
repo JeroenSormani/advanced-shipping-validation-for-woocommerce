@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * @version		1.0.0
  */
 class WCASV_Admin {
+	public WCASV_Admin_Settings $settings;
 
 
 	/**

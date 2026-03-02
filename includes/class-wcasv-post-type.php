@@ -166,7 +166,7 @@ class WCASV_Post_Type {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int/numberic $post_id ID of the post being saved.
+	 * @param int/numeric $post_id ID of the post being saved.
 	 */
 	public function save_meta( $post_id ) {
 
